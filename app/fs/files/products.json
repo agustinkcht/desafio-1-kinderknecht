@@ -1,0 +1,82 @@
+[
+    {
+        "id": "83e91cc011b0589bd266770c",
+        "title": "Airpods Pro 2",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 249,
+        "stock": 40
+    },
+    {
+        "id": "4a3ff2cd70bb8ad470316cd5",
+        "title": "Apple EarPods",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 89,
+        "stock": 40
+    },
+    {
+        "id": "d0973c10780fd87e7b428051",
+        "title": "Airpods Max",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 549,
+        "stock": 40
+    },
+    {
+        "id": "db59eb925337c5f53097be0b",
+        "title": "Airpods 3rd gen",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 169,
+        "stock": 40
+    },
+    {
+        "id": "bf688f4b45ba8ec1bccfadbf",
+        "title": "iPhone 15 Pro",
+        "photo": "./assets/imgpath.jpg",
+        "category": "phones",
+        "price": 999,
+        "stock": 30
+    },
+    {
+        "id": "1b163517636e223522649352",
+        "title": "iPhone 14",
+        "photo": "./assets/imgpath.jpg",
+        "category": "phones",
+        "price": 699,
+        "stock": 30
+    },
+    {
+        "id": "bc09a348f59a699a854bec78",
+        "title": "Apple Watch 9",
+        "photo": "./assets/imgpath.jpg",
+        "category": "watches",
+        "price": 399,
+        "stock": 35
+    },
+    {
+        "id": "a22681d8711e04865223b500",
+        "title": "MacBook Air 13 M2",
+        "photo": "./assets/imgpath.jpg",
+        "category": "laptops",
+        "price": 999,
+        "stock": 20
+    },
+    {
+        "id": "8718dcb8b1a20f9a4faa7ddc",
+        "title": "MacBook Pro 14 M3",
+        "photo": "./assets/imgpath.jpg",
+        "category": "laptops",
+        "price": 1599,
+        "stock": 20
+    },
+    {
+        "id": "a72252fb8249106ebd78535a",
+        "title": "Mac Studio M2 Max",
+        "photo": "./assets/imgpath.jpg",
+        "category": "computers",
+        "price": 1999,
+        "stock": 20
+    }
+]

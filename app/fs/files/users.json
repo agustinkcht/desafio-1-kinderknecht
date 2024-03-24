@@ -1,0 +1,72 @@
+[
+    {
+        "id": "cfc53a46c51c7cb4c6d30a63",
+        "photo": "./assets/imgpath.jpg",
+        "email": "johndoe123@email.com",
+        "password": "P@ssw0rd123",
+        "role": "Customer Service Representative"
+    },
+    {
+        "id": "f6226aa687336f04cb3b9d8e",
+        "photo": "./assets/imgpath.jpg",
+        "email": "sarahsmith456@email.com",
+        "password": "SecurePass789!",
+        "role": "Sales Associate"
+    },
+    {
+        "id": "24e09fe34078c24127a1375c",
+        "photo": "./assets/imgpath.jpg",
+        "email": "lisawilliams432@email.com",
+        "password": "William$L1sa",
+        "role": "Customer Support Specialist"
+    },
+    {
+        "id": "e9172eca317f8a4b984e307c",
+        "photo": "./assets/imgpath.jpg",
+        "email": "emilybrown321@email.com",
+        "password": "Brownie1234$",
+        "role": "Customer Support Specialist"
+    },
+    {
+        "id": "0e2faca1dab7b542ce9c0750",
+        "photo": "./assets/imgpath.jpg",
+        "email": "mikejones789@email.com",
+        "password": "2335$$w0rd",
+        "role": "Marketing Coordinator"
+    },
+    {
+        "id": "fef492c21070e00f464af367",
+        "photo": "./assets/imgpath.jpg",
+        "email": "davidwilson987@email.com",
+        "password": " WilsonD@v3",
+        "role": "Sales Associate"
+    },
+    {
+        "id": "6a7ca9f934947bb6952e960b",
+        "photo": "./assets/imgpath.jpg",
+        "email": "laurajackson654@email.com",
+        "password": "JackL@ura1",
+        "role": "Marketing Coordinator"
+    },
+    {
+        "id": "09bb4f5edc5b7d5672f7a104",
+        "photo": "./assets/imgpath.jpg",
+        "email": "chrisroberts234@email.com",
+        "password": "CR1234$ecure",
+        "role": "Customer Service Representative"
+    },
+    {
+        "id": "b38e4a83b15523ca19f7e42c",
+        "photo": "./assets/imgpath.jpg",
+        "email": "kevinharris876@email.com",
+        "password": "HarrisK3vin!",
+        "role": "Sales Associate"
+    },
+    {
+        "id": "d175674605aaa21d25a82f43",
+        "photo": "./assets/imgpath.jpg",
+        "email": "alexmiller890@email.com",
+        "password": "MillerAlex789",
+        "role": "Marketing Coordinator"
+    }
+]
