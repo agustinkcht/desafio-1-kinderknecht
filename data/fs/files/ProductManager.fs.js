@@ -1,9 +1,9 @@
-const fs = require('fs')
-const crypto = require('crypto')
+import fs from "fs";
+import crypto from "crypto";
 
 class ProductManager {
     constructor() {
-        this.path = '../files/products.json'
+        this.path = './data/fs/files/products.json'
         this.init()
     };
     init() {
@@ -17,7 +17,7 @@ class ProductManager {
         };
     };
     async create(data) {
-        try{
+        try {
             if (!data.title) {
                 const error = new Error ('Enter product name');
                 throw error;
@@ -39,16 +39,21 @@ class ProductManager {
                     return product;  
             };
         } catch(err) {
-            throw(err)
+            throw err;
         };
     };
-    async read() {
+    async read(category = 'accessories') {
         try {
             let allProducts = await fs.promises.readFile(this.path, 'utf-8');
             allProducts = JSON.parse(allProducts);
-            console.log(allProducts)
+            allProducts = allProducts.filter((each) => each.category === category)
+            if (allProducts.length === 0) {
+                return null;
+            } 
+            console.log(allProducts);
+            return allProducts;
         } catch(err) {
-            console.log('Unable to reach the products')
+            throw err;
         };
     };
     async readOne(id) {
@@ -63,7 +68,7 @@ class ProductManager {
                 return selected;
             }
         } catch(err) {
-            throw(err);
+            throw err;
         };
     };
     async destroy(id) {
@@ -82,26 +87,29 @@ class ProductManager {
                 return withoutSelected;
             };
         } catch(err) {
-            throw(err);
+            throw err;
         };
     };
 };
 
+const productManager = new ProductManager()
+export default productManager
+
 
 //TESTING
 
-async function test() {
-    try {
-        const products = new ProductManager();
-        //products.create({})
-        //products.read()
-        //products.readOne()
-        //products.destroy()
-    } catch(err) {
-        console.log(err)
-    }
-};
+// async function test() {
+//     try {
+//         const products = new ProductManager();
+//         products.create({})
+//         products.read()
+//         products.readOne()
+//         products.destroy()
+//     } catch(err) {
+//         console.log(err)
+//     }
+// };
 
 //test()
-//
+
 
