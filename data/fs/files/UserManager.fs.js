@@ -1,9 +1,9 @@
-const fs = require('fs')
-const crypto = require('crypto')
+import fs from "fs";
+import crypto from "crypto";
 
 class UserManager {
     constructor() {
-        this.path = '../files/users.json'
+        this.path = './data/fs/files/users.json'
         this.init()
     };
     init() {
@@ -30,7 +30,7 @@ class UserManager {
                     photo: './assets/imgpath.jpg',
                     email: data.email,
                     password: data.password,
-                    role: data.role || 'TBD'
+                    role: data.role || '0'
                 };
                 let allUsers = await fs.promises.readFile(this.path, 'utf-8');
                     allUsers = JSON.parse(allUsers);
@@ -42,16 +42,22 @@ class UserManager {
             };
 
         } catch(err) {
-            throw(err)
+            throw err;
         };
     };
-    async read() {
+    async read(role = '0') {
         try {
             let allUsers = await fs.promises.readFile(this.path, 'utf-8');
             allUsers = JSON.parse(allUsers);
-            console.log(allUsers)
+            allUsers = allUsers.filter((each) => each.role === role);
+            if (allUsers.length === 0) {
+                return null;
+            } else {
+                console.log(allUsers)
+                return allUsers;
+            };   
         } catch(err) {
-            console.log('Unable to find the users')
+            throw err;
         };
     };
     async readOne(id) {
@@ -66,7 +72,7 @@ class UserManager {
                 return selected;
             }
         } catch(err) {
-            throw(err)
+            throw err;
         };
     };
     async destroy(id) {
@@ -85,25 +91,28 @@ class UserManager {
                 return withoutSelected;
             };
         } catch(err) {
-            throw(err)
+            throw err;
         };
     };
 };
 
+const userManager = new UserManager()
+export default userManager
+
 
 //TESTING
 
-async function test() {
-    try {
-        const users = new UserManager();
-        // users.create({})
-        // users.read()
-        // users.readOne()
-        // users.destroy()
+// async function test() {
+//     try {
+//         const users = new UserManager();
+//         users.create({})
+//         users.read()
+//         users.readOne()
+//         users.destroy()
 
-    } catch(err) {
-        console.log(err)
-    };
-};
+//     } catch(err) {
+//         console.log(err)
+//     };
+// };
 
 // test()

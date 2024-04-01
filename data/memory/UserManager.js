@@ -16,7 +16,7 @@ class UserManager {
                     email: data.email,
                     password: data.password,
                     photo: data.photo || './assets/imgpath.jpg',
-                    role: data.role || 'TBD'
+                    role: data.role || '0'
                 };
                 UserManager.#users.push(user);
                 console.log('User successfully created')
@@ -68,71 +68,142 @@ users.create({
     photo: './assets/imgpath.jpg',
     email: 'johndoe123@email.com',
     password: 'P@ssw0rd123',
-    role: 'Customer Service Representative'
-})
+    role: 0
+});
 
 users.create({
     photo: './assets/imgpath.jpg',
     email: 'sarahsmith456@email.com',
     password: 'SecurePass789!',
-    role: 'Sales Associate'
-})
+    role: 1
+});
 
 users.create({
     photo: './assets/imgpath.jpg',
     email: 'lisawilliams432@email.com',
     password: 'William$L1sa',
-    role: 'Customer Support Specialist'
-})
+    role: 0
+});
 
 users.create({
     photo: './assets/imgpath.jpg',
     email: 'emilybrown321@email.com',
     password: 'Brownie1234$',
-    role: 'Customer Support Specialist'
-})
+    role: 0
+});
 
 users.create({
     photo: './assets/imgpath.jpg',
     email: 'mikejones789@email.com',
     password: '2335$$w0rd',
-    role: 'Marketing Coordinator'
-})
+    role: 1
+});
 
 users.create({
     photo: './assets/imgpath.jpg',
     email: 'davidwilson987@email.com',
     password: 'WilsonD@v3',
-    role: 'Sales Associate'
-})
+    role: 1
+});
 
 users.create({
     photo: './assets/imgpath.jpg',
     email: 'laurajackson654@email.com',
     password: 'JackL@ura1',
-    role: 'Marketing Coordinator'
-})
+    role: 1
+});
 
 users.create({
     photo: './assets/imgpath.jpg',
     email: 'chrisroberts234@email.com',
     password: 'CR1234$ecure',
-    role: 'Customer Service Representative'
-})
+    role: 0
+});
 
 users.create({
     photo: './assets/imgpath.jpg',
     email: 'kevinharris876@email.com',
     password: 'HarrisK3vin!',
-    role: 'Sales Associate'
-})
+    role: 1
+});
 
 users.create({
     photo: './assets/imgpath.jpg',
     email: 'alexmiller890@email.com',
     password: 'MillerAlex789',
-    role: 'Marketing Coordinator'
-})
+    role: 1
+});
+
+users.create({
+    photo: './assets/imgpath.jpg',
+    email: 'markthompson123@email.com',
+    password: 'M@rkTh0mp!234',
+    role: 0
+});
+
+users.create({
+    photo: './assets/imgpath.jpg',
+    email: 'jessicablake456@email.com',
+    password: 'Bl@keJ3ss!789',
+    role: 1
+});
+
+users.create({
+    photo: './assets/imgpath.jpg',
+    email: 'matthewdavis432@email.com',
+    password: 'Dav!sM@tth3w1',
+    role: 0
+});
+
+users.create({
+    photo: './assets/imgpath.jpg',
+    email: 'ashleyharrison321@email.com',
+    password: 'H@rr!s0nAs!ey321',
+    role: 0
+});
+
+users.create({
+    photo: './assets/imgpath.jpg',
+    email: 'nathanrobinson789@email.com',
+    password: 'R0b!nsonN@th@n789',
+    role: 1
+});
+
+users.create({
+    photo: './assets/imgpath.jpg',
+    email: 'oliviataylor987@email.com',
+    password: 'T@yl0r0l!v!a987',
+    role: 1
+});
+
+users.create({
+    photo: './assets/imgpath.jpg',
+    email: 'danielcooper654@email.com',
+    password: 'Coop3rD@niel654',
+    role: 1
+});
+
+users.create({
+    photo: './assets/imgpath.jpg',
+    email: 'meganturner234@email.com',
+    password: 'Turn3rMeg@n234',
+    role: 0
+});
+
+users.create({
+    photo: './assets/imgpath.jpg',
+    email: 'lukepeterson876@email.com',
+    password: 'P3t3rs0nLuk3!876',
+    role: 1
+});
+
+users.create({
+    photo: './assets/imgpath.jpg',
+    email: 'samanthajenkins890@email.com',
+    password: 'J3nk!nsS@m@nth@890',
+    role: 1
+});
+
 
 
 //TESTING
