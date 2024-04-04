@@ -60,6 +60,27 @@ class UserManager {
             console.log(err)
         };
     };
+    update(id, data) {
+        try {
+            let allUsers = UserManager.#users;
+            let selected = allUsers.find(each => each.id === id);
+            if (selected) {
+                for (let prop in data) {
+                    selected[prop] = data[prop];
+                };
+                UserManager.#users.push(selected);
+                console.log('The user data has been updated successfully');
+                console.log(selected);
+                return selected;
+            } else {
+                const error = new Error('No user found with the specified ID. Please check the ID and try again.')
+                error.statusCode = 404;
+                throw error;
+            };
+        } catch(err) {
+            console.log(err);
+        };
+    };
 };
 
 const users = new UserManager()

@@ -11,7 +11,7 @@
         "photo": "./assets/imgpath.jpg",
         "email": "sarahsmith456@email.com",
         "password": "SecurePass789!",
-        "role": "1"
+        "role": 0
     },
     {
         "id": "24e09fe34078c24127a1375c",

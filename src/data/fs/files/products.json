@@ -1,0 +1,322 @@
+[
+    {
+        "id": "83e91cc011b0589bd266770c",
+        "title": "Airpods Pro 2",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 249,
+        "stock": 40
+    },
+    {
+        "id": "4a3ff2cd70bb8ad470316cd5",
+        "title": "Apple EarPods",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 89,
+        "stock": 40
+    },
+    {
+        "id": "d0973c10780fd87e7b428051",
+        "title": "Airpods Max",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 549,
+        "stock": 40
+    },
+    {
+        "id": "db59eb925337c5f53097be0b",
+        "title": "Airpods 3rd gen",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 169,
+        "stock": 40
+    },
+    {
+        "id": "bf688f4b45ba8ec1bccfadbf",
+        "title": "iPhone 15 Pro",
+        "photo": "./assets/imgpath.jpg",
+        "category": "phones",
+        "price": 999,
+        "stock": 30
+    },
+    {
+        "id": "1b163517636e223522649352",
+        "title": "iPhone 14",
+        "photo": "./assets/imgpath.jpg",
+        "category": "phones",
+        "price": 699,
+        "stock": 30
+    },
+    {
+        "id": "bc09a348f59a699a854bec78",
+        "title": "Apple Watch 9",
+        "photo": "./assets/imgpath.jpg",
+        "category": "watches",
+        "price": 399,
+        "stock": 35
+    },
+    {
+        "id": "a22681d8711e04865223b500",
+        "title": "MacBook Air 13 M2",
+        "photo": "./assets/imgpath.jpg",
+        "category": "laptops",
+        "price": 999,
+        "stock": 20
+    },
+    {
+        "id": "8718dcb8b1a20f9a4faa7ddc",
+        "title": "MacBook Pro 14 M3",
+        "photo": "./assets/imgpath.jpg",
+        "category": "laptops",
+        "price": 1399,
+        "stock": 20
+    },
+    {
+        "id": "a72252fb8249106ebd78535a",
+        "title": "Mac Studio M2 Max",
+        "photo": "./assets/imgpath.jpg",
+        "category": "computers",
+        "price": 1999,
+        "stock": 20
+    },
+    {
+        "id": "83e91cc011b0589bd266770c",
+        "title": "iPhone SE Plus",
+        "photo": "./assets/imgpath.jpg",
+        "category": "phones",
+        "price": 499,
+        "stock": 30
+    },
+    {
+        "id": "4a3ff2cd70bb8ad470316cd5",
+        "title": "iPhone XR2",
+        "photo": "./assets/imgpath.jpg",
+        "category": "phones",
+        "price": 599,
+        "stock": 30
+    },
+    {
+        "id": "d0973c10780fd87e7b428051",
+        "title": "iPhone 11",
+        "photo": "./assets/imgpath.jpg",
+        "category": "phones",
+        "price": 599,
+        "stock": 30
+    },
+    {
+        "id": "db59eb925337c5f53097be0b",
+        "title": "iPhone XS",
+        "photo": "./assets/imgpath.jpg",
+        "category": "phones",
+        "price": 899,
+        "stock": 30
+    },
+    {
+        "id": "bf688f4b45ba8ec1bccfadbf",
+        "title": "iPhone 8",
+        "photo": "./assets/imgpath.jpg",
+        "category": "phones",
+        "price": 499,
+        "stock": 30
+    },
+    {
+        "id": "1b163517636e223522649352",
+        "title": "iPhone 7 Plus",
+        "photo": "./assets/imgpath.jpg",
+        "category": "phones",
+        "price": 549,
+        "stock": 30
+    },
+    {
+        "id": "bc09a348f59a699a854bec78",
+        "title": "AirPods Pro Lite",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 199,
+        "stock": 40
+    },
+    {
+        "id": "a22681d8711e04865223b500",
+        "title": "AirTag Keychain",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 29,
+        "stock": 40
+    },
+    {
+        "id": "8718dcb8b1a20f9a4faa7ddc",
+        "title": "AirTag Leather Loop",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 39,
+        "stock": 40
+    },
+    {
+        "id": "a72252fb8249106ebd78535a",
+        "title": "Apple Watch Series 8",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 449,
+        "stock": 35
+    },
+    {
+        "id": "1b163517636e223522649352",
+        "title": "Apple Watch Sport Loop Band",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 49,
+        "stock": 35
+    },
+    {
+        "id": "bc09a348f59a699a854bec78",
+        "title": "Apple Watch Milanese Loop Band",
+        "photo": "./assets/imgpath.jpg",
+        "category": "accessories",
+        "price": 99,
+        "stock": 35
+    },
+    {
+        "id": "a22681d8711e04865223b500",
+        "title": "MacBook Pro 16 M4",
+        "photo": "./assets/imgpath.jpg",
+        "category": "laptops",
+        "price": 2499,
+        "stock": 20
+    },
+    {
+        "id": "8718dcb8b1a20f9a4faa7ddc",
+        "title": "MacBook Air 14 M2",
+        "photo": "./assets/imgpath.jpg",
+        "category": "laptops",
+        "price": 1199,
+        "stock": 20
+    },
+    {
+        "id": "a72252fb8249106ebd78535a",
+        "title": "iMac Pro 32-inch",
+        "photo": "./assets/imgpath.jpg",
+        "category": "computers",
+        "price": 3499,
+        "stock": 20
+    },
+    {
+        "id": "1b163517636e223522649352",
+        "title": "Mac Mini Pro",
+        "photo": "./assets/imgpath.jpg",
+        "category": "computers",
+        "price": 1499,
+        "stock": 20
+    },
+    {
+        "id": "fd6a9a34f389a8b4a9e3f865",
+        "title": "Anker PowerPort Atom III",
+        "photo": "./assets/imgpath.jpg",
+        "category": "chargers",
+        "price": 39,
+        "stock": 50
+    },
+    {
+        "id": "9b527f523d175bc38c2e2449",
+        "title": "RAVPower 30W 2-Port Wall Charger",
+        "photo": "./assets/imgpath.jpg",
+        "category": "chargers",
+        "price": 19,
+        "stock": 50
+    },
+    {
+        "id": "ebd6e1d8a37e6bc2a2a15b80",
+        "title": "Belkin Boost Charge 27W USB-C Wall Charger",
+        "photo": "./assets/imgpath.jpg",
+        "category": "chargers",
+        "price": 29,
+        "stock": 50
+    },
+    {
+        "id": "e893a299cb97d1f2395868e2",
+        "title": "AmazonBasics Nylon Braided Lightning to USB-A Cable",
+        "photo": "./assets/imgpath.jpg",
+        "category": "cables",
+        "price": 12,
+        "stock": 50
+    },
+    {
+        "id": "4c187c0a856b0916abf5e4d5",
+        "title": "UGREEN USB-C to 3.5mm Headphone Jack Adapter",
+        "photo": "./assets/imgpath.jpg",
+        "category": "cables",
+        "price": 9,
+        "stock": 50
+    },
+    {
+        "id": "24a52e0651f0146abf7b95c4",
+        "title": "Anker Soundcore Life Q20 Hybrid Active Noise Cancelling Headphones",
+        "photo": "./assets/imgpath.jpg",
+        "category": "headphones",
+        "price": 59,
+        "stock": 50
+    },
+    {
+        "id": "8f9d84701a7925bb7d70ec62",
+        "title": "Sony WH-1000XM4 Wireless Noise Cancelling Headphones",
+        "photo": "./assets/imgpath.jpg",
+        "category": "headphones",
+        "price": 279,
+        "stock": 50
+    },
+    {
+        "id": "c3664fd8e7e0a1d0fa78f9b6",
+        "title": "Bose QuietComfort 45 Wireless Headphones",
+        "photo": "./assets/imgpath.jpg",
+        "category": "headphones",
+        "price": 329,
+        "stock": 50
+    },
+    {
+        "id": "3c6e871f72b3b7e9bba299ad",
+        "title": "JBL Tune 750BTNC Wireless Over-Ear Headphones",
+        "photo": "./assets/imgpath.jpg",
+        "category": "headphones",
+        "price": 129,
+        "stock": 50
+    },
+    {
+        "id": "57fb5a59f7a35a62a36e80c0",
+        "title": "Sennheiser HD 450BT Wireless Noise Cancelling Headphones",
+        "photo": "./assets/imgpath.jpg",
+        "category": "headphones",
+        "price": 199,
+        "stock": 50
+    },
+    {
+        "id": "f2e6738efc4180b2beaf914c",
+        "title": "Samsung Fast Charge Wireless Charging Stand",
+        "photo": "./assets/imgpath.jpg",
+        "category": "chargers",
+        "price": 49,
+        "stock": 50
+    },
+    {
+        "id": "d6b4305291a99dddbbc88569",
+        "title": "Mophie Dual Wireless Charging Pad",
+        "photo": "./assets/imgpath.jpg",
+        "category": "chargers",
+        "price": 69,
+        "stock": 50
+    },
+    {
+        "id": "1a58f15e27153aef8c4b3d28",
+        "title": "Roku Wireless Charging Pad",
+        "photo": "./assets/imgpath.jpg",
+        "category": "chargers",
+        "price": 29,
+        "stock": 50
+    },
+    {
+        "id": "fef6f40de034c989a579c5d5",
+        "title": "Belkin USB-C to USB-A Cable",
+        "photo": "./assets/imgpath.jpg",
+        "category": "cables",
+        "price": 10,
+        "stock": 50
+    }
+]

@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 class ProductManager {
     constructor() {
-        this.path = './data/fs/files/products.json'
+        this.path = './src/data/fs/files/products.json'
         this.init()
     };
     init() {
@@ -27,8 +27,8 @@ class ProductManager {
                     title: data.title,
                     photo: data.photo || './assets/imgpath.jpg',
                     category: data.category || 'TBD',
-                    price: data.price || 'TBD',
-                    stock: data.stock || 'TBD'
+                    price: data.price || '1',
+                    stock: data.stock || '1'
                 };
                 let allProducts = await fs.promises.readFile(this.path, 'utf-8');
                     allProducts = JSON.parse(allProducts);
@@ -42,14 +42,16 @@ class ProductManager {
             throw err;
         };
     };
-    async read(category = 'accessories') {
+    async read(category = null) {
         try {
             let allProducts = await fs.promises.readFile(this.path, 'utf-8');
             allProducts = JSON.parse(allProducts);
-            allProducts = allProducts.filter((each) => each.category === category)
+            if (category) {
+                allProducts = allProducts.filter(each => each.category === category);
+            };
             if (allProducts.length === 0) {
                 return null;
-            } 
+            };
             console.log(allProducts);
             return allProducts;
         } catch(err) {
@@ -60,13 +62,15 @@ class ProductManager {
         try {
             let allProducts = await fs.promises.readFile(this.path, 'utf-8');
             allProducts = JSON.parse(allProducts);
-            let selected = allProducts.find((each) => each.id === id);
-            if (!selected) {
-                throw new Error('No product found with the specified ID. Please check the ID and try again.');
+            let selected = allProducts.find(each => each.id === id);
+            if (selected) {
+                console.log(selected);
+                return selected;       
             } else {
-                console.log(selected)
-                return selected;
-            }
+                const error = new Error('No product found with the specified ID. Please check the ID and try again.');
+                error.statusCode = 404;
+                throw error;
+            };
         } catch(err) {
             throw err;
         };
@@ -75,16 +79,40 @@ class ProductManager {
         try {
             let allProducts = await fs.promises.readFile(this.path, 'utf-8');
             allProducts = JSON.parse(allProducts);
-            let selected = allProducts.find((each) => each.id === id);
-            if (!selected) {
-                throw new Error('No product found with the specified ID. Please check the ID and try again.');
-            } else {
-                let withoutSelected = allProducts.filter((each) => each.id !== id);
+            let selected = allProducts.find(each => each.id === id);
+            if (selected) {
+                let withoutSelected = allProducts.filter(each => each.id !== id);
                 withoutSelected = JSON.stringify(withoutSelected, null, 4);
                 await fs.promises.writeFile(this.path, withoutSelected);
                 console.log('The product has been successfully deleted');
-                console.log(withoutSelected);
-                return withoutSelected;
+                console.log(selected)
+                return selected;
+            } else {
+                const error = new Error('No product found with the specified ID. Please check the ID and try again.');
+                error.statusCode = 404;
+                throw error;
+            };
+        } catch(err) {
+            throw err;
+        };
+    };
+    async update(id, data) {
+        try {
+            let allProducts = await this.read();
+            let selected = allProducts.find(each => each.id === id);
+            if (selected) {
+                for (let prop in data) {
+                    selected[prop] = data[prop];
+                };
+                allProducts = JSON.stringify(allProducts, null, 4);
+                await fs.promises.writeFile(this.path, allProducts);
+                console.log('The product has been updated successfully');
+                console.log(selected);
+                return selected;
+            } else {
+                const error = new Error('No product found with the specified ID. Please check the ID and try again.')
+                error.statusCode = 404;
+                throw error;
             };
         } catch(err) {
             throw err;
@@ -94,22 +122,5 @@ class ProductManager {
 
 const productManager = new ProductManager()
 export default productManager
-
-
-//TESTING
-
-// async function test() {
-//     try {
-//         const products = new ProductManager();
-//         products.create({})
-//         products.read()
-//         products.readOne()
-//         products.destroy()
-//     } catch(err) {
-//         console.log(err)
-//     }
-// };
-
-//test()
 
 
