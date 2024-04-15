@@ -1,0 +1,15 @@
+{{!-- uid --}}
+
+{{#if user}}
+<section class="m-3 text-center">
+    <h3>User {{user.id}}</h3>
+    {{!-- photo --}}
+    <div id="userData" class="d-flex flex-column align-items-center">
+        <p style="border: 1px solid black; border-radius: 4px; display: inline-block;" class="p-1">Email: {{user.email}}</p>
+        <p style="border: 1px solid black; border-radius: 4px; display: inline-block;" class="p-1">Role: {{user.role}}</p>
+    </div>
+</section>
+
+{{else}}
+    <h1>User not found</h1>
+{{/if}}
