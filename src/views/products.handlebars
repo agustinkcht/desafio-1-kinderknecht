@@ -1,0 +1,41 @@
+{{!-- products REAL --}}
+{{!-- este es el de la clase... con hbs y webs --}}
+
+<h1 class="bg-success-subtle p-2 text-center">PRODUCTS</h1>
+<section class="d-flex"> 
+    <article class="w-50 d-flex flex-column align-items-center">
+        <h2 class="m-3">Add a new product</h2>
+        <form class="d-flex flex-column">
+            <input class="m-3 w-40" type="text" name="text" id="title" placeholder="Title">
+            <input class="m-3 w-40" type="text" name="category" id="category" placeholder="Category">
+            <input class="m-3 w-40"  type="number" name="price" id="price" placeholder="Price">
+            <input class="m-3 w-40"  type="number" name="stock" id="stock" placeholder="Stock">
+            <input class="m-3 w-80"  type="button" value="Submit" id="submitProduct">
+        </form>
+    </article>
+    <article class="d-flex flex-wrap w-50" id="products"></article>
+</section>
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+    const socket = io();
+    socket.on('products', (data) => {
+        console.log(data);
+        let template = ``;
+        template = data.map(each => `
+        <div class="card m-2" style="width: 18rem">
+            <img style= "height: 10rem" src="${each.img}" class="card-img-top object-fit-cover" alt="${'img/' + each.title}">
+            <div class="card-body">
+                <p class="card-text">${each.title}</p>
+            </div>
+        </div>
+        `).join('');
+        document.querySelector('#products').innerHTML = template;
+    });
+    document.querySelector('#submitProduct').addEventListener('click', (e) => {
+        const title = document.querySelector('#title').value;
+        const category = document.querySelector('#category').value;
+        const price = document.querySelector('#price').value;
+        const stock = document.querySelector('#stock').value;
+        socket.emit('addProduct', { title, category, price, stock });
+    });
+</script>

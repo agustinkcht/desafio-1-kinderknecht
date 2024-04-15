@@ -80,7 +80,7 @@
         "stock": 20
     },
     {
-        "id": "83e91cc011b0589bd266770c",
+        "id": "83e91cc011b0589bd266770c1",
         "title": "iPhone SE Plus",
         "photo": "./assets/imgpath.jpg",
         "category": "phones",
@@ -88,7 +88,7 @@
         "stock": 30
     },
     {
-        "id": "4a3ff2cd70bb8ad470316cd5",
+        "id": "4a3ff2cd70bb8ad470316cd51",
         "title": "iPhone XR2",
         "photo": "./assets/imgpath.jpg",
         "category": "phones",
@@ -96,7 +96,7 @@
         "stock": 30
     },
     {
-        "id": "d0973c10780fd87e7b428051",
+        "id": "d0973c10780fd87e7b4280511",
         "title": "iPhone 11",
         "photo": "./assets/imgpath.jpg",
         "category": "phones",
@@ -104,7 +104,7 @@
         "stock": 30
     },
     {
-        "id": "db59eb925337c5f53097be0b",
+        "id": "db59eb925337c5f53097be0b1",
         "title": "iPhone XS",
         "photo": "./assets/imgpath.jpg",
         "category": "phones",
@@ -112,7 +112,7 @@
         "stock": 30
     },
     {
-        "id": "bf688f4b45ba8ec1bccfadbf",
+        "id": "bf688f4b45ba8ec1bccfadbf1",
         "title": "iPhone 8",
         "photo": "./assets/imgpath.jpg",
         "category": "phones",
@@ -120,7 +120,7 @@
         "stock": 30
     },
     {
-        "id": "1b163517636e223522649352",
+        "id": "1b163517636e2235226493521",
         "title": "iPhone 7 Plus",
         "photo": "./assets/imgpath.jpg",
         "category": "phones",
@@ -128,7 +128,7 @@
         "stock": 30
     },
     {
-        "id": "bc09a348f59a699a854bec78",
+        "id": "bc09a348f59a699a854bec781",
         "title": "AirPods Pro Lite",
         "photo": "./assets/imgpath.jpg",
         "category": "accessories",
@@ -136,7 +136,7 @@
         "stock": 40
     },
     {
-        "id": "a22681d8711e04865223b500",
+        "id": "a22681d8711e04865223b5001",
         "title": "AirTag Keychain",
         "photo": "./assets/imgpath.jpg",
         "category": "accessories",
@@ -144,7 +144,7 @@
         "stock": 40
     },
     {
-        "id": "8718dcb8b1a20f9a4faa7ddc",
+        "id": "8718dcb8b1a20f9a4faa7ddc1",
         "title": "AirTag Leather Loop",
         "photo": "./assets/imgpath.jpg",
         "category": "accessories",
@@ -152,7 +152,7 @@
         "stock": 40
     },
     {
-        "id": "a72252fb8249106ebd78535a",
+        "id": "a72252fb8249106ebd78535a1",
         "title": "Apple Watch Series 8",
         "photo": "./assets/imgpath.jpg",
         "category": "accessories",
@@ -160,7 +160,7 @@
         "stock": 35
     },
     {
-        "id": "1b163517636e223522649352",
+        "id": "1b163517636e2235226493522",
         "title": "Apple Watch Sport Loop Band",
         "photo": "./assets/imgpath.jpg",
         "category": "accessories",
@@ -168,7 +168,7 @@
         "stock": 35
     },
     {
-        "id": "bc09a348f59a699a854bec78",
+        "id": "bc09a348f59a699a854bec782",
         "title": "Apple Watch Milanese Loop Band",
         "photo": "./assets/imgpath.jpg",
         "category": "accessories",
@@ -176,7 +176,7 @@
         "stock": 35
     },
     {
-        "id": "a22681d8711e04865223b500",
+        "id": "a22681d8711e04865223b5002",
         "title": "MacBook Pro 16 M4",
         "photo": "./assets/imgpath.jpg",
         "category": "laptops",
@@ -184,7 +184,7 @@
         "stock": 20
     },
     {
-        "id": "8718dcb8b1a20f9a4faa7ddc",
+        "id": "8718dcb8b1a20f9a4faa7ddc2",
         "title": "MacBook Air 14 M2",
         "photo": "./assets/imgpath.jpg",
         "category": "laptops",
@@ -192,7 +192,7 @@
         "stock": 20
     },
     {
-        "id": "a72252fb8249106ebd78535a",
+        "id": "a72252fb8249106ebd78535a2",
         "title": "iMac Pro 32-inch",
         "photo": "./assets/imgpath.jpg",
         "category": "computers",
@@ -200,7 +200,7 @@
         "stock": 20
     },
     {
-        "id": "1b163517636e223522649352",
+        "id": "1b163517636e2235226493523",
         "title": "Mac Mini Pro",
         "photo": "./assets/imgpath.jpg",
         "category": "computers",

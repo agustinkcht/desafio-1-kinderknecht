@@ -1,25 +1,25 @@
 import { Router } from "express";
-import productManager from "../../src/data/fs/files/ProductManager.fs.js";
+import userManager from '../../data/fs/files/UserManager.fs.js'
 
-const productsRouter = Router();
+const usersRouter = Router();
 
 //routes
-productsRouter.get('/', read);
-productsRouter.get('/:pid', readOne);
-productsRouter.post('/', create);
-productsRouter.put('/:pid', update);
-productsRouter.delete('/:pid', destroy);
+usersRouter.get('/', read);
+usersRouter.get('/:uid', readOne);
+usersRouter.post('/', create);
+usersRouter.put('/:uid', update);
+usersRouter.delete('/:uid', destroy);
 
 //functions
 async function read (req, res, next) {
     try {
-        const { category } = req.query;
-        const allProducts = await productManager.read(category);
-        if (allProducts) {
+        const { role } = req.query;
+        const allUsers = await userManager.read(role);
+        if (allUsers) {
             return res.json({
                 statusCode: 200,
-                response: allProducts,
-                category,
+                response: allUsers,
+                role,
                 success: true
             });
         } else {
@@ -34,8 +34,8 @@ async function read (req, res, next) {
 
 async function readOne (req, res, next) {
     try {
-        const { pid } = req.params;
-        const selected = await productManager.readOne(pid);
+        const { uid } = req.params;
+        const selected = await userManager.readOne(uid);
         if (selected) {
             return res.json({
                 statusCode: 200,
@@ -55,11 +55,11 @@ async function readOne (req, res, next) {
 async function create (req, res, next) {
     try {
         const data = req.body;
-        const newProduct = await productManager.create(data)
+        const newUser = await userManager.create(data)
         return res.json({
             statusCode: 201,
-            message: `Product created successfully with id ${newProduct.id}`,
-            response: newProduct
+            message: `User created successfully with id ${newUser.id}`,
+            response: newUser
         });
     } catch(err) {
         return next(err);
@@ -68,13 +68,13 @@ async function create (req, res, next) {
 
 async function update (req, res, next) {
     try {
-        const { pid } = req.params;
+        const { uid } = req.params;
         const data = req.body;
-        const updatedProduct = await productManager.update(pid, data);
+        const updatedUser = await userManager.update(uid, data);
         return res.json({
             statusCode: 200,
-            message: `Product with id ${pid} updated successfully`,
-            response: updatedProduct
+            message: `User with id ${uid} updated successfully`,
+            response: updatedUser
         });    
     } catch(err) {
         return next(err);
@@ -83,17 +83,16 @@ async function update (req, res, next) {
 
 async function destroy (req, res, next) {
     try {
-        const { pid } = req.params;
-        const deletedProduct = await productManager.destroy(pid);
+        const { uid } = req.params;
+        const deletedUser = await userManager.destroy(uid);
         return res.json({
             statusCode: 200,
-            message: 'Product deleted successfully',
-            response: deletedProduct
+            message: 'User deleted successfully',
+            response: deletedUser
         });
     } catch(err) {
         return next(err);
     };
 };
 
-export default productsRouter;
-
+export default usersRouter;
