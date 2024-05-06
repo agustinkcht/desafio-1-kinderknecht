@@ -1,25 +1,25 @@
+// external dependencies
 import express from "express";
+import "dotenv/config.js"
+import dbConnect from "./src/utils/dbConnect.util.js";
 import { createServer } from "http";
-import { Server } from 'socket.io';
-import morgan from "morgan";
 import { engine } from "express-handlebars";
+import morgan from "morgan";
+//internal modules
+import __dirname from "./utils.js";
 import indexRouter from "./src/routers/index.router.js";
-import socketCb from './src/routers/index.socket.js';
 import errorHandler from "./src/middlewares/errorHandler.js"
 import notFoundHandler from "./src/middlewares/notFoundHandler.js";
-import __dirname from "./utils.js";
-
 
 // server init
 const server = express();
-const port = 8080;
-const handleServerStart = () => {
-    console.log(`Server is now running on port ${port}`)
+const port = process.env.PORT || 8080;
+const handleServerStart = async () => {
+    console.log(`Server is now running on port ${port}`);
+    await dbConnect();
 };
 // extra for socket
 const nodeServer = createServer(server);
-const socketServer = new Server(nodeServer);
-socketServer.on('connection', socketCb);
 nodeServer.listen(port, handleServerStart);
 
 // handlebars init

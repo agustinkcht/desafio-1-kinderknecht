@@ -1,0 +1,62 @@
+[
+    {
+        "user_id": "777888666",
+        "product_id": "aaahhh477736",
+        "quantity": 1,
+        "state": "reserved"
+    },
+    {
+        "user_id": "777adasjhasidaod",
+        "product_id": "aaahhh477736",
+        "quantity": 1,
+        "state": "reserved"
+    },
+    {
+        "user_id": "user_b",
+        "product_id": "h5",
+        "quantity": 2,
+        "state": "reserved"
+    },
+    {
+        "user_id": "user_a",
+        "product_id": "h5",
+        "quantity": 2,
+        "state": "reserved"
+    },
+    {
+        "user_id": "user_a",
+        "product_id": "b9",
+        "quantity": 2,
+        "state": "reserved"
+    },
+    {
+        "user_id": "user_a",
+        "product_id": "g4",
+        "quantity": 2,
+        "state": "reserved"
+    },
+    {
+        "user_id": "user_b",
+        "product_id": "g4",
+        "quantity": 2,
+        "state": "reserved"
+    },
+    {
+        "user_id": "user_b",
+        "product_id": "KK4",
+        "quantity": 2,
+        "state": "reserved"
+    },
+    {
+        "user_id": "user_b",
+        "product_id": "JO4",
+        "quantity": 2,
+        "state": "reserved"
+    },
+    {
+        "user_id": "user_b",
+        "product_id": "SsL4",
+        "quantity": 2,
+        "state": "reserved"
+    }
+]

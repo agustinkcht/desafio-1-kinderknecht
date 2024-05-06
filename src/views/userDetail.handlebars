@@ -2,11 +2,11 @@
 
 {{#if user}}
 <section class="m-3 text-center">
-    <h3>User {{user.id}}</h3>
+    <h3>About user: {{user.id}}</h3>
     {{!-- photo --}}
     <div id="userData" class="d-flex flex-column align-items-center">
-        <p style="border: 1px solid black; border-radius: 4px; display: inline-block;" class="p-1">Email: {{user.email}}</p>
-        <p style="border: 1px solid black; border-radius: 4px; display: inline-block;" class="p-1">Role: {{user.role}}</p>
+        <p style="border: 1px solid black; border-radius: 4px; background-color:rgba(0, 255, 255, 0.151); display: inline-block;" class="p-1">Email: {{user.email}}</p>
+        <p style="border: 1px solid black; border-radius: 4px; background-color:rgba(0, 255, 255, 0.151); display: inline-block;" class="p-1">Role: {{user.role}}</p>
     </div>
 </section>
 

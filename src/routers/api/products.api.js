@@ -1,5 +1,6 @@
 import { Router } from "express";
-import productManager from "../../data/fs/files/ProductManager.fs.js";
+//import productManager from "../../data/fs/files/ProductManager.fs.js";
+import productManager from "../../data/mongo/managers/ProductManager.mongo.js";
 
 const productsRouter = Router();
 
@@ -95,6 +96,8 @@ async function destroy (req, res, next) {
         return next(err);
     };
 };
+
+
 
 export default productsRouter;
 
