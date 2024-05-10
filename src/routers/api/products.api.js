@@ -6,6 +6,7 @@ const productsRouter = Router();
 
 //routes
 productsRouter.get('/', read);
+productsRouter.get('/paginate', paginate)
 productsRouter.get('/:pid', readOne);
 productsRouter.post('/', create);
 productsRouter.put('/:pid', update);
@@ -33,7 +34,35 @@ async function read (req, res, next) {
         return next(err);
     };
 };
-
+async function paginate (req, res, next) {
+    try {
+        const filter = {};
+        const opts = {};
+        if (req.query.limit) {
+            opts.limit = req.query.limit;
+        };
+        if (req.query.page) {
+            opts.page = req.query.page;
+        };
+        if (req.query.category) {
+            filter.category = req.query.category;
+        };
+        const all = await productManager.paginate({ filter, opts });
+        return res.json({
+            statusCode: 200,
+            response: all.docs,
+            paginateInfo: {
+                page: all.page,
+                totalPages: all.totalPages,
+                limit: all.limit,
+                prevPage: all.prevPage,
+                nextPage: all.nextPage
+            }
+        });
+    } catch(err) {
+        return next(err)
+    };
+};
 async function readOne (req, res, next) {
     try {
         const { pid } = req.params;
@@ -53,7 +82,6 @@ async function readOne (req, res, next) {
         return next(err);
     };
 };
-
 async function create (req, res, next) {
     try {
         const data = req.body;
@@ -67,7 +95,6 @@ async function create (req, res, next) {
         return next(err);
     };
 };
-
 async function update (req, res, next) {
     try {
         const { pid } = req.params;
@@ -82,7 +109,6 @@ async function update (req, res, next) {
         return next(err);
     };
 };
-
 async function destroy (req, res, next) {
     try {
         const { pid } = req.params;
@@ -96,8 +122,6 @@ async function destroy (req, res, next) {
         return next(err);
     };
 };
-
-
 
 export default productsRouter;
 

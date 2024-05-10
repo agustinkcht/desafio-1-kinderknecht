@@ -18,6 +18,14 @@ class Manager {
             throw err;
         };
     };
+    async paginate({ filter, opts }) { // read paginate
+        try {
+            const all = await this.Model.paginate(filter, opts)
+            return all;
+        } catch(err) {
+            throw err
+        };
+    };
     async readOne(id) {
         try {
             const one = await this.Model.findOne({ _id: id });
@@ -38,6 +46,14 @@ class Manager {
         try {
             const one = await this.Model.findByIdAndDelete(id);
             return one;
+        } catch(err) {
+            throw err;
+        };
+    };
+    async aggregate(obj) {
+        try {
+            const result = await this.Model.aggregate(obj) ;
+            return result;
         } catch(err) {
             throw err;
         };

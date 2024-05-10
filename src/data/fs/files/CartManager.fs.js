@@ -1,4 +1,5 @@
 import fs from "fs";
+import crypto from "crypto";
 
 class CartManager {
     constructor() {
@@ -28,6 +29,7 @@ class CartManager {
                 throw error;
             } else {
                 const cart = {
+                    id: crypto.randomBytes(12).toString('hex'),
                     user_id: data.user_id,
                     product_id: data.product_id,
                     quantity: data.quantity,
@@ -64,26 +66,70 @@ class CartManager {
         } catch(err) {
             throw err;
         }
-    }
+    };
+    async readOne(id) {
+        try {
+            let allCarts = await fs.promises.readFile(this.path, 'utf-8');
+            allCarts = JSON.parse(allCarts);
+            let selected = allCarts.find(each => each.id === id);
+            if (selected) {
+                console.log(selected);
+                return selected;       
+            } else {
+                const error = new Error(`No item found in the cart with id ${id}`);
+                error.statusCode = 404;
+                throw error;
+            };
+        } catch(err) {
+            throw err;
+        };
+    };
+    async destroy(id) {
+        try {
+            let allCarts = await fs.promises.readFile(this.path, 'utf-8');
+            allCarts = JSON.parse(allCarts);
+            let selected = allCarts.find(each => each.id === id);
+            if (selected) {
+                let withoutSelected = allCarts.filter(each => each.id !== id);
+                withoutSelected = JSON.stringify(withoutSelected, null, 4);
+                await fs.promises.writeFile(this.path, withoutSelected);
+                console.log('The item has been successfully deleted');
+                console.log(selected)
+                return selected;
+            } else {
+                const error = new Error(`No item found in the cart with id ${id}`);
+                error.statusCode = 404;
+                throw error;
+            };
+        } catch(err) {
+            throw err;
+        };
+    };
+    async update(id, data) {
+        try {
+            let allCarts = await fs.promises.readFile(this.path, 'utf-8');
+            allCarts = JSON.parse(allCarts);
+            let selected = allCarts.find(each => each.id === id);
+            if (selected) {
+                for (let prop in data) {
+                    selected[prop] = data[prop];
+                };
+                allCarts = JSON.stringify(allCarts, null, 4);
+                await fs.promises.writeFile(this.path, allCarts);
+                console.log('The item has been updated successfully');
+                console.log(selected);
+                return selected;
+            } else {
+                const error = new Error(`No item found in the cart with id ${id}`)
+                error.statusCode = 404;
+                throw error;
+            };
+        } catch(err) {
+            throw err;
+        };
+    };
 
 };
 
 const cartManager = new CartManager();
 export default cartManager;
-
-
-// async read(user_id) {
-//     try {
-//         if(user_id) {
-//             let fullCart = await fs.promises.readFile(this.path, 'utf-8');
-//             fullCart = JSON.parse(fullCart);
-//             let selected = fullCart.find(each => each.user_id === user_id);
-//             if (selected) {
-//                 console.log(selected);
-//                 return selected;       
-//             };
-//         };         
-//     } catch(err) {
-//         throw err;
-//     };
-// };

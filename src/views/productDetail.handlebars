@@ -1,7 +1,9 @@
 {{#if product}}
     <h3>About {{product.title}}</h3>
+    <img src="{{product.photo}}" alt="photo" style="width: 100px;">
     <p>Price: {{product.price}}</p>
     <p>category: {{product.category}}</p>
+
 {{else}}
     <h1>Product not found</h1>
 {{/if}}

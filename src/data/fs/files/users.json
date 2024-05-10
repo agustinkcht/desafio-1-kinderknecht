@@ -1,28 +1,28 @@
 [
     {
-        "id": "cfc53a46c51c7cb4c6d30a63",
-        "photo": "./assets/imgpath.jpg",
+        "id": "663ce82357109ba2e5d3b56b",
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
         "email": "johndoe123@email.com",
         "password": "P@ssw0rd123",
         "role": "0"
     },
     {
-        "id": "f6226aa687336f04cb3b9d8e",
-        "photo": "./assets/imgpath.jpg",
+        "id": "663ce82357109ba2e5d3b56c",
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
         "email": "sarahsmith456@email.com",
         "password": "SecurePass789!",
         "role": "1"
     },
     {
-        "id": "24e09fe34078c24127a1375c",
-        "photo": "./assets/imgpath.jpg",
+        "id": "663ce82357109ba2e5d3b56d",
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
         "email": "lisawilliams432@email.com",
         "password": "William$L1sa",
         "role": "0"
     },
     {
-        "id": "e9172eca317f8a4b984e307c",
-        "photo": "./assets/imgpath.jpg",
+        "id": "663ce82357109ba2e5d3b56e",
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
         "email": "emilybrown321@email.com",
         "password": "Brownie1234$",
         "role": "1"
