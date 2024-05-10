@@ -27,7 +27,7 @@ class UserManager {
             } else {
                 const user = {
                     id: crypto.randomBytes(12).toString('hex'),
-                    photo: './assets/imgpath.jpg',
+                    photo: 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png',
                     email: data.email,
                     password: data.password,
                     role: data.role || '0'

@@ -6,6 +6,7 @@ const usersRouter = Router();
 
 //routes
 usersRouter.get('/', read);
+usersRouter.get('/paginate', paginate);
 usersRouter.get('/:uid', readOne);
 usersRouter.post('/', create);
 usersRouter.put('/:uid', update);
@@ -32,7 +33,35 @@ async function read (req, res, next) {
         return next(err);
     };
 };
-
+async function paginate (req, res, next) {
+    try {
+        const filter = {};
+        const opts = {};
+        if (req.query.limit) {
+            opts.limit = req.query.limit;
+        };
+        if (req.query.page) {
+            opts.page = req.query.page;
+        };
+        if (req.query.role) {
+            filter.role = req.query.role;
+        };
+        const all = await userManager.paginate({ filter, opts });
+        return res.json({
+            statusCode: 200,
+            response: all.docs,
+            paginateInfo: {
+                page: all.page,
+                totalPages: all.totalPages,
+                limit: all.limit,
+                prevPage: all.prevPage,
+                nextPage: all.nextPage
+            }
+        });
+    } catch(err) {
+        return next(err)
+    };
+};
 async function readOne (req, res, next) {
     try {
         const { uid } = req.params;
@@ -52,7 +81,6 @@ async function readOne (req, res, next) {
         return next(err);
     };
 };
-
 async function create (req, res, next) {
     try {
         const data = req.body;
@@ -66,7 +94,6 @@ async function create (req, res, next) {
         return next(err);
     };
 };
-
 async function update (req, res, next) {
     try {
         const { uid } = req.params;
@@ -81,7 +108,6 @@ async function update (req, res, next) {
         return next(err);
     };
 };
-
 async function destroy (req, res, next) {
     try {
         const { uid } = req.params;

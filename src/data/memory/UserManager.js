@@ -15,7 +15,7 @@ class UserManager {
                         : UserManager.#users[UserManager.#users.length-1].id+1,
                     email: data.email,
                     password: data.password,
-                    photo: data.photo || './assets/imgpath.jpg',
+                    photo: data.photo || 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png',
                     role: data.role || '0'
                 };
                 UserManager.#users.push(user);
@@ -86,28 +86,28 @@ class UserManager {
 const users = new UserManager()
 
 users.create({
-    photo: './assets/imgpath.jpg',
+    photo: 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png',
     email: 'johndoe123@email.com',
     password: 'P@ssw0rd123',
     role: 0
 });
 
 users.create({
-    photo: './assets/imgpath.jpg',
+    photo: 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png',
     email: 'sarahsmith456@email.com',
     password: 'SecurePass789!',
     role: 1
 });
 
 users.create({
-    photo: './assets/imgpath.jpg',
+    photo: 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png',
     email: 'lisawilliams432@email.com',
     password: 'William$L1sa',
     role: 0
 });
 
 users.create({
-    photo: './assets/imgpath.jpg',
+    photo: 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png',
     email: 'emilybrown321@email.com',
     password: 'Brownie1234$',
     role: 0
@@ -115,10 +115,12 @@ users.create({
 
 
 //TESTING
+// node src/data/memory/UserManager.js
 
 //users.read()
-//users.readOne()
-//users.destroy()
+//users.readOne('')
+//users.update(1, {price: 5})
+//users.destroy(1)
 
 
 

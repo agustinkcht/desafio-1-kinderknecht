@@ -25,7 +25,7 @@ class ProductManager {
                 const product = {
                     id: crypto.randomBytes(12).toString('hex'),
                     title: data.title,
-                    photo: data.photo || './assets/imgpath.jpg',
+                    photo: data.photo || 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
                     category: data.category || 'TBD',
                     price: data.price || '1',
                     stock: data.stock || '1'
