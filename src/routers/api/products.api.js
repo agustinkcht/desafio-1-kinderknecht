@@ -6,7 +6,6 @@ const productsRouter = Router();
 
 //routes
 productsRouter.get('/', read);
-productsRouter.get('/paginate', paginate)
 productsRouter.get('/:pid', readOne);
 productsRouter.post('/', create);
 productsRouter.put('/:pid', update);
@@ -14,38 +13,17 @@ productsRouter.delete('/:pid', destroy);
 // asigno los distintos métodos con sus respectivos endpoints, y la callback que llaman
 
 //functions
+
 async function read (req, res, next) {
     try {
-        const { category } = req.query;
-        const allProducts = await productManager.read(category);
-        if (allProducts) {
-            return res.json({
-                statusCode: 200,
-                response: allProducts,
-                category,
-                success: true
-            });
-        } else {
-            const error = new Error("Error fetching data");
-            error.status = 404;
-            throw error;
-        };
-    } catch(err){
-        return next(err);
-    };
-};
-async function paginate (req, res, next) {
-    try {
         const filter = {};
-        const opts = {};
-        if (req.query.limit) {
-            opts.limit = req.query.limit;
-        };
-        if (req.query.page) {
-            opts.page = req.query.page;
-        };
         if (req.query.category) {
             filter.category = req.query.category;
+        };
+        const opts = {
+            limit: req.query.limit || 4,
+            page: req.query.page || 1,
+            sort: { name: 1 }
         };
         const all = await productManager.paginate({ filter, opts });
         return res.json({
@@ -56,13 +34,14 @@ async function paginate (req, res, next) {
                 totalPages: all.totalPages,
                 limit: all.limit,
                 prevPage: all.prevPage,
-                nextPage: all.nextPage
+                nextPage: all.nextPage,
+                totalDocs: all.totalDocs
             }
         });
     } catch(err) {
         return next(err)
     };
-};
+}; //read con paginate
 async function readOne (req, res, next) {
     try {
         const { pid } = req.params;
