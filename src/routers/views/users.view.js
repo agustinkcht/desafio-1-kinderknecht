@@ -3,6 +3,14 @@ import userManager from "../../data/fs/files/UserManager.fs.js";
 
 const usersViewRouter = Router();
 
+usersViewRouter.get('/login', (req, res, next) => {
+    try {
+        return res.render('login', { title: 'Login' })
+    } catch(err) {
+        return next(err);
+    };
+});
+
 usersViewRouter.get('/register', (req, res, next) => {
     try {
         return res.render('register', { title: 'Register' })
@@ -20,5 +28,7 @@ usersViewRouter.get('/:uid', async(req, res, next) => {
         return next(err);
     };
 });
+
+
 
 export default usersViewRouter;
