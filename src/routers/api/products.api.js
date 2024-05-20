@@ -10,10 +10,8 @@ productsRouter.get('/:pid', readOne);
 productsRouter.post('/', create);
 productsRouter.put('/:pid', update);
 productsRouter.delete('/:pid', destroy);
-// asigno los distintos métodos con sus respectivos endpoints, y la callback que llaman
 
 //functions
-
 async function read (req, res, next) {
     try {
         const filter = {};
@@ -41,7 +39,7 @@ async function read (req, res, next) {
     } catch(err) {
         return next(err)
     };
-}; //read con paginate
+}; // con paginate
 async function readOne (req, res, next) {
     try {
         const { pid } = req.params;

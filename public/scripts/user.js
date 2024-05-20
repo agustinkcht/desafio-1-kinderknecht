@@ -1,3 +1,8 @@
+import { printCart, printLogout } from "./modules/printLayout.js";
+
+printCart()
+printLogout()
+
 const template = (data) => `
 <div class="card m-2" style="width: 24rem;">
     <img src="${data.photo}" class="card-img-top" alt="data-photo">

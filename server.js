@@ -3,8 +3,9 @@ import express from "express";
 import "dotenv/config.js"
 import dbConnect from "./src/utils/dbConnect.util.js";
 import { createServer } from "http";
-import { engine } from "express-handlebars";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
+import session from "express-session";
 //internal modules
 import __dirname from "./utils.js";
 import indexRouter from "./src/routers/index.router.js";
@@ -18,20 +19,22 @@ const handleServerStart = async () => {
     console.log(`Server is now running on port ${port}`);
     await dbConnect();
 };
-// extra for socket
+// extra for socket -not used at the moment
 const nodeServer = createServer(server);
 nodeServer.listen(port, handleServerStart);
-
-// handlebars init
-server.engine('handlebars', engine());
-server.set('view engine', 'handlebars');
-server.set('views', __dirname + '/src/views');
 
 //middlewares
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static('public'));
 server.use(morgan('dev'));
+server.use(cookieParser(process.env.SECRET_COOKIE));
+server.use(session({
+    secret: process.env.SECRET_SESSION,
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 }
+}));
 
 // router
 server.use('/', indexRouter);

@@ -6,34 +6,13 @@ const usersRouter = Router();
 
 //routes
 usersRouter.get('/', read);
-usersRouter.get('/paginate', paginate);
 usersRouter.get('/:uid', readOne);
 usersRouter.post('/', create);
 usersRouter.put('/:uid', update);
 usersRouter.delete('/:uid', destroy);
 
 //functions
-async function read (req, res, next) {
-    try {
-        const { role } = req.query;
-        const allUsers = await userManager.read(role);
-        if (allUsers) {
-            return res.json({
-                statusCode: 200,
-                response: allUsers,
-                role,
-                success: true
-            });
-        } else {
-            const error = new Error("Error fetching data");
-            error.status = 404;
-            throw error;
-        };
-    } catch(err){
-        return next(err);
-    };
-};
-async function paginate (req, res, next) {
+async function read(req, res, next) {
     try {
         const filter = {};
         const opts = {};
@@ -61,7 +40,7 @@ async function paginate (req, res, next) {
     } catch(err) {
         return next(err)
     };
-};
+}; // con paginate
 async function readOne (req, res, next) {
     try {
         const { uid } = req.params;
