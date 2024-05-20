@@ -6,6 +6,7 @@ import { createServer } from "http";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 //internal modules
 import __dirname from "./utils.js";
 import indexRouter from "./src/routers/index.router.js";
@@ -30,10 +31,13 @@ server.use(express.static('public'));
 server.use(morgan('dev'));
 server.use(cookieParser(process.env.SECRET_COOKIE));
 server.use(session({
+    store: new MongoStore({
+        mongoUrl: process.env.MONGO_URI,
+        ttl: 60 * 60
+    }),
     secret: process.env.SECRET_SESSION,
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 1000 }
 }));
 
 // router

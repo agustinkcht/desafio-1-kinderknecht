@@ -1,5 +1,8 @@
-import { printCart, printLogout } from "./modules/printLayout.js";
+import { printRegister, printLogin, printProfile, printCart, printLogout } from "./modules/printLayout.js";
 
+printRegister()
+printLogin()
+printProfile()
 printCart()
 printLogout()
 

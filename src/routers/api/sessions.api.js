@@ -1,27 +1,36 @@
 import { Router } from "express";
 import userManager from "../../data/mongo/managers/UserManager.mongo.js";
+import isValidEmail from "../../middlewares/isValidEmail.mid.js";
+import isValidData from "../../middlewares/isValidData.mid.js";
+import isValidUser from "../../middlewares/isValidUser.mid.js";
+import isValidPassword from "../../middlewares/isValidPassword.mid.js";
 
 const sessionsRouter = Router();
 
-sessionsRouter.post('/login', async (req, res, next) => {
+sessionsRouter.post('/register', isValidData, isValidEmail, async (req, res, next) => {
     try {
-        const { email, password } = req.body;
+        const data = req.body;
+        await userManager.create(data);
+        return res.json({ 
+            statusCode: 201,
+            message: 'User successfully registered.'
+         });
+    } catch (err) {
+        return next(err);
+    };
+});
+sessionsRouter.post('/login', isValidUser, isValidPassword, async (req, res, next) => {
+    try {
+        const { email } = req.body;
         const one = await userManager.readByEmail(email);
-        if (one.password === password) {
-            req.session.email = email;
-            req.session.role = one.role;
-            req.session.user_id = one._id;
-            req.session.online = true;
-            return res.json({
-                statusCode: 200,
-                message: 'Logged In'
-            });
-        } else {
-            return res.json({
-                statusCode: 401,
-                message: 'Bad Auth'
-            });
-        };
+        req.session.email = email;
+        req.session.role = one.role;
+        req.session.user_id = one._id;
+        req.session.online = true;
+        return res.json({
+            statusCode: 200,
+            message: 'Access Granted'
+        });
     } catch (err) {
         return next(err)    
     };
@@ -31,14 +40,14 @@ sessionsRouter.get('/online', async (req, res, next) => {
         if (req.session.online) {
             return res.json({
                 statusCode: 200,
-                message: 'User Online',
+                message: 'Online',
                 user_id: req.session.user_id,
                 email: req.session.email
             });
         } else {
             return res.json({
                 statusCode: 401,
-                message: 'Bad Auth'
+                message: 'Offline'
             });
         };
     } catch (err) {
