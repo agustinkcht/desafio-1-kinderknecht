@@ -1,3 +1,11 @@
+import { printRegister, printLogin, printProfile, printCart,  printLogout } from "./modules/printLayout.js";
+
+printRegister()
+printLogin()
+printCart()
+printLogout()
+printProfile()
+
 const template = (data) => `
 <a href="/pages/detail.html?id=${data._id}" class="card m-2" style="width: 18rem;">
     <img src="${data.photo}" class="card-img-top" alt="data-photo">

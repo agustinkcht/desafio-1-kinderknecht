@@ -8,49 +8,15 @@ import cartManager from "../../data/mongo/managers/CartManager.mongo.js";
 
 const cartsRouter = Router();
 
-cartsRouter.post('/', create);
-cartsRouter.get('/', read);
-cartsRouter.get('/paginate', paginate)
+cartsRouter.get('/', read)
 cartsRouter.get('/:iid', readOne); // item id
+cartsRouter.post('/', create);
 cartsRouter.put('/:iid', update);
 cartsRouter.delete('/:iid', destroy);
+cartsRouter.delete('/user/:uid', destroyMany)
 
-
-async function create (req, res, next) {
-    try {
-        const data = req.body;
-        const one = await cartManager.create(data);
-        return res.json({
-            statusCode: 201,
-            message: 'Created',
-            response: one
-        }); 
-    } catch(err) {
-        return next(err)
-    };
-};
+//functions
 async function read (req, res, next) {
-    try {
-        const { user_id } = req.query;
-        if (user_id) {
-            const cart = await cartManager.read( {user_id} );
-            if (cart) {
-                return res.json({
-                    statusCode: 200,
-                    message: 'Read',
-                    response: cart
-                });
-            };
-        } else {
-            const error = new Error('No cart available');
-            error.statusCode = 404;
-            throw error;
-        };
-    } catch(err){
-        return next(err);
-    };
-};
-async function paginate (req, res, next) {
     try {
         const filter = {};
         const opts = {};
@@ -72,13 +38,14 @@ async function paginate (req, res, next) {
                 totalPages: all.totalPages,
                 limit: all.limit,
                 prevPage: all.prevPage,
-                nextPage: all.nextPage
+                nextPage: all.nextPage,
+                totalDocs: all.totalDocs
             }
         });
     } catch(err) {
         return next(err)
     };
-};
+}; // con paginate
 async function readOne (req, res, next) {
     try {
         const { iid } = req.params;
@@ -96,6 +63,19 @@ async function readOne (req, res, next) {
         };
     } catch(err) {
         return next(err);
+    };
+};
+async function create (req, res, next) {
+    try {
+        const data = req.body;
+        const one = await cartManager.create(data);
+        return res.json({
+            statusCode: 201,
+            message: 'Created',
+            response: one
+        }); 
+    } catch(err) {
+        return next(err)
     };
 };
 async function update (req, res, next) { 
@@ -120,6 +100,19 @@ async function destroy (req, res, next) {
             statusCode: 200,
             message: 'Deleted',
             response: deletedItem
+        });
+    } catch(err) {
+        return next(err);
+    };
+};
+async function destroyMany (req, res, next) {
+    try {
+        const { uid } = req.params;
+        const deletedItems = await cartManager.destroyMany(uid)
+        return res.json({
+            statusCode: 200,
+            message: 'Cart reset. All items deleted.',
+            response: deletedItems
         });
     } catch(err) {
         return next(err);

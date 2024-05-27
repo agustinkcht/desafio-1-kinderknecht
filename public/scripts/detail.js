@@ -1,3 +1,11 @@
+import { printRegister, printLogin, printProfile, printCart, printLogout } from "./modules/printLayout.js";
+
+printRegister()
+printLogin()
+printProfile()
+printCart()
+printLogout()
+
 const template = (data) => `
 <div class="card m-2" style="width: 18rem;">
     <img src="${data.photo}" class="card-img-top" alt="data-photo">
@@ -8,7 +16,6 @@ const template = (data) => `
   </div>
 </div> 
 `;
-
 
 const queries = new URL(location.href);
 const pid = queries.searchParams.get('id');
@@ -45,4 +52,6 @@ async function addToCart(pid) {
         console.log(error)
     };
 };
+
+window.addToCart = addToCart;
 

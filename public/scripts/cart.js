@@ -1,3 +1,11 @@
+import { printRegister, printLogin, printProfile, printCart, printLogout } from "./modules/printLayout.js";
+
+printRegister()
+printLogin()
+printProfile()
+printCart()
+printLogout()
+
 const template = (data) => `
 <div class="card m-2" style="width: 18rem;">
     <div class="card-body">
@@ -9,31 +17,24 @@ const template = (data) => `
 </div> 
 `;
 
-fetch('/api/carts?user_id=663ce82357109ba2e5d3b56c') // id hardcodeado provisoriamente
-    .then(res => res.json())
-    .then(res => {
-        console.log(res.response);  
-        const items = res.response;
-        const itemsHtml = items
-            .map(each => template(each))
-            .join('')
-        document.querySelector('#itemsOnCart').innerHTML = itemsHtml
-    })
-    .catch(err => console.log(err))
 
-async function removeItem(iid) {
+async function fetchData() {
     try {
-        const url = `/api/carts/${iid}`;
-        const opts = {
-            method: 'DELETE',
-            headers: {"Content-Type" : "application/json"}
-        };
-        let response = await fetch(url, opts)
-        response = await response.json()
-        console.log('item removed from cart', response)
-        location.reload()
-    } catch (error) {
-        console.log(error)
+        let response = await fetch('/api/sessions/online');
+        response = await response.json();
+        const user_id = response.user_id;
+        if(user_id) {
+            let userCart = await fetch(`/api/carts?user_id=${user_id}`)
+            const res = await userCart.json();
+            const items = res.response;
+            console.log(res.response)
+            const itemsHtml = items
+                .map(each => template(each))
+                .join('');
+            document.querySelector('#itemsOnCart').innerHTML = itemsHtml;    
+        }   
+    } catch (err) {
+        console.log(err)
     };
 };
 
@@ -53,4 +54,45 @@ async function updateQuantity(iid, newQuantity) {
         console.log(error)
     }
 }
+
+async function removeItem(iid) {
+    try {
+        const url = `/api/carts/${iid}`;
+        const opts = {
+            method: 'DELETE',
+            headers: {"Content-Type" : "application/json"}
+        };
+        let response = await fetch(url, opts)
+        response = await response.json()
+        console.log('item removed from cart', response)
+        location.reload()
+    } catch (error) {
+        console.log(error)
+    };
+};
+
+window.updateQuantity = updateQuantity;
+window.removeItem = removeItem;
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchData();
+});
+
+// async function removeAll(uid) {
+//     try {
+//         const url = `/api/carts/user/${uid}`;
+//         const opts = {
+//             method: 'DELETE',
+//             headers: {"Content-Type" : "application/json"}
+//         };
+//         let response = await fetch(url, opts)
+//         response = await response.json()
+//         console.log('Cart reset. All items removed.')
+//         location.reload()
+//     } catch(error) {
+//         console.log(error)
+//     };
+// };
+
+
 
