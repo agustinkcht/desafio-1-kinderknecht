@@ -1,16 +1,12 @@
 import { Router } from "express";
-import userManager from "../../data/mongo/managers/UserManager.mongo.js";
-import isValidEmail from "../../middlewares/isValidEmail.mid.js";
-import isValidData from "../../middlewares/isValidData.mid.js";
-import isValidUser from "../../middlewares/isValidUser.mid.js";
-import isValidPassword from "../../middlewares/isValidPassword.mid.js";
+import passport from "../../middlewares/passport.mid.js";
 
 const sessionsRouter = Router();
 
-sessionsRouter.post('/register', isValidData, isValidEmail, async (req, res, next) => {
+sessionsRouter.post('/register', 
+    passport.authenticate('register', { session: false }), 
+    async (req, res, next) => {
     try {
-        const data = req.body;
-        await userManager.create(data);
         return res.json({ 
             statusCode: 201,
             message: 'User successfully registered.'
@@ -19,23 +15,20 @@ sessionsRouter.post('/register', isValidData, isValidEmail, async (req, res, nex
         return next(err);
     };
 });
-sessionsRouter.post('/login', isValidUser, isValidPassword, async (req, res, next) => {
+sessionsRouter.post('/login',
+    passport.authenticate('login', { session: false }), 
+    async (req, res, next) => {
     try {
-        const { email } = req.body;
-        const one = await userManager.readByEmail(email);
-        req.session.email = email;
-        req.session.role = one.role;
-        req.session.user_id = one._id;
-        req.session.online = true;
         return res.json({
             statusCode: 200,
-            message: 'Access Granted'
+            message: 'Session Initialized'
         });
     } catch (err) {
         return next(err)    
     };
 });
-sessionsRouter.get('/online', async (req, res, next) => {
+sessionsRouter.get('/online', 
+    async (req, res, next) => {
     try {
         if (req.session.online) {
             return res.json({
@@ -54,12 +47,19 @@ sessionsRouter.get('/online', async (req, res, next) => {
         return next(err)      
     };
 });
-sessionsRouter.post('/logout', (req, res, next) => {
+sessionsRouter.post('/logout', 
+    (req, res, next) => {
     try {
-        req.session.destroy()
+        if (req.session.online) {
+            req.session.destroy();
+        } else {
+            const error = new Error('No session opened')
+            error.statusCode = 401;
+            throw error;
+        }
         return res.json({
             statusCode: 200,
-            message: 'Logged Out'
+            message: 'Session Closed'
         });  
     } catch (err) {
         return next(err)     
