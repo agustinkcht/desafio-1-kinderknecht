@@ -1,8 +1,7 @@
-let online = await fetch('/api/sessions/online');
-online = await online.json();
-
 async function printLogin() {
     let template = "";
+    let online = await fetch('/api/sessions/online');
+    online = await online.json();
     if (online.statusCode === 401) {
         template = `
         <a class="nav-link" href="/pages/login.html">Login</a>
@@ -13,6 +12,8 @@ async function printLogin() {
 
 async function printRegister() {
     let template = "";
+    let online = await fetch('/api/sessions/online');
+    online = await online.json();
     if (online.statusCode === 401) {
         template = `
         <a class="nav-link" href="/pages/register.html">Register</a>
@@ -23,6 +24,8 @@ async function printRegister() {
 
 async function printCart() {
     let template = "";
+    let online = await fetch('/api/sessions/online');
+    online = await online.json();
     console.log(online) // acá surge el online/offline que se consologuea
     if (online.statusCode === 200) {
         template = `
@@ -34,6 +37,8 @@ async function printCart() {
 
 async function printProfile() {
     let template = "";
+    let online = await fetch('/api/sessions/online');
+    online = await online.json();
     if (online.statusCode === 200) {
         template = `
         <a class="nav-link" href="/pages/user.html">Profile</a>
@@ -44,6 +49,8 @@ async function printProfile() {
 
 async function printLogout() {
     let template = "";
+    let online = await fetch('/api/sessions/online');
+    online = await online.json();
     if (online.statusCode === 200) {
         template = `
         <button class="nav-link" type="button" id="logout-btn" style="border: solid 1px; border-radius: 4px; padding: 2px; margin-left: 4px;">Log Out</button>
@@ -58,6 +65,7 @@ async function printLogout() {
             response = await response.json()
             if (response.statusCode === 200) {
                 location.replace('/')
+                return alert(response.message);
             };
         };
     };

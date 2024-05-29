@@ -23,6 +23,7 @@ async function fetchData() {
         let response = await fetch('/api/sessions/online');
         response = await response.json();
         const user_id = response.user_id;
+        console.log(user_id)
         if(user_id) {
             let userCart = await fetch(`/api/carts?user_id=${user_id}`)
             const res = await userCart.json();

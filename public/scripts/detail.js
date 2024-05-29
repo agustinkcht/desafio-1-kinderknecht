@@ -19,6 +19,8 @@ const template = (data) => `
 
 const queries = new URL(location.href);
 const pid = queries.searchParams.get('id');
+// traigo pid desde el params
+
 
 fetch(`/api/products/${pid}`)
     .then(res => res.json())
@@ -34,11 +36,15 @@ fetch(`/api/products/${pid}`)
 
 async function addToCart(pid) {
     try {
+        let fetchSession = await fetch('/api/sessions/online');
+        fetchSession = await fetchSession.json();
+        const user_id = fetchSession.user_id;
+        // fetch a la data de la session, para obtener el user_id
         const data = {
-            user_id: '663ce82357109ba2e5d3b56c',
+            user_id: user_id,
             product_id: pid,
             quantity: 1 
-        }; // user_id y quantity hardcodeadas provisoriamente
+        }; 
         const url = '/api/carts';
         const opts = {
             method: 'POST',
@@ -54,4 +60,3 @@ async function addToCart(pid) {
 };
 
 window.addToCart = addToCart;
-

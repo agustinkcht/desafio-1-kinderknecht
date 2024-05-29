@@ -19,10 +19,12 @@ async function read (req, res, next) {
         if (req.query.category) {
             filter.category = req.query.category;
         };
+        if (req.query.title) {
+            filter.title = new RegExp(req.query.title, 'i');
+        };
         const opts = {
-            limit: req.query.limit || 4,
-            page: req.query.page || 1,
-            sort: { name: 1 }
+            limit: parseInt(req.query.limit) || 3,
+            page: parseInt(req.query.page) || 1,
         };
         const all = await productManager.paginate({ filter, opts });
         return res.json({

@@ -16,7 +16,12 @@ const template = (data) => `
 </div> 
 `;
 
-fetch('/api/users/663ce82357109ba2e5d3b56c')
+let fetchSession = await fetch('/api/sessions/online');
+        fetchSession = await fetchSession.json();
+        const user_id = fetchSession.user_id;
+// traigo user_id desde la session
+
+fetch(`/api/users/${user_id}`)
     .then(res => res.json())
     .then(res => {
         console.log(res.response)
