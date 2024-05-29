@@ -65,5 +65,24 @@ sessionsRouter.post('/logout',
         return next(err)     
     };
 });
+sessionsRouter.get('/google',
+ passport.authenticate('google', { scope: ['email', 'profile'] })
+);
+
+sessionsRouter.get('/google/callback', 
+passport.authenticate('google', { session: false }),
+(req, res, next) => {
+    try {
+        return res.json({
+            statusCode: 200,
+            message: 'Logged in with google'
+        });  
+    } catch (err) {
+        return next(err)  
+    };
+});
 
 export default sessionsRouter;
+
+
+// requiere scope, con array con 2 props importantes.. 'email' como prop principal, 'profile' para q me lo traiga.

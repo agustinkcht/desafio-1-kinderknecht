@@ -1,5 +1,6 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import userManager from "../data/mongo/managers/UserManager.mongo.js"
 import { createHash } from "../utils/hash.util.js";
 import { verifyHash } from "../utils/hash.util.js";
@@ -55,6 +56,40 @@ passport.use('login',
                 return done(null, one);
             } catch (err) {
                 return done(err);       
+            };
+        }
+    )
+)
+
+passport.use('google',
+    new GoogleStrategy(
+        {
+            clientID: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            callbackURL: 'http://localhost:8080/api/sessions/google/callback',
+            passReqToCallback: true
+        },
+        async(req, accessToken, refreshToken, profile, done) => {
+            try {
+                const { id, picture } = profile;
+                console.log(profile)
+                let user = await userManager.readByEmail(id);
+                if (!user) {
+                    user = {
+                        email: id,
+                        password: createHash(id),
+                        photo: picture
+                    }
+                    user = await userManager.create(user)
+                }
+                req.session.email = user.email;
+                req.session.online = true;
+                req.session.role = user.role;
+                req.session.photo = user.photo;
+                req.session.user_id = user._id;
+                return done(null, user);  
+            } catch (err) {
+                return done(err)      
             };
         }
     )
