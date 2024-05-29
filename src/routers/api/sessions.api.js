@@ -21,7 +21,8 @@ sessionsRouter.post('/login',
     try {
         return res.json({
             statusCode: 200,
-            message: 'Session Initialized'
+            message: 'Session Initialized',
+            // token: req.user.token
         });
     } catch (err) {
         return next(err)    
@@ -68,7 +69,6 @@ sessionsRouter.post('/logout',
 sessionsRouter.get('/google',
  passport.authenticate('google', { scope: ['email', 'profile'] })
 );
-
 sessionsRouter.get('/google/callback', 
 passport.authenticate('google', { session: false }),
 (req, res, next) => {

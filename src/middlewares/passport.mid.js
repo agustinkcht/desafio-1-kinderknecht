@@ -4,6 +4,7 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import userManager from "../data/mongo/managers/UserManager.mongo.js"
 import { createHash } from "../utils/hash.util.js";
 import { verifyHash } from "../utils/hash.util.js";
+//import { createToken } from "../utils/token.util.js";
 
 passport.use('register',
     new LocalStrategy(
@@ -49,6 +50,16 @@ passport.use('login',
                     error.statusCode = 401;
                     throw error;
                 }; 
+                // const data = {
+                //     email,
+                //     role: one.role,
+                //     photo: one.photo,
+                //     _id: one._id,
+                //     online: true
+                // };
+                // const token = createToken(data);
+                // one.token = token;
+                //return done(null, one);
                 req.session.email = email;
                 req.session.role = one.role;
                 req.session.user_id = one._id;
