@@ -60,5 +60,3 @@ async function addToCart(pid) {
 };
 
 window.addToCart = addToCart;
-
-

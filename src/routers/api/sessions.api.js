@@ -83,6 +83,3 @@ passport.authenticate('google', { session: false }),
 });
 
 export default sessionsRouter;
-
-
-// requiere scope, con array con 2 props importantes.. 'email' como prop principal, 'profile' para q me lo traiga.

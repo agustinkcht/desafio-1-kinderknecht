@@ -2,6 +2,7 @@ import { printRegister, printLogin, printProfile, printCart,  printLogout } from
 import fetchProducts from "./modules/fetchProducts.js";
 import printFilter from "./modules/printFilter.js";
 
+
 printRegister()
 printLogin()
 printCart()
@@ -12,13 +13,3 @@ fetchProducts('products', '')
 
 const searchSelector = document.querySelector('#search');
 searchSelector.addEventListener('keyup', printFilter)
-
-
-
-
-
-
-
-
-
-

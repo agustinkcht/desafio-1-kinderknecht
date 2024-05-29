@@ -1,6 +1,5 @@
 import userManager from "../data/mongo/managers/UserManager.mongo.js";
 import { verifyHash } from "../utils/hash.util.js";
-
 async function isValidPassword (req, res, next) {
     try {
         const { email, password } = req.body;
