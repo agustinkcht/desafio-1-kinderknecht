@@ -1,10 +1,13 @@
 import { Router } from "express";
 import passport from "../../middlewares/passport.mid.js";
+//import isAuth from "../../middlewares/isAuth.mid.js";
+import passportCb from "../../middlewares/passportCb.mid.js";
 
 const sessionsRouter = Router();
 
 sessionsRouter.post('/register', 
-    passport.authenticate('register', { session: false }), 
+    //passport.authenticate('register', { session: false }), 
+    passportCb('register'),
     async (req, res, next) => {
     try {
         return res.json({ 
@@ -16,27 +19,30 @@ sessionsRouter.post('/register',
     };
 });
 sessionsRouter.post('/login',
-    passport.authenticate('login', { session: false }), 
+    //passport.authenticate('login', { session: false }), 
+    passportCb('login'),
     async (req, res, next) => {
     try {
-        return res.json({
+        return res.cookie('token', req.user.token, { signedCookie: true }).json({
             statusCode: 200,
             message: 'Session Initialized',
-            // token: req.user.token
+            token: req.user.token,
         });
     } catch (err) {
         return next(err)    
     };
 });
-sessionsRouter.get('/online', 
+sessionsRouter.get('/online',
+    //passport.authenticate('jwt', { session: false }), 
+    passportCb('jwt'),
     async (req, res, next) => {
     try {
-        if (req.session.online) {
+        if (req.user.online) {
             return res.json({
                 statusCode: 200,
                 message: 'Online',
-                user_id: req.session.user_id,
-                email: req.session.email
+                user_id: req.user._id,
+                email: req.user.email
             });
         } else {
             return res.json({
