@@ -1,10 +1,7 @@
-import { printRegister, printLogin, printProfile, printCart, printLogout } from "./modules/printLayout.js";
+import { printOfflineIcons, printOnlineIcons } from "./modules/printLayout.js";
 
-printRegister()
-printLogin()
-printProfile()
-printCart()
-printLogout()
+printOfflineIcons()
+printOnlineIcons()
 
 const template = (data) => `
 <div class="card m-2" style="width: 24rem;">

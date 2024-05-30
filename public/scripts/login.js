@@ -1,10 +1,7 @@
-import { printRegister, printLogin, printProfile, printCart, printLogout } from "./modules/printLayout.js";
+import { printOfflineIcons, printOnlineIcons } from "./modules/printLayout.js";
 
-printRegister()
-printLogin()
-printProfile()
-printCart()
-printLogout()
+printOfflineIcons()
+printOnlineIcons()
 
 document.querySelector('#login').addEventListener('click', async () => {
     const data = {

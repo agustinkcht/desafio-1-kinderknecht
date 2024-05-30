@@ -1,10 +1,7 @@
-import { printRegister, printLogin, printProfile, printCart, printLogout } from "./modules/printLayout.js";
+import { printOfflineIcons, printOnlineIcons } from "./modules/printLayout.js";
 
-printRegister()
-printLogin()
-printProfile()
-printCart()
-printLogout()
+printOfflineIcons()
+printOnlineIcons()
 
 const template = (data) => `
 <div class="card m-2" style="width: 18rem;">
@@ -54,6 +51,7 @@ async function addToCart(pid) {
         let response = await fetch(url, opts)
         response = await response.json()
         console.log('added to cart', response)
+        alert('Added To The Cart')
     } catch (error) {
         console.log(error)
     };

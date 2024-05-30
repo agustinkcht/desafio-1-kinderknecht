@@ -1,10 +1,7 @@
-import { printRegister, printLogin, printProfile, printCart, printLogout } from "./modules/printLayout.js";
+import { printOfflineIcons, printOnlineIcons } from "./modules/printLayout.js";
 
-printRegister()
-printLogin()
-printProfile()
-printCart()
-printLogout()
+printOfflineIcons()
+printOnlineIcons()
 
 const template = (data) => `
 <div class="card m-2" style="width: 18rem;">
@@ -23,7 +20,6 @@ async function fetchData() {
         let response = await fetch('/api/sessions/online');
         response = await response.json();
         const user_id = response.user_id;
-        console.log(user_id)
         if(user_id) {
             let userCart = await fetch(`/api/carts?user_id=${user_id}`)
             const res = await userCart.json();
