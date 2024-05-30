@@ -1,13 +1,9 @@
-import { printRegister, printLogin, printProfile, printCart,  printLogout } from "./modules/printLayout.js";
+import { printOfflineIcons, printOnlineIcons} from "./modules/printLayout.js";
 import fetchProducts from "./modules/fetchProducts.js";
 import printFilter from "./modules/printFilter.js";
 
-
-printRegister()
-printLogin()
-printCart()
-printLogout()
-printProfile()
+printOfflineIcons()
+printOnlineIcons()
 
 fetchProducts('products', '')
 

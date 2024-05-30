@@ -1,10 +1,11 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GoogleStrategy } from "passport-google-oauth2";
+import { Strategy as JWTStrategy, ExtractJwt } from "passport-jwt";
 import userManager from "../data/mongo/managers/UserManager.mongo.js"
 import { createHash } from "../utils/hash.util.js";
 import { verifyHash } from "../utils/hash.util.js";
-//import { createToken } from "../utils/token.util.js";
+import { createToken } from "../utils/token.util.js";
 
 passport.use('register',
     new LocalStrategy(
@@ -14,7 +15,7 @@ passport.use('register',
                 if (!email || !password) {
                     const error = new Error('Enter a valid email and password')
                     error.statusCode = 400;
-                    return done(error);
+                    return done(null, null, error);
                 };
                 const one = await userManager.readByEmail(email);
                 if (one) {
@@ -31,7 +32,7 @@ passport.use('register',
             };
         }
     )
-)
+);
 
 passport.use('login',
     new LocalStrategy(
@@ -50,27 +51,22 @@ passport.use('login',
                     error.statusCode = 401;
                     throw error;
                 }; 
-                // const data = {
-                //     email,
-                //     role: one.role,
-                //     photo: one.photo,
-                //     _id: one._id,
-                //     online: true
-                // };
-                // const token = createToken(data);
-                // one.token = token;
-                //return done(null, one);
-                req.session.email = email;
-                req.session.role = one.role;
-                req.session.user_id = one._id;
-                req.session.online = true;
-                return done(null, one);
+                const user = {
+                    email,
+                    role: one.role,
+                    photo: one.photo,
+                    _id: one._id,
+                    online: true
+                };
+                const token = createToken(user);
+                user.token = token;
+                return done(null, user);
             } catch (err) {
                 return done(err);       
             };
         }
     )
-)
+);
 
 passport.use('google',
     new GoogleStrategy(
@@ -104,7 +100,29 @@ passport.use('google',
             };
         }
     )
-)
+);
+
+passport.use('jwt',
+    new JWTStrategy(
+        {
+            jwtFromRequest: ExtractJwt.fromExtractors([(req) => req?.cookies['token']]),
+            secretOrKey: process.env.SECRET_JWT,
+        },
+        (data, done) => {
+            try {
+                if (data) {
+                    return done(null, data)  
+                } else {
+                    const error = new Error('Forbidden from JWT')
+                    error.statusCode = 403;
+                    return done(error)
+                };          
+            } catch (err) {
+                return done(err)           
+            };
+        }
+    )
+);
 
 export default passport;
 
