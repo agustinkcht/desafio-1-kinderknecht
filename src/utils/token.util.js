@@ -9,7 +9,7 @@ const createToken = (data) => {
         console.error('Error creating token')
         throw err;
     };
-};
+}; // receives object and returns it 'tokenized'. this should be used when starting the session.
 
 const verifyToken = (token) => {
     try {
@@ -19,6 +19,6 @@ const verifyToken = (token) => {
         console.error('Error verifying token')
         throw err;
     };
-};
+}; // receives token and 'de-tokenizes' it, retrieving the de-encrypted data.
 
 export { createToken, verifyToken };

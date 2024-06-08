@@ -1,4 +1,4 @@
-import { Router } from "express";
+import CustomRouter from "../CustomRouter.js";
 //import cartManager from "../../data/fs/files/CartManager.fs.js";
 import cartManager from "../../data/mongo/managers/CartManager.mongo.js";
 
@@ -6,117 +6,101 @@ import cartManager from "../../data/mongo/managers/CartManager.mongo.js";
 // mongo utiliza cartManager.read({ user_id })
 // fs utiliza cartManager.read(user_id)
 
-const cartsRouter = Router();
+class CartsRouter extends CustomRouter {
+  init() {
+    this.read("/", ["USER", "ADMIN"], read);
+    this.create("/", ["USER", "ADMIN"], create);
+    this.destroy("/all", ["USER", "ADMIN"], destroyAll);
+    this.read("/:iid", ["USER", "ADMIN"], readOne); // item id
+    this.update("/:iid", ["USER", "ADMIN"], update);
+    this.destroy("/:iid", ["USER", "ADMIN"], destroy);
+  }
+}
 
-cartsRouter.get('/', read)
-cartsRouter.get('/:iid', readOne); // item id
-cartsRouter.post('/', create);
-cartsRouter.put('/:iid', update);
-cartsRouter.delete('/:iid', destroy);
-cartsRouter.delete('/user/:uid', destroyMany)
+const cartsRouter = new CartsRouter();
 
 //functions
-async function read (req, res, next) {
-    try {
-        const filter = {};
-        const opts = {};
-        if (req.query.limit) {
-            opts.limit = req.query.limit;
-        };
-        if (req.query.page) {
-            opts.page = req.query.page;
-        };
-        if (req.query.user_id) {
-            filter.user_id = req.query.user_id;
-        };
-        const all = await cartManager.paginate({ filter, opts });
-        return res.json({
-            statusCode: 200,
-            response: all.docs,
-            paginateInfo: {
-                page: all.page,
-                totalPages: all.totalPages,
-                limit: all.limit,
-                prevPage: all.prevPage,
-                nextPage: all.nextPage,
-                totalDocs: all.totalDocs
-            }
-        });
-    } catch(err) {
-        return next(err)
+async function read(req, res, next) {
+  // con paginate
+  try {
+    const filter = {};
+    const opts = {};
+    if (req.query.limit) {
+      opts.limit = req.query.limit;
+    }
+    if (req.query.page) {
+      opts.page = req.query.page;
+    }
+    if (req.query.user_id) {
+      filter.user_id = req.query.user_id;
+    }
+    const all = await cartManager.paginate({ filter, opts });
+    const paginateInfo = {
+      page: all.page,
+      totalPages: all.totalPages,
+      limit: all.limit,
+      prevPage: all.prevPage,
+      nextPage: all.nextPage,
+      totalDocs: all.totalDocs,
     };
-}; // con paginate
-async function readOne (req, res, next) {
-    try {
-        const { iid } = req.params;
-        const selected = await cartManager.readOne(iid);
-        if (selected) {
-            return res.json({ 
-                statusCode: 200,
-                response: selected,
-                success: true
-            });
-        } else {
-            const error = new Error(`No item found in the cart with id ${id}`);
-            error.statusCode = 404;
-            throw error;
-        };
-    } catch(err) {
-        return next(err);
-    };
-};
-async function create (req, res, next) {
-    try {
-        const data = req.body;
-        const one = await cartManager.create(data);
-        return res.json({
-            statusCode: 201,
-            message: 'Created',
-            response: one
-        }); 
-    } catch(err) {
-        return next(err)
-    };
-};
-async function update (req, res, next) { 
-    try {
-        const { iid } = req.params;
-        const data = req.body;
-        const updatedItem = await cartManager.update(iid, data);
-        return res.json({
-            statusCode: 200,
-            message: `Item updated successfully`,
-            response: updatedItem
-        });    
-    } catch(err) {
-        return next(err);
-    };
-}; // podes modificar quantity y state
-async function destroy (req, res, next) {
-    try {
-        const { iid } = req.params;
-        const deletedItem = await cartManager.destroy(iid);
-        return res.json({
-            statusCode: 200,
-            message: 'Deleted',
-            response: deletedItem
-        });
-    } catch(err) {
-        return next(err);
-    };
-};
-async function destroyMany (req, res, next) {
-    try {
-        const { uid } = req.params;
-        const deletedItems = await cartManager.destroyMany(uid)
-        return res.json({
-            statusCode: 200,
-            message: 'Cart reset. All items deleted.',
-            response: deletedItems
-        });
-    } catch(err) {
-        return next(err);
-    };
-};
+    const response = all.docs;
+    return res.suc200respag(response, paginateInfo);
+  } catch (err) {
+    return next(err);
+  }
+}
+async function readOne(req, res, next) {
+  try {
+    const { iid } = req.params;
+    const selected = await cartManager.readOne(iid);
+    if (selected) {
+      return res.suc200res(selected);
+    } else {
+      res.err404mes("Item not found in the cart");
+    }
+  } catch (err) {
+    return next(err);
+  }
+}
+async function create(req, res, next) {
+  try {
+    const data = req.body;
+    const one = await cartManager.create(data);
+    return res.suc201mesres("Added to the cart", one);
+  } catch (err) {
+    return next(err);
+  }
+}
+async function update(req, res, next) {
+  try {
+    const { iid } = req.params;
+    const data = req.body;
+    const updatedItem = await cartManager.update(iid, data);
+    return res.suc200mesres("Item updated successfully", updatedItem);
+  } catch (err) {
+    return next(err);
+  }
+} // podes modificar quantity y state
+async function destroy(req, res, next) {
+  try {
+    const { iid } = req.params;
+    const deletedItem = await cartManager.destroy(iid);
+    if (!deletedItem) {
+      return res.err404mes("Item not found")
+    }
+    return res.suc200mesres("Removed from the cart", deletedItem);
+  } catch (err) {
+    return next(err);
+  }
+}
+async function destroyAll(req, res, next) {
+  try {
+    const uid = req.user._id;
+    const deletedItems = await cartManager.destroyMany(uid);
+    return res.suc200mesres("The cart has been cleaned", deletedItems);
+  } catch (err) {
+    return next(err);
+  }
+}
 
-export default cartsRouter;
+export default cartsRouter.getRouter();

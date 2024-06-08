@@ -7,5 +7,6 @@ printOnlineIcons()
 
 fetchProducts('products', '')
 
+// Search filter 
 const searchSelector = document.querySelector('#search');
 searchSelector.addEventListener('keyup', printFilter)

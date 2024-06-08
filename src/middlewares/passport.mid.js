@@ -19,7 +19,7 @@ passport.use('register',
                 };
                 const one = await userManager.readByEmail(email);
                 if (one) {
-                    const error = new Error('Invalid email. Use a different email or log in')
+                    const error = new Error('Email already taken. Use a different email or log in')
                     error.statusCode = 409;
                     return done(error)
                 };
@@ -57,7 +57,7 @@ passport.use('login',
                     photo: one.photo,
                     _id: one._id,
                     online: true
-                };
+                }; // creates the object to tokenize.
                 const token = createToken(user);
                 user.token = token;
                 return done(null, user);
@@ -107,11 +107,11 @@ passport.use('jwt',
         {
             jwtFromRequest: ExtractJwt.fromExtractors([(req) => req?.cookies['token']]),
             secretOrKey: process.env.SECRET_JWT,
-        },
-        (data, done) => {
+        }, // extracts the JWT from the cookies, and decryptes it
+        (data, done) => { // data is the actual decrypted payload 
             try {
                 if (data) {
-                    return done(null, data)  
+                    return done(null, data)  // pass the payload to the next middleware.
                 } else {
                     const error = new Error('Forbidden from JWT')
                     error.statusCode = 403;
@@ -119,10 +119,10 @@ passport.use('jwt',
                 };          
             } catch (err) {
                 return done(err)           
-            };
-        }
+            }; 
+        } 
     )
-);
+); 
 
 export default passport;
 

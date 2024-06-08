@@ -1,9 +1,5 @@
 import passport from "passport";
 
-// es una func q devuelve un middleware
-// func q depende de la strategy a implementar... devuelve el error(si ocurre), los datos del usuario si existen, la ino correspondiente en caso de q no suceda lo anterior.
-
-
 function passportCb(strategy) {
     return (req, res, next) => {
         passport.authenticate(strategy, (error, user, info) => {
@@ -21,6 +17,8 @@ function passportCb(strategy) {
         })(req, res, next);
     };
 };
+
+// function that returns a middleware. It works handling the result of the passport authentication.
 
 export default passportCb;
 
