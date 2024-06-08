@@ -6,8 +6,8 @@ async function printOfflineIcons() {
             if (offline.statusCode !== 200) {
                 console.log('Offline', offline)
                 template = `
-                <a class="nav-link" href="/pages/login.html">Login</a>
-                <a class="nav-link" href="/pages/register.html">Register</a>
+                <a class="nav-link active" aria-current="page" href="/pages/login.html">Login</a>
+                <a class="nav-link active" aria-current="page" href="/pages/register.html">Register</a>
                 `;
                 document.querySelector('#print-offline-icons').innerHTML = template;
             }    
@@ -25,9 +25,9 @@ async function printOnlineIcons() {
         if (online.statusCode === 200) {
             console.log('Online', online);
             template = `
-            <a class="nav-link" href="/pages/user.html">Profile</a>
-            <a class="nav-link" href="/pages/cart.html" id="cart-icon">Cart</a>
-            <button class="nav-link" type="button" id="logout-btn" style="border: solid 1px; border-radius: 4px; padding: 2px; margin-left: 4px;">Log Out</button>
+            <a class="nav-link active" aria-current="page" href="/pages/user.html">Profile</a>
+            <a class="nav-link active" aria-current="page" href="/pages/cart.html" id="cart-icon">Cart</a>
+            <button class="nav-link active" type="button" id="logout-btn" style="border: solid 1px; border-radius: 4px; margin-left: 4px;">Log Out</button>
             `
             document.querySelector('#print-online-icons').innerHTML = template
             document.querySelector('#logout-btn').onclick = async () => {

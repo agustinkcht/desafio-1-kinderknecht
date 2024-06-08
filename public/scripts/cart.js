@@ -25,11 +25,16 @@ async function fetchData() {
             const res = await userCart.json();
             const items = res.response;
             console.log(res.response)
-            const itemsHtml = items
+            if (items.length > 0) {
+                const itemsHtml = items
                 .map(each => template(each))
                 .join('');
-            document.querySelector('#itemsOnCart').innerHTML = itemsHtml;    
-        }   
+                document.querySelector('#itemsOnCart').innerHTML = itemsHtml;    
+            } else {
+                let noItemsMessage = `There are no items in the cart`;
+                document.querySelector('#itemsOnCart').innerHTML = noItemsMessage
+            }; 
+        };
     } catch (err) {
         console.log(err)
     };

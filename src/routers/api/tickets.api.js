@@ -1,12 +1,18 @@
-import { Router } from "express";
+import CustomRouter from "../CustomRouter.js";
 import cartManager from "../../data/mongo/managers/CartManager.mongo.js";
 import { Types } from "mongoose";
 
-const ticketsRouter = Router();
+class TicketsRouter extends CustomRouter {
+  init() {
+    this.read("/", ["USER", "ADMIN"], generateTicket);
+  }
+}
 
-ticketsRouter.get("/:uid", async (req, res, next) => {
+const ticketsRouter = new TicketsRouter();
+
+async function generateTicket(req, res, next) {
   try {
-    const { uid } = req.params;
+    const uid = req.user._id;
     const ticket = await cartManager.aggregate([
       {
         $match: {
@@ -15,40 +21,42 @@ ticketsRouter.get("/:uid", async (req, res, next) => {
       },
       {
         $lookup: {
-          foreignField: "_id",
-          from: "products", 
+          from: "products",
           localField: "product_id",
-          as: "product_id",
+          foreignField: "_id",
+          as: "product",
         },
       },
       {
-        $replaceRoot: {
-          newRoot: {
-            $mergeObjects: [{ $arrayElemAt: ["$product_id", 0] }, "$$ROOT"],
-          },
-        },
+        $unwind: "$product",
       },
       {
-        $set: { subTotal: { $multiply: ['$quantity', '$price'] }}
+        $set: {
+          subTotal: { $multiply: ["$quantity", "$product.price"] },
+        },
       },
       {
         $group: {
-            _id:'$user_id',
-            total: { $sum: '$subTotal'} 
-        }
+          _id: "$user_id",
+          total: { $sum: "$subTotal" },
+        },
       },
       {
-        $project: { 
-            _id: 0,       
-            user_id: '$_id', 
-            total: '$total', 
-            date: new Date() 
-        }
+        $project: {
+          _id: 0,
+          user_id: "$_id",
+          total: "$total",
+          date: new Date(), // Adding current date
+        },
       },
-      { 
-        $merge: { into: 'tickets' }
-      }
     ]);
+    if (!ticket || ticket.length === 0) {
+      // Check if ticket is empty and handle appropriately
+      return res.json({
+        statusCode: 404,
+        message: "No tickets found for this user",
+      });
+    }
     return res.json({
       statusCode: 200,
       response: ticket,
@@ -56,6 +64,6 @@ ticketsRouter.get("/:uid", async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
-});
+}
 
-export default ticketsRouter;
+export default ticketsRouter.getRouter();
