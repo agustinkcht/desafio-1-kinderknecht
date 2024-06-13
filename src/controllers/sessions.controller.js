@@ -48,6 +48,6 @@ class SessionsController {
 }
 
 const sessionsController = new SessionsController();
-const { register, login, online, logout, googleCallback } = sessionsController;
 
+const { register, login, online, logout, googleCallback } = sessionsController;
 export { register, login, online, logout, googleCallback };
