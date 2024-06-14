@@ -52,7 +52,7 @@ class CustomRouter {
             (policiesArray.includes("ADMIN") && role === "1")
           ) {
             const user = await userManager.readByEmail(email);
-            // proteger contraseña del usuario!!
+            delete user.password; // protecting password.
             req.user = user;
             return next();
           } else {
