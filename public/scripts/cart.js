@@ -14,6 +14,10 @@ const template = (data) => `
 </div> 
 `;
 
+const clearCartBtn = `
+ <button type="button" class="btn btn-primary" onclick="clearCart()">Clear Cart</button>
+`;
+
 
 async function fetchData() {
     try {
@@ -29,7 +33,8 @@ async function fetchData() {
                 const itemsHtml = items
                 .map(each => template(each))
                 .join('');
-                document.querySelector('#itemsOnCart').innerHTML = itemsHtml;    
+                document.querySelector('#itemsOnCart').innerHTML = itemsHtml;
+                document.querySelector('#clearCart').innerHTML = clearCartBtn;    
             } else {
                 let noItemsMessage = `There are no items in the cart`;
                 document.querySelector('#itemsOnCart').innerHTML = noItemsMessage
@@ -73,28 +78,27 @@ async function removeItem(iid) {
     };
 };
 
+async function clearCart() {
+    try {
+        const url = "/api/carts/all";
+        const opts = {
+            method: "DELETE",
+            headers: {"Content-Type" : "application/json"}
+        };
+        let response = await fetch(url, opts);
+        response = await response.json()
+        console.log('The cart has been cleared', response)
+        alert('The cart has been cleared')
+        location.reload()
+    } catch (error) {
+        console.log('error clearing cart', error)
+    }
+}
+
 window.updateQuantity = updateQuantity;
 window.removeItem = removeItem;
+window.clearCart = clearCart;
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchData();
 });
-
-// async function removeAll(uid) {
-//     try {
-//         const url = `/api/carts/user/${uid}`;
-//         const opts = {
-//             method: 'DELETE',
-//             headers: {"Content-Type" : "application/json"}
-//         };
-//         let response = await fetch(url, opts)
-//         response = await response.json()
-//         console.log('Cart reset. All items removed.')
-//         location.reload()
-//     } catch(error) {
-//         console.log(error)
-//     };
-// };
-
-
-
