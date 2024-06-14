@@ -18,6 +18,9 @@ const clearCartBtn = `
  <button type="button" class="btn btn-primary" onclick="clearCart()">Clear Cart</button>
 `;
 
+const checkoutBtn = `
+ <a href="/pages/ticket.html" class="btn btn-primary" onclick="checkOut()">Check Out</a>
+`;
 
 async function fetchData() {
     try {
@@ -34,7 +37,8 @@ async function fetchData() {
                 .map(each => template(each))
                 .join('');
                 document.querySelector('#itemsOnCart').innerHTML = itemsHtml;
-                document.querySelector('#clearCart').innerHTML = clearCartBtn;    
+                document.querySelector('#clearCart').innerHTML = clearCartBtn;
+                document.querySelector('#checkOut').innerHTML = checkoutBtn;      
             } else {
                 let noItemsMessage = `There are no items in the cart`;
                 document.querySelector('#itemsOnCart').innerHTML = noItemsMessage
@@ -94,6 +98,7 @@ async function clearCart() {
         console.log('error clearing cart', error)
     }
 }
+
 
 window.updateQuantity = updateQuantity;
 window.removeItem = removeItem;
