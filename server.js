@@ -5,6 +5,7 @@ import dbConnect from "./src/utils/dbConnect.util.js";
 import { createServer } from "http";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 //internal modules
 import __dirname from "./utils.js";
 import indexRouter from "./src/routers/index.router.js";
@@ -29,6 +30,7 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.static('public'));
 server.use(morgan('dev'));
 server.use(cookieParser(environment.SECRET_COOKIE));
+server.use(cors({ origin: true, credentials: true }))
 
 // router
 server.use('/', indexRouter);
