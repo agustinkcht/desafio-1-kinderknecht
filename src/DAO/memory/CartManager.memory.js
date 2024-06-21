@@ -89,23 +89,23 @@ class CartManager {
     };
 };
 
-const carts = new CartManager()
+const cartManager = new CartManager()
 
-carts.create({
+cartManager.create({
     user_id: '00139129038',
     product_id: 'aabbdhsjdhsj',
     quantity: 3,
     state: 'reserved',
 });
 
-carts.create({
+cartManager.create({
     user_id: '00139129038',
     product_id: 'kkk555jfjf',
     quantity: 1,
     state: 'reserved',
 })
 
-carts.create({
+cartManager.create({
     user_id: 'tt7474',
     product_id: 'sssdhu',
     quantity: 1,
@@ -116,8 +116,8 @@ carts.create({
 // TESTING
 // node src/data/memory/CartManager.js
 
-//carts.read()
-//carts.readOne('tt7474')
-//carts.update(2, {state: 'paid'})
-//carts.destroy(2)
+//cartManager.read()
+//cartManager.readOne('tt7474')
+//cartManager.update(2, {state: 'paid'})
+//cartManager.destroy(2)
 

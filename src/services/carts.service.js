@@ -1,9 +1,7 @@
 import CustomService from "./CustomService.js";
-import cartManager from "../data/mongo/managers/CartManager.mongo.js";
-//import cartManager from "../data/fs/files/CartManager.fs.js"
+import dao from "../DAO/dao.factory.js";
 
-// mongo utiliza cartManager.read({ user_id })
-// fs utiliza cartManager.read(user_id)
+const { cartManager } = dao;
 
 const cartsService = new CustomService(cartManager);
 

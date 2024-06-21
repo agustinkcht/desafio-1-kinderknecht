@@ -7,6 +7,8 @@
   "scripts": {
     "start": "node ./server.js -p 9000",
     "dev": "nodemon ./server.js --env dev",
+    "memory": "nodemon ./server.js -p 8081 --env prod --persistence memory",
+    "fs": "nodemon ./server.js -p 8082 --env prod --persistence fs",
     "argv": "nodemon ./server.js -p 8080 --env prod --persistence mongo"
   },
   "keywords": [],

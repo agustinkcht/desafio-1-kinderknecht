@@ -1,8 +1,10 @@
 import CustomService from "./CustomService.js";
-import productManager from "../data/mongo/managers/ProductManager.mongo.js";
-//import productManager from '../data/fs/files/ProductManager.fs.js'
+import dao from "../DAO/dao.factory.js";
+
+const { productManager } = dao;
 
 const productsService = new CustomService(productManager);
+
 const {
   createService,
   paginateService,

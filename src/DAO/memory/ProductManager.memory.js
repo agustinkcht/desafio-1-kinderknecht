@@ -80,9 +80,9 @@ class ProductManager {
     };
 };
 
-const products = new ProductManager()
+const productManager = new ProductManager()
 
-products.create({
+productManager.create({
     title: 'Airpods Pro 2',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'accessories',
@@ -90,7 +90,7 @@ products.create({
     stock: 40
 });
 
-products.create({
+productManager.create({
     title: 'Apple EarPods',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'accessories',
@@ -98,7 +98,7 @@ products.create({
     stock: 40
 });
 
-products.create({
+productManager.create({
     title: 'Airpods Max',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'accessories',
@@ -106,7 +106,7 @@ products.create({
     stock: 40
 });
 
-products.create({
+productManager.create({
     title: 'Airpods 3rd gen',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'accessories',
@@ -114,7 +114,7 @@ products.create({
     stock: 40
 });
 
-products.create({
+productManager.create({
     title: 'iPhone 15 Pro',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'phones',
@@ -122,7 +122,7 @@ products.create({
     stock: 30
 });
 
-products.create({
+productManager.create({
     title: 'iPhone 14',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'phones',
@@ -130,7 +130,7 @@ products.create({
     stock: 30
 });
 
-products.create({
+productManager.create({
     title: 'Apple Watch 9',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'watches',
@@ -138,7 +138,7 @@ products.create({
     stock: 35
 });
 
-products.create({
+productManager.create({
     title: 'MacBook Air 13 M2',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'laptops',
@@ -146,7 +146,7 @@ products.create({
     stock: 20
 });
 
-products.create({
+productManager.create({
     title: 'MacBook Pro 14 M3',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'laptops',
@@ -154,7 +154,7 @@ products.create({
     stock: 20
 });
 
-products.create({
+productManager.create({
     title: 'Mac Studio M2 Max',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'computers',
@@ -162,7 +162,7 @@ products.create({
     stock: 20
 });
 
-products.create({
+productManager.create({
     title: 'iPhone SE Plus',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'phones',
@@ -170,7 +170,7 @@ products.create({
     stock: 30
 });
 
-products.create({
+productManager.create({
     title: 'iPhone XR2',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'phones',
@@ -178,7 +178,7 @@ products.create({
     stock: 30
 });
 
-products.create({
+productManager.create({
     title: 'iPhone 11',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'phones',
@@ -186,7 +186,7 @@ products.create({
     stock: 30
 });
 
-products.create({
+productManager.create({
     title: 'iPhone XS',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'phones',
@@ -194,7 +194,7 @@ products.create({
     stock: 30
 });
 
-products.create({
+productManager.create({
     title: 'iPhone 8',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'phones',
@@ -202,7 +202,7 @@ products.create({
     stock: 30
 });
 
-products.create({
+productManager.create({
     title: 'iPhone 7 Plus',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'phones',
@@ -210,7 +210,7 @@ products.create({
     stock: 30
 });
 
-products.create({
+productManager.create({
     title: 'AirPods Pro Lite',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'accessories',
@@ -218,7 +218,7 @@ products.create({
     stock: 40
 });
 
-products.create({
+productManager.create({
     title: 'AirTag Keychain',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'accessories',
@@ -226,7 +226,7 @@ products.create({
     stock: 40
 });
 
-products.create({
+productManager.create({
     title: 'AirTag Leather Loop',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'accessories',
@@ -234,7 +234,7 @@ products.create({
     stock: 40
 });
 
-products.create({
+productManager.create({
     title: 'Apple Watch Series 8',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'accessories',
@@ -242,7 +242,7 @@ products.create({
     stock: 35
 });
 
-products.create({
+productManager.create({
     title: 'Apple Watch Sport Loop Band',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'accessories',
@@ -250,7 +250,7 @@ products.create({
     stock: 35
 });
 
-products.create({
+productManager.create({
     title: 'Apple Watch Milanese Loop Band',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'accessories',
@@ -258,7 +258,7 @@ products.create({
     stock: 35
 });
 
-products.create({
+productManager.create({
     title: 'MacBook Pro 16 M4',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'laptops',
@@ -266,7 +266,7 @@ products.create({
     stock: 20
 });
 
-products.create({
+productManager.create({
     title: 'MacBook Air 14 M2',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'laptops',
@@ -274,7 +274,7 @@ products.create({
     stock: 20
 });
 
-products.create({
+productManager.create({
     title: 'iMac Pro 32-inch',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'computers',
@@ -282,7 +282,7 @@ products.create({
     stock: 20
 });
 
-products.create({
+productManager.create({
     title: 'Mac Mini Pro',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'computers',
@@ -290,7 +290,7 @@ products.create({
     stock: 20
 });
 
-products.create({
+productManager.create({
     title: 'Anker PowerPort Atom III',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'chargers',
@@ -298,7 +298,7 @@ products.create({
     stock: 50
 });
 
-products.create({
+productManager.create({
     title: 'RAVPower 30W 2-Port Wall Charger',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'chargers',
@@ -306,7 +306,7 @@ products.create({
     stock: 50
 });
 
-products.create({
+productManager.create({
     title: 'Belkin Boost Charge 27W USB-C Wall Charger',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'chargers',
@@ -314,7 +314,7 @@ products.create({
     stock: 50
 });
 
-products.create({
+productManager.create({
     title: 'AmazonBasics Nylon Braided Lightning to USB-A Cable',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'cables',
@@ -322,7 +322,7 @@ products.create({
     stock: 50
 });
 
-products.create({
+productManager.create({
     title: 'UGREEN USB-C to 3.5mm Headphone Jack Adapter',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'cables',
@@ -330,7 +330,7 @@ products.create({
     stock: 50
 });
 
-products.create({
+productManager.create({
     title: 'Anker Soundcore Life Q20 Hybrid Active Noise Cancelling Headphones',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'headphones',
@@ -338,7 +338,7 @@ products.create({
     stock: 50
 });
 
-products.create({
+productManager.create({
     title: 'Sony WH-1000XM4 Wireless Noise Cancelling Headphones',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'headphones',
@@ -346,7 +346,7 @@ products.create({
     stock: 50
 });
 
-products.create({
+productManager.create({
     title: 'Bose QuietComfort 45 Wireless Headphones',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'headphones',
@@ -354,7 +354,7 @@ products.create({
     stock: 50
 });
 
-products.create({
+productManager.create({
     title: 'JBL Tune 750BTNC Wireless Over-Ear Headphones',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'headphones',
@@ -362,7 +362,7 @@ products.create({
     stock: 50
 });
 
-products.create({
+productManager.create({
     title: 'Sennheiser HD 450BT Wireless Noise Cancelling Headphones',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'headphones',
@@ -370,7 +370,7 @@ products.create({
     stock: 50
 });
 
-products.create({
+productManager.create({
     title: 'Samsung Fast Charge Wireless Charging Stand',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'chargers',
@@ -378,7 +378,7 @@ products.create({
     stock: 50
 });
 
-products.create({
+productManager.create({
     title: 'Mophie Dual Wireless Charging Pad',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'chargers',
@@ -386,7 +386,7 @@ products.create({
     stock: 50
 });
 
-products.create({
+productManager.create({
     title: 'Roku Wireless Charging Pad',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'chargers',
@@ -394,7 +394,7 @@ products.create({
     stock: 50
 });
 
-products.create({
+productManager.create({
     title: 'Belkin USB-C to USB-A Cable',
     photo: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png',
     category: 'cables',
@@ -406,7 +406,7 @@ products.create({
 //TESTING
 // node src/data/memory/ProductManager.js
 
-//products.read()
-//products.readOne('')
-//products.update(1, {price: 5})
-//products.destroy(1)
+//productManager.read()
+//productManager.readOne('')
+//productManager.update(1, {price: 5})
+//productManager.destroy(1)

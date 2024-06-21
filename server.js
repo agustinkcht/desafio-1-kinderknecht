@@ -1,7 +1,7 @@
 // external dependencies
 import express from "express";
 import environment from "./src/utils/env.util.js";
-import dbConnect from "./src/utils/dbConnect.util.js";
+//import dbConnect from "./src/utils/dbConnect.util.js";
 import { createServer } from "http";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
@@ -18,7 +18,7 @@ const server = express();
 const port = environment.PORT || argsUtil.p;
 const handleServerStart = async () => {
     console.log(`Server is now running on port ${port}`);
-    await dbConnect();
+    //await dbConnect();
 };
 // extra for socket -not used at the moment
 const nodeServer = createServer(server);
