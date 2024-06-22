@@ -26,5 +26,46 @@
         "email": "emilybrown321@email.com",
         "password": "Brownie1234$",
         "role": "1"
+    },
+    {
+        "id": "2d94dea15a60d5406d65780d",
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
+        "email": "marleybob@gmail.com",
+        "password": "$2b$10$BUZdATiWd.FdPNeam6Ml1eZnaVsVlMApiQaa/hnJ.hMWjILLUxoo.",
+        "role": "0"
+    },
+    {
+        "id": "5c322cebf51f58d485c849f0",
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
+        "email": "stevejobs@gmail.com",
+        "password": "$2b$10$TujXYVSF8OaCjptKriSZQOXyZ8dMwWctOmiJwMbkP6/RBWoZZT5hS",
+        "role": "0"
+    },
+    {
+        "_id": "eb4b0494a2004d277fa4b664",
+        "createdAt": "2024-06-22T15:07:25.193Z",
+        "updatedAt": "2024-06-22T15:07:25.193Z",
+        "email": "stevejobs@gmail.com",
+        "password": "$2b$10$u6Hl9KUY9Xru0q4ViKZudu8UZ22LW2Zeob6RWgZ1FDsz/zCgWbuJq",
+        "role": 0,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+    },
+    {
+        "_id": "9ad10ff4b1f3078b54026f4e",
+        "createdAt": "2024-06-22T15:10:08.186Z",
+        "updatedAt": "2024-06-22T15:10:08.186Z",
+        "email": "mariadelcarmen@gmail.com",
+        "password": "$2b$10$/ikBZlctVluodBTvfW.PRerIV39OaYaJxhvphXfjqDtUOtyHWnI/y",
+        "role": 0,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+    },
+    {
+        "_id": "e859ab9088cc0079b5dc91e2",
+        "createdAt": "2024-06-22T15:13:03.816Z",
+        "updatedAt": "2024-06-22T15:13:03.816Z",
+        "email": "mariadelmario@gmail.com",
+        "password": "$2b$10$amMAvkE1YadabEJCVZV6uehQk7wrAyQ/tXmeNUZNTu6Z0UArpL0X.",
+        "role": 0,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
     }
 ]

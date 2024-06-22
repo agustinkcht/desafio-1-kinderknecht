@@ -1,5 +1,5 @@
 import CustomService from "./CustomService.js";
-import dao from "../DAO/dao.factory.js";
+import dao from "../dao/dao.factory.js";
 
 const { productManager } = dao;
 

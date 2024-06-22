@@ -13,7 +13,7 @@ class UsersController {
       const data = req.body;
       const newUser = await createService(data);
       return res.suc201mesres(
-        `User created successfully with id ${newUser.id}`,
+        "User created successfully with id" + newUser._id,
         newUser
       );
     } catch (err) {

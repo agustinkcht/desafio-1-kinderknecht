@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 class UserManager {
     constructor() {
-        this.path = './src/DAO/fs/files/users.json'
+        this.path = './src/dao/fs/files/users.json'
         this.init()
     };
     init() {
@@ -25,20 +25,13 @@ class UserManager {
                 const error = new Error ('Enter a valid password');
                 throw error;
             } else {
-                const user = {
-                    id: crypto.randomBytes(12).toString('hex'),
-                    photo: 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png',
-                    email: data.email,
-                    password: data.password,
-                    role: data.role || '0'
-                };
                 let allUsers = await fs.promises.readFile(this.path, 'utf-8');
                     allUsers = JSON.parse(allUsers);
-                    allUsers.push(user);
+                    allUsers.push(data);
                     allUsers = JSON.stringify(allUsers, null, 4);
                     await fs.promises.writeFile(this.path, allUsers);
                     console.log('User created successfully');
-                    return user;
+                    return data;
             };
         } catch(err) {
             throw err;
