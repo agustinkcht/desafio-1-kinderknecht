@@ -9,21 +9,17 @@ const schema = new Schema({
         index: true 
     },
     photo: { 
-        type: String, 
-        default: 'https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png' 
+        type: String
     },
     category: { 
-        type: String, 
-        default: 'TBD', 
+        type: String,
         index: true 
     },
     price: { 
-        type: Number, 
-        default: '1' 
+        type: Number
     },
     stock: { 
-        type: Number, 
-        default: '1' 
+        type: Number
     }
 },
 {

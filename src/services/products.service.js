@@ -1,9 +1,7 @@
 import CustomService from "./CustomService.js";
-import dao from "../dao/dao.factory.js";
+import productsRepository from "../repositories/products.rep.js";
 
-const { productManager } = dao;
-
-const productsService = new CustomService(productManager);
+const productsService = new CustomService(productsRepository);
 
 const {
   createService,
