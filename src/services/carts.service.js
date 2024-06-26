@@ -1,9 +1,7 @@
 import CustomService from "./CustomService.js";
-import dao from "../dao/dao.factory.js";
+import cartsRepository from "../repositories/carts.rep.js";
 
-const { cartManager } = dao;
-
-const cartsService = new CustomService(cartManager);
+const cartsService = new CustomService(cartsRepository);
 
 const {
   paginateService,

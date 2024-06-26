@@ -85,6 +85,7 @@ class CartsController {
   async destroyAll(req, res, next) {
     try {
       const uid = req.user._id;
+      console.log(uid)
       const deletedItems = await destroyAllService(uid);
       return res.suc200mesres("The cart has been cleaned", deletedItems);
     } catch (err) {

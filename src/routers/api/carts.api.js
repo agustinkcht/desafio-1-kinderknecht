@@ -3,12 +3,12 @@ import { read, readOne, create, update, destroy, destroyAll } from "../../contro
 
 class CartsRouter extends CustomRouter {
   init() {
-    this.read("/", ["USER", "ADMIN"], read);
-    this.create("/", ["USER", "ADMIN"], create);
+    this.read("/", ["PUBLIC"], read);
+    this.create("/", ["PUBLIC"], create);
     this.destroy("/all", ["USER", "ADMIN"], destroyAll);
-    this.read("/:iid", ["USER", "ADMIN"], readOne); // item id
-    this.update("/:iid", ["USER", "ADMIN"], update);
-    this.destroy("/:iid", ["USER", "ADMIN"], destroy);
+    this.read("/:iid", ["PUBLIC"], readOne); // item id
+    this.update("/:iid", ["PUBLIC"], update);
+    this.destroy("/:iid", ["PUBLIC"], destroy);
   }
 }
 
