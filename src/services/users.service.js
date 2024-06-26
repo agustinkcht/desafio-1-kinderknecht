@@ -5,6 +5,7 @@ const usersService = new CustomService(usersRepository);
 
 const {
   createService,
+  readByEmailService,
   paginateService,
   readOneService,
   updateService,
@@ -12,6 +13,7 @@ const {
 } = usersService;
 export {
   createService,
+  readByEmailService,
   paginateService,
   readOneService,
   updateService,

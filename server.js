@@ -18,7 +18,6 @@ const server = express();
 const port = environment.PORT || argsUtil.p;
 const handleServerStart = async () => {
     console.log(`Server is now running on port ${port}`);
-    //await dbConnect();
 };
 // extra for socket -not used at the moment
 const nodeServer = createServer(server);

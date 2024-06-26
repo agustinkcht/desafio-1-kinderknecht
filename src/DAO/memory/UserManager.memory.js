@@ -1,81 +1,123 @@
 class UserManager {
-    static #users = []
-    create(data){
-        try {
-            if (!data.email) {
-                const error = new Error ('Enter a valid email');
-                throw error;
-            } else if (!data.password) {
-                const error = new Error ('Enter a valid password');
-                throw error;
-            } else {
-                UserManager.#users.push(data);
-                console.log('User successfully created')
-                return data;
-            };
-        } catch(err) {
-            throw(err)
-        };
-    };
-    read(role) {
-        try {
-            console.log(UserManager.#users);
-        } catch(err) {
-            console.log('Unable to find the users');
-        };       
-    };
-    readOne(id) {
-        try {
-            let allUsers = UserManager.#users;
-            let selected = allUsers.find((each) => each.id === id);
-            if (!selected) {
-                throw new Error ('No user found with the specified ID. Please check the ID and try again.')
-            } else {
-                console.log(selected);
-            };
-        } catch(err) {
-            console.log(err)
-        };
-    };
-    destroy(id) {
-        try {
-            let allUsers = UserManager.#users;
-            let withoutSelected = allUsers.filter((each) => each.id !== id);
-            if (allUsers.length == withoutSelected.length) {
-                throw new Error ('No product found with the specified ID. Please check the ID and try again.');
-            } else {
-                UserManager.#users = withoutSelected;
-                console.log('User deleted')
-                console.log(UserManager.#users)
-            };
-        } catch(err) {
-            console.log(err)
-        };
-    };
-    update(id, data) {
-        try {
-            let allUsers = UserManager.#users;
-            let selected = allUsers.find(each => each.id === id);
-            if (selected) {
-                for (let prop in data) {
-                    selected[prop] = data[prop];
-                };
-                UserManager.#users.push(selected);
-                console.log('The user data has been updated successfully');
-                console.log(selected);
-                return selected;
-            } else {
-                const error = new Error('No user found with the specified ID. Please check the ID and try again.')
-                error.statusCode = 404;
-                throw error;
-            };
-        } catch(err) {
-            console.log(err);
-        };
-    };
-};
+  static #users = [];
+  create(data) {
+    try {
+      UserManager.#users.push(data);
+      console.log("User successfully created");
+      return data;
+    } catch (err) {
+      throw err;
+    }
+  }
+  read(role) {
+    try {
+      console.log(UserManager.#users);
+    } catch (err) {
+      console.log("Unable to find the users");
+      throw err;
+    }
+  }
+  paginate({ filter = {}, opts = {} }) {
+    try {
+      let allUsers = UserManager.#users;
+      if (filter.role) {
+        allUsers = allUsers.filter((user) => user.role === filter.role);
+      }
+      const totalDocs = allUsers.length;
+      const limit = opts.limit || 10;
+      const page = opts.page || 1;
+      const totalPages = Math.ceil(totalDocs / limit);
+      const offset = (page - 1) * limit;
+      const paginatedUsers = allUsers.slice(offset, offset + limit);
+      const paginateInfo = {
+        page,
+        totalPages,
+        limit,
+        prevPage: page > 1 ? page - 1 : null,
+        nextPage: page < totalPages ? page + 1 : null,
+        totalDocs,
+      };
+      return { docs: paginatedUsers, ...paginateInfo };
+    } catch (err) {
+      throw err;
+    }
+  }
+  readOne(id) {
+    try {
+      let allUsers = UserManager.#users;
+      let selected = allUsers.find((each) => each._id === id);
+      if (!selected) {
+        throw new Error(
+          "No user found with the specified ID. Please check the ID and try again."
+        );
+      } else {
+        return selected;
+      }
+    } catch (err) {
+      throw err;
+    }
+  }
+  readByEmail(email) {
+    try {
+      let allUsers = UserManager.#users;
+      let selected = allUsers.find((each) => each.email === email);
+      if (!selected) {
+        throw new Error(
+          "No user found with the specified ID. Please check the ID and try again."
+        );
+      } else {
+        return selected;
+      }
+    } catch (err) {
+      throw err;
+    }
+  }
+  destroy(id) {
+    try {
+      let allUsers = UserManager.#users;
+      let selected = allUsers.find((each) => each._id === id);
+      if (!selected) {
+        throw new Error(
+          "No user found with the specified ID. Please check the ID and try again."
+        );
+      } else {
+        let withoutSelected = allUsers.filter((each) => each._id !== id);
+        UserManager.#users = withoutSelected;
+        console.log("User deleted");
+        console.log(UserManager.#users);
+        return selected;
+      }
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }
+  update(id, data) {
+    try {
+      let allUsers = UserManager.#users;
+      let selected = allUsers.find((each) => each._id === id);
+      if (selected) {
+        for (let prop in data) {
+          selected[prop] = data[prop];
+        }
+        UserManager.#users.push(selected);
+        console.log("The user data has been updated successfully");
+        console.log(selected);
+        return selected;
+      } else {
+        const error = new Error(
+          "No user found with the specified ID. Please check the ID and try again."
+        );
+        error.statusCode = 404;
+        throw error;
+      }
+    } catch (err) {
+      throw err;
+    }
+  }
+}
 
-const userManager = new UserManager()
+const userManager = new UserManager();
 
 export default userManager;
 
@@ -107,7 +149,6 @@ export default userManager;
 //     role: 0
 // });
 
-
 //TESTING
 // node src/data/memory/UserManager.js
 
@@ -115,10 +156,3 @@ export default userManager;
 //userManager.readOne('')
 //userManager.update(1, {price: 5})
 //userManager.destroy(1)
-
-
-
-
-
-
-

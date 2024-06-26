@@ -1,16 +1,16 @@
-import dao from "../dao/dao.factory.js";
 import UsersDTO from "../dto/users.dto.js";
+import dao from "../dao/dao.factory.js";
 
 const { userManager } = dao
 
 class UsersRepository {
     constructor(manager) {
-      this.model = manager;
+      this.manager = manager;
     }
     createRepository = async (data) => {
       try {
         data = new UsersDTO(data)
-        const one = await this.model.create(data);
+        const one = await this.manager.create(data);
         return one;
       } catch (err) {
         throw err;
@@ -18,15 +18,23 @@ class UsersRepository {
     }
     readRepository = async (filter) => {
       try {
-        const all = await this.model.read(filter);
+        const all = await this.manager.read(filter);
         return all;
+      } catch (err) {
+        throw err;
+      }
+    }
+    readByEmailRepository = async (email) => {
+      try {
+        const one = await this.manager.readByEmail(email);
+        return one;
       } catch (err) {
         throw err;
       }
     }
     paginateRepository = async ({ filter, opts }) => {
       try {
-        const all = await this.model.paginate({ filter, opts });
+        const all = await this.manager.paginate({ filter, opts });
         return all;
       } catch (err) {
         throw err;
@@ -34,7 +42,7 @@ class UsersRepository {
     }
     readOneRepository = async (id) => {
       try {
-        const one = await this.model.readOne(id);
+        const one = await this.manager.readOne(id);
         return one;
       } catch (err) {
         throw err;
@@ -42,7 +50,7 @@ class UsersRepository {
     }
     updateRepository = async (id, data) => {
       try {
-        const one = await this.model.update(id, data);
+        const one = await this.manager.update(id, data);
         return one;
       } catch (err) {
         throw err;
@@ -50,7 +58,7 @@ class UsersRepository {
     }
     destroyRepository = async(id) => {
       try {
-        const one = await this.model.destroy(id);
+        const one = await this.manager.destroy(id);
         return one;
       } catch (err) {
         throw err;
@@ -58,7 +66,7 @@ class UsersRepository {
     }
     destroyAllRepository = async (id) => {
       try {
-        const all = await this.model.destroyMany(id);
+        const all = await this.manager.destroyMany(id);
         return all;
       } catch (err) {
         throw err;

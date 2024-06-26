@@ -18,6 +18,14 @@ class CustomService {
       throw err;
     }
   }
+  readByEmailService = async (email) => {
+    try {
+      const one = await this.repository.readByEmailRepository(email);
+      return one;
+    } catch (err) {
+      throw err;
+    }
+  }
   paginateService = async ({ filter, opts }) => {
     try {
       const all = await this.repository.paginateRepository({ filter, opts });

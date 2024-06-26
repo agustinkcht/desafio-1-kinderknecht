@@ -1,47 +1,5 @@
 [
     {
-        "id": "663ce82357109ba2e5d3b56b",
-        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
-        "email": "johndoe123@email.com",
-        "password": "P@ssw0rd123",
-        "role": "0"
-    },
-    {
-        "id": "663ce82357109ba2e5d3b56c",
-        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
-        "email": "sarahsmith456@email.com",
-        "password": "SecurePass789!",
-        "role": "1"
-    },
-    {
-        "id": "663ce82357109ba2e5d3b56d",
-        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
-        "email": "lisawilliams432@email.com",
-        "password": "William$L1sa",
-        "role": "0"
-    },
-    {
-        "id": "663ce82357109ba2e5d3b56e",
-        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
-        "email": "emilybrown321@email.com",
-        "password": "Brownie1234$",
-        "role": "1"
-    },
-    {
-        "id": "2d94dea15a60d5406d65780d",
-        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
-        "email": "marleybob@gmail.com",
-        "password": "$2b$10$BUZdATiWd.FdPNeam6Ml1eZnaVsVlMApiQaa/hnJ.hMWjILLUxoo.",
-        "role": "0"
-    },
-    {
-        "id": "5c322cebf51f58d485c849f0",
-        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
-        "email": "stevejobs@gmail.com",
-        "password": "$2b$10$TujXYVSF8OaCjptKriSZQOXyZ8dMwWctOmiJwMbkP6/RBWoZZT5hS",
-        "role": "0"
-    },
-    {
         "_id": "eb4b0494a2004d277fa4b664",
         "createdAt": "2024-06-22T15:07:25.193Z",
         "updatedAt": "2024-06-22T15:07:25.193Z",
@@ -51,20 +9,38 @@
         "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
     },
     {
-        "_id": "9ad10ff4b1f3078b54026f4e",
-        "createdAt": "2024-06-22T15:10:08.186Z",
-        "updatedAt": "2024-06-22T15:10:08.186Z",
-        "email": "mariadelcarmen@gmail.com",
-        "password": "$2b$10$/ikBZlctVluodBTvfW.PRerIV39OaYaJxhvphXfjqDtUOtyHWnI/y",
-        "role": 0,
-        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
-    },
-    {
         "_id": "e859ab9088cc0079b5dc91e2",
         "createdAt": "2024-06-22T15:13:03.816Z",
         "updatedAt": "2024-06-22T15:13:03.816Z",
         "email": "mariadelmario@gmail.com",
         "password": "$2b$10$amMAvkE1YadabEJCVZV6uehQk7wrAyQ/tXmeNUZNTu6Z0UArpL0X.",
+        "role": 0,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+    },
+    {
+        "_id": "ecbeb95cb523a198963b2a7b",
+        "createdAt": "2024-06-26T18:10:45.461Z",
+        "updatedAt": "2024-06-26T18:10:45.461Z",
+        "email": "maurodemaria@gmail.com",
+        "password": "$2b$10$Ui/xeEkEl9z3pOviCLY6KehgN4rm2VWJ.PEdIg1t5t.0AQij7lIji",
+        "role": 0,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+    },
+    {
+        "_id": "63a226f6746dfa127bc9afe5",
+        "createdAt": "2024-06-26T18:26:18.338Z",
+        "updatedAt": "2024-06-26T18:26:18.338Z",
+        "email": "mariedemauro@gmail.com",
+        "password": "$2b$10$lKPdG4miVgBY5SN4pnXlz.8n7DkudA30W00Pyl7Bmu4lBNrBHehZq",
+        "role": 0,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+    },
+    {
+        "_id": "8a4df7cde9aae1abd59092c3",
+        "createdAt": "2024-06-26T19:38:09.869Z",
+        "updatedAt": "2024-06-26T19:38:09.869Z",
+        "email": "cachorrolopez@gmail.com",
+        "password": "$2b$10$Mu4SriU./pdsgDCR83LWAeuxZFvCmCfFZkI791G0/qdppLZwG6WIO",
         "role": 0,
         "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
     }

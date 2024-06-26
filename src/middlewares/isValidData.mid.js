@@ -1,5 +1,3 @@
-import userManager from "../data/mongo/managers/UserManager.mongo.js";
-
 async function isValidData (req, res, next) {
     try {
         const { email, password } = req.body;
