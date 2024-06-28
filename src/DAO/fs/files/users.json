@@ -14,7 +14,7 @@
         "updatedAt": "2024-06-22T15:13:03.816Z",
         "email": "mariadelmario@gmail.com",
         "password": "$2b$10$amMAvkE1YadabEJCVZV6uehQk7wrAyQ/tXmeNUZNTu6Z0UArpL0X.",
-        "role": 0,
+        "role": 1,
         "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
     },
     {
@@ -41,6 +41,15 @@
         "updatedAt": "2024-06-26T19:38:09.869Z",
         "email": "cachorrolopez@gmail.com",
         "password": "$2b$10$Mu4SriU./pdsgDCR83LWAeuxZFvCmCfFZkI791G0/qdppLZwG6WIO",
+        "role": 0,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+    },
+    {
+        "_id": "01d3c7f2758277fa04c9a1eb",
+        "createdAt": "2024-06-28T17:14:52.745Z",
+        "updatedAt": "2024-06-28T17:14:52.745Z",
+        "email": "maurodemariano@gmail.com",
+        "password": "$2b$10$5lHjoxcya4CQ28V6WzkCGuKOb7DRBZvwU/fdijM0m7fMSVeEXGIqu",
         "role": 0,
         "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
     }

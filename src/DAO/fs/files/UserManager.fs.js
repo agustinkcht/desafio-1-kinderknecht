@@ -1,5 +1,4 @@
 import fs from "fs";
-import crypto from "crypto";
 
 class UserManager {
   constructor() {
@@ -70,7 +69,7 @@ class UserManager {
       allUsers = JSON.parse(allUsers);
       //filter
       if (filter.role) {
-        const allUsers = allUsers.filter((user) => user.role === filter.role);
+        allUsers = allUsers.filter((user) => user.role === filter.role);
       } // if filter exists, show me only the users that match the role
       const totalDocs = allUsers.length;
       const limit = opts.limit || 10;
