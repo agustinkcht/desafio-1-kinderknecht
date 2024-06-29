@@ -22,7 +22,6 @@ class ProductManager {
       allProducts.push(data);
       allProducts = JSON.stringify(allProducts, null, 4);
       await fs.promises.writeFile(this.path, allProducts);
-      console.log("Product successfully added to the system");
       return data;
     } catch (err) {
       throw err;
@@ -38,7 +37,6 @@ class ProductManager {
       if (allProducts.length === 0) {
         return null;
       }
-      console.log(allProducts);
       return allProducts;
     } catch (err) {
       throw err;
@@ -49,7 +47,6 @@ class ProductManager {
       let allProducts = await fs.promises.readFile(this.path, "utf-8");
       allProducts = JSON.parse(allProducts);
       if (filter.category) {
-        console.log(filter.category)
         allProducts = allProducts.filter(
           (product) => product.category === filter.category
         );
@@ -84,7 +81,6 @@ class ProductManager {
       allProducts = JSON.parse(allProducts);
       let selected = allProducts.find((each) => each._id === id);
       if (selected) {
-        console.log(selected);
         return selected;
       } else {
         const error = new Error(
@@ -106,8 +102,6 @@ class ProductManager {
         let withoutSelected = allProducts.filter((each) => each._id !== id);
         withoutSelected = JSON.stringify(withoutSelected, null, 4);
         await fs.promises.writeFile(this.path, withoutSelected);
-        console.log("The product has been successfully deleted");
-        console.log(selected);
         return selected;
       } else {
         const error = new Error(
@@ -130,8 +124,6 @@ class ProductManager {
         }
         allProducts = JSON.stringify(allProducts, null, 4);
         await fs.promises.writeFile(this.path, allProducts);
-        console.log("The product has been updated successfully");
-        console.log(selected);
         return selected;
       } else {
         const error = new Error(

@@ -23,7 +23,6 @@ class CartManager {
       allCarts.push(data);
       allCarts = JSON.stringify(allCarts, null, 4);
       await fs.promises.writeFile(this.path, allCarts);
-      console.log("Product added to the cart");
       return data;
     } catch (err) {
       throw err;
@@ -39,7 +38,6 @@ class CartManager {
       allCarts = JSON.parse(allCarts);
       let cart = allCarts.filter((each) => each.user_id === user_id);
       if (cart) {
-        console.log(cart);
         return cart;
       } else {
         const error = new Error(
@@ -54,7 +52,6 @@ class CartManager {
   async paginate({ filter = {}, opts = {} }) {
     let allCarts = await fs.promises.readFile(this.path, "utf-8");
     allCarts = JSON.parse(allCarts);
-    console.log(allCarts)
     try {
       //filter
       if (filter.user_id) {
@@ -86,7 +83,6 @@ class CartManager {
       allCarts = JSON.parse(allCarts);
       let selected = allCarts.find((each) => each._id === id);
       if (selected) {
-        console.log(selected);
         return selected;
       } else {
         const error = new Error(`No item found in the cart with id ${id}`);
@@ -106,8 +102,6 @@ class CartManager {
         let withoutSelected = allCarts.filter((each) => each._id !== id);
         withoutSelected = JSON.stringify(withoutSelected, null, 4);
         await fs.promises.writeFile(this.path, withoutSelected);
-        console.log("The item has been successfully deleted");
-        console.log(selected);
         return selected;
       } else {
         const error = new Error(`No item found in the cart with id ${id}`);
@@ -122,17 +116,16 @@ class CartManager {
     try {
         let allCarts = await fs.promises.readFile(this.path, "utf-8");
         allCarts = JSON.parse(allCarts);
-        let selected = allCarts.find((cart) => cart.user_id === user_id);
-        if (!selected) {
+        let many = allCarts.filter((cart) => cart.user_id === user_id);
+        if (!many) {
             const error = new Error ("No items found associated with the user.")
             error.statusCode = 404;
             throw error;
         }
-        let withoutSelected = allCarts.filter((cart) => cart.user_id === user_id);
-        withoutSelected = JSON.stringify(many, null, 4);
-        await fs.promises.writeFile(this.path, withoutSelected);
-        console.log("The cart has been emptied.")
-        console.log(selected)
+        let withoutMany = allCarts.filter((cart) => cart.user_id !== user_id);
+        withoutMany = JSON.stringify(withoutMany, null, 4);
+        await fs.promises.writeFile(this.path, withoutMany);
+        return many;
     } catch (err) {
         throw err;
     }
@@ -148,8 +141,6 @@ class CartManager {
         }
         allCarts = JSON.stringify(allCarts, null, 4);
         await fs.promises.writeFile(this.path, allCarts);
-        console.log("The item has been updated successfully");
-        console.log(selected);
         return selected;
       } else {
         const error = new Error(`No item found in the cart with id ${id}`);

@@ -13,7 +13,7 @@ class ProductsController {
       const data = req.body;
       const newProduct = await createService(data);
       return res.suc200mesres(
-        `Product created successfully with id ${newProduct.id}`, 
+        `Product created successfully with id ${newProduct._id}`, 
         newProduct
       );
     } catch (err) {

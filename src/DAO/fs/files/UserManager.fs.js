@@ -22,7 +22,6 @@ class UserManager {
       allUsers.push(data);
       allUsers = JSON.stringify(allUsers, null, 4);
       await fs.promises.writeFile(this.path, allUsers);
-      console.log("User created successfully");
       return data;
     } catch (err) {
       throw err;
@@ -38,7 +37,6 @@ class UserManager {
       if (allUsers.length === 0) {
         return null;
       }
-      console.log(allUsers);
       return allUsers;
     } catch (err) {
       throw err;
@@ -50,7 +48,6 @@ class UserManager {
       allUsers = JSON.parse(allUsers);
       let selected = allUsers.find((each) => each.email === email);
       if (selected) {
-        console.log(selected);
         return selected;
       } else {
         const error = new Error(
@@ -97,7 +94,6 @@ class UserManager {
       allUsers = JSON.parse(allUsers);
       let selected = allUsers.find((each) => each._id === id);
       if (selected) {
-        console.log(selected);
         return selected;
       } else {
         const error = new Error(

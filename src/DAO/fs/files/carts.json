@@ -1,19 +1,5 @@
 [
     {
-        "_id": "a42cfcae08ec940be3992a04",
-        "user_id": "663ce82357109ba2e5d3b56d",
-        "product_id": "663cea2c57109ba2e5d3b56f",
-        "quantity": 1,
-        "state": "delivered"
-    },
-    {
-        "_id": "0dfab56396d8e4eef5f15eb4",
-        "user_id": "663ce82357109ba2e5d3b56d",
-        "product_id": "663cea2c57109ba2e5d3b573",
-        "quantity": 5,
-        "state": "delivered"
-    },
-    {
         "_id": "a7ea65f79e26873268ffbe49",
         "user_id": "663ce82357109ba2e5d3b56e",
         "product_id": "663ceb1057109ba2e5d3b58e",
