@@ -5,11 +5,11 @@ import { create, read, readOne, update, destroy, readByEmail } from "../../contr
 class UsersRouter extends CustomRouter {
   init() {
     this.create("/", ["PUBLIC"], isValidData, create);
-    this.read("/", ["PUBLIC"], read);
-    this.read("/email/:email", ["PUBLIC"], readByEmail);
-    this.read("/:uid", ["PUBLIC"], readOne);
-    this.update("/:uid", ["PUBLIC"], update);
-    this.destroy("/:uid", ["PUBLIC"], destroy);
+    this.read("/", ["USER", "ADMIN"], read);
+    this.read("/email/:email", ["USER", "ADMIN"], readByEmail);
+    this.read("/:uid", ["USER", "ADMIN"], readOne);
+    this.update("/:uid", ["USER", "ADMIN"], update);
+    this.destroy("/:uid", ["USER", "ADMIN"], destroy);
   }
 }
 

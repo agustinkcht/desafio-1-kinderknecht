@@ -37,7 +37,7 @@ passport.use('register',
 passport.use('login',
     new LocalStrategy(
         { passReqToCallback: true, usernameField: 'email' },
-        async (req, email, password, done) => {
+        async (_req, email, password, done) => {
             try {
                 const one = await usersRepository.readByEmailRepository(email);
                 if (!one) {

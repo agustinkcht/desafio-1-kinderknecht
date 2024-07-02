@@ -42,6 +42,7 @@ class CustomRouter {
     res.err403mes = () => res.json({ statusCode: 403, message });
     res.err404 = () => res.json({ statusCode: 404, message: "Not Found" });
     res.err404mes = (message) => res.json({ statusCode: 404, message });
+    res.err409mes = (message) => res.json({ statusCode: 409, message })
     return next();
   };
   policies = (policiesArray) => async (req, res, next) => {
@@ -52,8 +53,8 @@ class CustomRouter {
       token = verifyToken(token); // uses verifyToken to de-tokenize the data
       const { role, email } = token;
       if (
-        (policiesArray.includes("USER") && role === "0") ||
-        (policiesArray.includes("ADMIN") && role === "1")
+        (policiesArray.includes("USER") && role === 0) ||
+        (policiesArray.includes("ADMIN") && role === 1)
       ) {
         const user = await usersRepository.readByEmailRepository(email);
         delete user.password; // protecting password.

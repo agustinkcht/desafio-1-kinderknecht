@@ -4,12 +4,12 @@ import isValidCart from "../../middlewares/isValidCart.mid.js";
 
 class CartsRouter extends CustomRouter {
   init() {
-    this.read("/", ["PUBLIC"], read);
-    this.create("/", ["PUBLIC"], isValidCart, create);
-    this.destroy("/all/:uid", ["PUBLIC"], destroyAll);
-    this.read("/:iid", ["PUBLIC"], readOne); // item id
-    this.update("/:iid", ["PUBLIC"], update);
-    this.destroy("/:iid", ["PUBLIC"], destroy);
+    this.read("/", ["USER", "ADMIN"], read);
+    this.create("/", ["USER", "ADMIN"], isValidCart, create);
+    this.destroy("/all/:uid", ["USER", "ADMIN"], destroyAll);
+    this.read("/:iid", ["USER", "ADMIN"], readOne); // item id
+    this.update("/:iid", ["USER", "ADMIN"], update);
+    this.destroy("/:iid", ["USER", "ADMIN"], destroy);
   }
 }
 

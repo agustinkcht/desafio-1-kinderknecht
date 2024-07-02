@@ -1,19 +1,18 @@
-import userManager from "../data/mongo/managers/UserManager.mongo.js";
+import usersRepository from "../repositories/users.rep.js";
 
-async function isValidEmail (req, res, next) {
-    try {
-        const { email } = req.body;
-        const one = await userManager.readByEmail(email);
-        if (one) {
-            const error = new Error ('Email already registered. Use a different email or log in')
-            error.statusCode = 409;
-            throw error;
-        };
-        return next();
-    } catch (err) {
-        return next(err)
-    };
-};
+async function isValidEmail(req, res, next) {
+  try {
+    const { email } = req.body;
+    const one = await usersRepository.readByEmailRepository(email);
+    if (one) {
+      res.err409mes(
+        "Email already registered. Use a different email or log in"
+      );
+    }
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+}
 
 export default isValidEmail;
-
