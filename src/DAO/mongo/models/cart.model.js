@@ -18,13 +18,11 @@ const schema = new Schema(
         },
         quantity: { 
             type: Number, 
-            default: 1,
             required: true
         },
         state: {
             type: String,
-            enum: ['reserved', 'paid', 'delivered'],
-            default: 'reserved',
+            enum: ['reserved', 'paid', 'delivered']
         }
     },
     {

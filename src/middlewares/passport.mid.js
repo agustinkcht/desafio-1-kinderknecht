@@ -2,10 +2,10 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import { Strategy as JWTStrategy, ExtractJwt } from "passport-jwt";
-import userManager from "../data/mongo/managers/UserManager.mongo.js"
 import { createHash } from "../utils/hash.util.js";
 import { verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
+import usersRepository from "../repositories/users.rep.js";
 
 passport.use('register',
     new LocalStrategy(
@@ -17,7 +17,7 @@ passport.use('register',
                     error.statusCode = 400;
                     return done(null, null, error);
                 };
-                const one = await userManager.readByEmail(email);
+                const one = await usersRepository.readByEmailRepository(email);
                 if (one) {
                     const error = new Error('Email already taken. Use a different email or log in')
                     error.statusCode = 409;
@@ -25,7 +25,7 @@ passport.use('register',
                 };
                 const hashPassword = createHash(password);
                 req.body.password = hashPassword;
-                const user = await userManager.create(req.body)
+                const user = await usersRepository.createRepository(req.body)
                 return done(null, user)
             } catch (err) {
                return done(err)              
@@ -37,9 +37,9 @@ passport.use('register',
 passport.use('login',
     new LocalStrategy(
         { passReqToCallback: true, usernameField: 'email' },
-        async (req, email, password, done) => {
+        async (_req, email, password, done) => {
             try {
-                const one = await userManager.readByEmail(email);
+                const one = await usersRepository.readByEmailRepository(email);
                 if (!one) {
                     const error = new Error('Bad auth from login. Check login info and try again.')
                     error.statusCode = 401;
@@ -80,14 +80,14 @@ passport.use('google',
             try {
                 const { id, picture } = profile;
                 console.log(profile)
-                let user = await userManager.readByEmail(id);
+                let user = await usersRepository.readByEmailRepository(id);
                 if (!user) {
                     user = {
                         email: id,
                         password: createHash(id),
                         photo: picture
                     }
-                    user = await userManager.create(user)
+                    user = await usersRepository.createRepository(user)
                 }
                 req.session.email = user.email;
                 req.session.online = true;

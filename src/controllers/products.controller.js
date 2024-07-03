@@ -12,8 +12,9 @@ class ProductsController {
     try {
       const data = req.body;
       const newProduct = await createService(data);
-      return res.suc200mes(
-        `Product created successfully with id ${newProduct.id}`
+      return res.suc200mesres(
+        `Product created successfully with id ${newProduct._id}`, 
+        newProduct
       );
     } catch (err) {
       return next(err);
@@ -74,6 +75,9 @@ class ProductsController {
     try {
       const { pid } = req.params;
       const deletedProduct = await destroyService(pid);
+      if (!deletedProduct) {
+        return res.err404mes("Product not found")
+      };
       return res.suc200mesres("Product deleted successfully", deletedProduct);
     } catch (err) {
       return next(err);

@@ -1,8 +1,8 @@
 import CustomService from "./CustomService.js";
-import productManager from "../data/mongo/managers/ProductManager.mongo.js";
-//import productManager from '../data/fs/files/ProductManager.fs.js'
+import productsRepository from "../repositories/products.rep.js";
 
-const productsService = new CustomService(productManager);
+const productsService = new CustomService(productsRepository);
+
 const {
   createService,
   paginateService,

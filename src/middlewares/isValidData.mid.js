@@ -1,17 +1,11 @@
-import userManager from "../data/mongo/managers/UserManager.mongo.js";
-
 async function isValidData (req, res, next) {
     try {
         const { email, password } = req.body;
         if (!email) {
-            const error = new Error('Enter a valid email');
-            error.statusCode = 400;
-            throw error;
+            return res.err400mes("Enter a valid email")
         };
         if (!password) {
-            const error = new Error('Enter a valid password');
-            error.statusCode = 400;
-            throw error;
+            return res.err400mes("Enter a valid password")
         };
         return next() 
     } catch (err) {

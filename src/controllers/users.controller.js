@@ -4,6 +4,7 @@ import {
   readOneService,
   updateService,
   destroyService,
+  readByEmailService,
 } from "../services/users.service.js";
 
 //functions
@@ -13,9 +14,22 @@ class UsersController {
       const data = req.body;
       const newUser = await createService(data);
       return res.suc201mesres(
-        `User created successfully with id ${newUser.id}`,
+        "User created successfully with id " + newUser._id,
         newUser
       );
+    } catch (err) {
+      return next(err);
+    }
+  }
+  async readByEmail(req, res, next) {
+    try {
+      const { email } = req.params;
+      const selected = await readByEmailService(email);
+      if (selected) {
+        return res.suc200res(selected);
+      } else {
+        return res.err404();
+      }
     } catch (err) {
       return next(err);
     }
@@ -78,7 +92,7 @@ class UsersController {
     try {
       const { uid } = req.params;
       const deletedUser = await destroyService(uid);
-      if (!user) {
+      if (!deletedUser) {
         return res.err404mes("User not found");
       }
       return res.suc200mesres("User deleted successfully", deletedUser);
@@ -90,5 +104,5 @@ class UsersController {
 
 const usersController = new UsersController();
 
-const { create, read, readOne, update, destroy } = usersController;
-export { create, read, readOne, update, destroy };
+const { create, read, readByEmail, readOne, update, destroy } = usersController;
+export { create, read, readByEmail, readOne, update, destroy };

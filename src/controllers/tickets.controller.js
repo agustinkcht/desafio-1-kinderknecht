@@ -1,4 +1,4 @@
-import cartManager from "../data/mongo/managers/CartManager.mongo.js";
+import cartManager from "../dao/mongo/managers/CartManager.mongo.js";
 import { Types } from "mongoose";
 
 class TicketsController {

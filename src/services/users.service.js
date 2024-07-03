@@ -1,10 +1,11 @@
 import CustomService from "./CustomService.js";
-import userManager from "../data/mongo/managers/UserManager.mongo.js";
-//import userManager from '../data/fs/files/UserManager.fs.js'
+import usersRepository from "../repositories/users.rep.js"
 
-const usersService = new CustomService(userManager);
+const usersService = new CustomService(usersRepository);
+
 const {
   createService,
+  readByEmailService,
   paginateService,
   readOneService,
   updateService,
@@ -12,6 +13,7 @@ const {
 } = usersService;
 export {
   createService,
+  readByEmailService,
   paginateService,
   readOneService,
   updateService,
