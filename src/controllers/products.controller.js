@@ -75,6 +75,9 @@ class ProductsController {
     try {
       const { pid } = req.params;
       const deletedProduct = await destroyService(pid);
+      if (!deletedProduct) {
+        return res.err404mes("Product not found")
+      };
       return res.suc200mesres("Product deleted successfully", deletedProduct);
     } catch (err) {
       return next(err);

@@ -109,47 +109,49 @@ class CartManager {
 
 const cartManager = new CartManager();
 
-// cartManager.create({
-//   _id: "a42cfcae08ec940be3992a04",
-//   createdAt: "2024-06-28T21:02:03.796Z",
-//   updatedAt: "2024-06-28T21:02:03.796Z",
-//   user_id: "66818054e857f2ed5dbf802c",
-//   product_id: "663cea2c57109ba2e5d3b56f",
-//   quantity: 1,
-//   state: "delivered",
-// });
-
-// cartManager.create({
-//   _id: "0dfab56396d8e4eef5f15eb4",
-//   createdAt: "2024-06-28T21:02:03.796Z",
-//   updatedAt: "2024-06-28T21:02:03.796Z",
-//   user_id: "66818054e857f2ed5dbf802c",
-//   product_id: "663cea2c57109ba2e5d3b573",
-//   quantity: 5,
-//   state: "delivered",
-// });
-
-// cartManager.create({
-//   _id: "a7ea65f79e26873268ffbe49",
-//   createdAt: "2024-06-28T21:02:03.796Z",
-//   updatedAt: "2024-06-28T21:02:03.796Z",
-//   user_id: "6681805ee857f2ed5dbf802e",
-//   product_id: "663ceb1057109ba2e5d3b58e",
-//   quantity: 1,
-//   state: "reserved",
-// });
-
-// cartManager.create({
-//   _id: "8fd95873a35d3a32357743b5",
-//   createdAt: "2024-06-28T21:02:03.796Z",
-//   updatedAt: "2024-06-28T21:02:03.796Z",
-//   user_id: "6681805ee857f2ed5dbf802e",
-//   product_id: "663ceb1057109ba2e5d3b595",
-//   quantity: 3,
-//   state: "reserved",
-// });
-
 export default cartManager;
+
+cartManager.create({
+  _id: "a42cfcae08ec940be3992a04",
+  createdAt: "2024-06-28T21:02:03.796Z",
+  updatedAt: "2024-06-28T21:02:03.796Z",
+  user_id: "66818054e857f2ed5dbf802c",
+  product_id: "663cea2c57109ba2e5d3b56f",
+  quantity: 1,
+  state: "delivered",
+});
+
+cartManager.create({
+  _id: "0dfab56396d8e4eef5f15eb4",
+  createdAt: "2024-06-28T21:02:03.796Z",
+  updatedAt: "2024-06-28T21:02:03.796Z",
+  user_id: "66818054e857f2ed5dbf802c",
+  product_id: "663cea2c57109ba2e5d3b573",
+  quantity: 5,
+  state: "delivered",
+});
+
+cartManager.create({
+  _id: "a7ea65f79e26873268ffbe49",
+  createdAt: "2024-06-28T21:02:03.796Z",
+  updatedAt: "2024-06-28T21:02:03.796Z",
+  user_id: "6681805ee857f2ed5dbf802e",
+  product_id: "663ceb1057109ba2e5d3b58e",
+  quantity: 1,
+  state: "reserved",
+});
+
+cartManager.create({
+  _id: "8fd95873a35d3a32357743b5",
+  createdAt: "2024-06-28T21:02:03.796Z",
+  updatedAt: "2024-06-28T21:02:03.796Z",
+  user_id: "6681805ee857f2ed5dbf802e",
+  product_id: "663ceb1057109ba2e5d3b595",
+  quantity: 3,
+  state: "reserved",
+});
+
+
 
 // TESTING
 // node src/data/memory/CartManager.js

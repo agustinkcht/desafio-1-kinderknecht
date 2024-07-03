@@ -1,74 +1,11 @@
 [
     {
-        "_id": "9bb0922be6eded029f8b00c6",
-        "createdAt": "2024-06-30T18:28:02.142Z",
-        "updatedAt": "2024-06-30T18:28:02.142Z",
+        "_id": "21242dae81ffce1ede4cadcb",
+        "createdAt": "2024-07-03T00:41:24.202Z",
+        "updatedAt": "2024-07-03T00:41:24.202Z",
         "user_id": "6681805ee857f2ed5dbf802e",
-        "product_id": "663cea2c57109ba2e5d3b578",
+        "product_id": "663cea2c57109ba2e5d3b57a",
         "quantity": 1,
-        "state": "reserved"
-    },
-    {
-        "_id": "34d8d93d7b36f60ef762deec",
-        "createdAt": "2024-06-30T19:19:38.420Z",
-        "updatedAt": "2024-06-30T19:19:38.420Z",
-        "user_id": "6681805ee857f2ed5dbf802e",
-        "product_id": "663cea2c57109ba2e5d3b578",
-        "quantity": 1,
-        "state": "reserved"
-    },
-    {
-        "_id": "0e55d1ce6cd384f3bf1f499d",
-        "createdAt": "2024-06-30T19:22:44.895Z",
-        "updatedAt": "2024-06-30T19:22:44.895Z",
-        "user_id": "6681805ee857f2ed5dbf802e",
-        "product_id": "663cea2c57109ba2e5d3b578",
-        "quantity": 1,
-        "state": "reserved"
-    },
-    {
-        "_id": "15321c5008447217e598f8af",
-        "createdAt": "2024-06-30T19:25:14.031Z",
-        "updatedAt": "2024-06-30T19:25:14.031Z",
-        "user_id": "6681805ee857f2ed5dbf802e",
-        "product_id": "663cea2c57109ba2e5d3b578",
-        "quantity": 1,
-        "state": "reserved"
-    },
-    {
-        "_id": "676559cee2f6e45235263a4c",
-        "createdAt": "2024-07-01T21:57:35.709Z",
-        "updatedAt": "2024-07-01T21:57:35.709Z",
-        "user_id": "6681805ee857f2ed5dbf802e",
-        "product_id": "663cea2c57109ba2e5d3b56f",
-        "quantity": 1,
-        "state": "reserved"
-    },
-    {
-        "_id": "eedb7c1bb1ca5679b6606342",
-        "createdAt": "2024-07-02T00:18:19.632Z",
-        "updatedAt": "2024-07-02T00:18:19.632Z",
-        "user_id": "6681805ee857f2ed5dbf802e",
-        "product_id": "663cea2c57109ba2e5d3b571",
-        "quantity": 1,
-        "state": "reserved"
-    },
-    {
-        "_id": "2acb34e723c1ac6b779a63bb",
-        "createdAt": "2024-07-02T00:18:32.277Z",
-        "updatedAt": "2024-07-02T00:18:32.277Z",
-        "user_id": "6681805ee857f2ed5dbf802e",
-        "product_id": "663ceb1057109ba2e5d3b58d",
-        "quantity": 1,
-        "state": "reserved"
-    },
-    {
-        "_id": "db2e1541f5c6fea94e3dba07",
-        "createdAt": "2024-07-02T00:30:43.249Z",
-        "updatedAt": "2024-07-02T00:30:43.249Z",
-        "user_id": "6681805ee857f2ed5dbf802e",
-        "product_id": "663cea2c57109ba2e5d3b571",
-        "quantity": 2,
         "state": "reserved"
     }
 ]

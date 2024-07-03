@@ -9,7 +9,7 @@ import {
 import { readOneService as readOneUser } from "../services/users.service.js";
 import { readOneService as readOneProduct } from "../services/products.service.js";
 import argsUtil from "../utils/args.util.js";
-import { populateUser, populateProduct } from "../utils/populate.util.js";
+import { populateProduct } from "../utils/populate.util.js";
 import { getUser } from "../utils/getResource.util.js";
 
 class CartsController1 {
@@ -18,14 +18,15 @@ class CartsController1 {
     try {
       const filter = {};
       const opts = {};
+      const user_id = req.user._id;
       if (req.query.limit) {
         opts.limit = req.query.limit;
       }
       if (req.query.page) {
         opts.page = req.query.page;
       }
-      if (req.query.user_id) {
-        filter.user_id = req.query.user_id;
+      if (user_id) {
+        filter.user_id = user_id;
       }
       const all = await paginateService({ filter, opts });
       const paginateInfo = {
@@ -46,117 +47,8 @@ class CartsController1 {
     try {
       const { iid } = req.params;
       const selected = await readOneService(iid);
-      if (selected) {
-        return res.suc200res(selected);
-      } else {
-        res.err404mes("Item not found in the cart");
-      }
-    } catch (err) {
-      return next(err);
-    }
-  }
-  async create(req, res, next) {
-    try {
-      const data = req.body;
-      const one = await createService(data);
-      return res.suc201mesres("Added to the cart", one);
-    } catch (err) {
-      return next(err);
-    }
-  }
-  async update(req, res, next) {
-    try {
-      const { iid } = req.params;
-      const data = req.body;
-      const updatedItem = await updateService(iid, data);
-      return res.suc200mesres("Item updated successfully", updatedItem);
-    } catch (err) {
-      return next(err);
-    }
-  } // podes modificar quantity y state
-  async destroy(req, res, next) {
-    try {
-      const { iid } = req.params;
-      const deletedItem = await destroyService(iid);
-      if (!deletedItem) {
-        return res.err404mes("Item not found");
-      }
-      return res.suc200mesres("Removed from the cart", deletedItem);
-    } catch (err) {
-      return next(err);
-    }
-  }
-  async destroyAll(req, res, next) {
-    try {
-      const { uid } = req.params;
-      console.log(uid);
-      const deletedItems = await destroyAllService(uid);
-      return res.suc200mesres("The cart has been cleaned", deletedItems);
-    } catch (err) {
-      return next(err);
-    }
-  }
-}
-
-class CartsController2 {
-  async read(req, res, next) {
-    // con paginate
-    try {
-      const filter = {};
-      const opts = {};
-      const user_id = req.query.user_id;
-      if (req.query.limit) {
-        opts.limit = req.query.limit;
-      }
-      if (req.query.page) {
-        opts.page = req.query.page;
-      }
-      if (user_id) {
-        filter.user_id = user_id;
-      }
-      const all = await paginateService({ filter, opts });
-      const paginateInfo = {
-        page: all.page,
-        totalPages: all.totalPages,
-        limit: all.limit,
-        prevPage: all.prevPage,
-        nextPage: all.nextPage,
-        totalDocs: all.totalDocs,
-      };
-      const items = all.docs;
-      
-      const user = await getUser(user_id)
-      console.log(user)
-      const products = await populateProduct(items)
-      console.log(products)
-      const populatedItems = items.map((item, index) => ({
-        ...item,
-        user_id: user,
-        product_id: products[index]
-      }))
-      console.log(populatedItems)
-      //son varios user_id. tengo que armar un loop para recorrerlo, encontrar ese user_id, fetchear y reemplazar.
-      return res.suc200respag(populatedItems, paginateInfo);
-    } catch (err) {
-      return next(err);
-    }
-  }
-  async readOne(req, res, next) {
-    try {
-      const { iid } = req.params;
-      let selected = await readOneService(iid);
       if (!selected) {
         return res.err404mes("Item not found in the cart");
-      }
-      //console.log(selected)
-      const { user_id, product_id } = selected;
-      const user = await readOneUser(user_id);
-      const product = await readOneProduct(product_id);
-      if (!user || !product) {
-        return res.err404mes("Unable to populate cart's fields");
-      } else {
-        selected.user_id = user;
-        selected.product_id = product;
       }
       return res.suc200res(selected);
     } catch (err) {
@@ -168,20 +60,9 @@ class CartsController2 {
       const data = req.body;
       const one = await createService(data);
       if (!one) {
-        return res.err400mes("Error adding to the cart");
+        return res.err400mes("Error adding item to the cart");
       }
-      const { user_id, product_id } = one;
-      const user = await readOneUser(user_id);
-      const product = await readOneProduct(product_id);
-      if (!user || !product) {
-        return res.err404mes("Unable to populate cart's fields");
-      } else {
-        one.user_id = user;
-        one.product_id = product;
-      }
-      console.log(one)
       return res.suc201mesres("Added to the cart", one);
-      
     } catch (err) {
       return next(err);
     }
@@ -194,15 +75,6 @@ class CartsController2 {
       if (!updatedItem) {
         return res.err400mes("Error updating cart item");
       }
-      const { user_id, product_id } = updatedItem;
-      const user = await readOneUser(user_id);
-      const product = await readOneProduct(product_id);
-      if (!user || !product) {
-        return res.err404mes("Unable to populate cart's fields");
-      } else {
-        updatedItem.user_id = user;
-        updatedItem.product_id = product;
-      }
       return res.suc200mesres("Item updated successfully", updatedItem);
     } catch (err) {
       return next(err);
@@ -215,15 +87,6 @@ class CartsController2 {
       if (!deletedItem) {
         return res.err404mes("Item not found");
       }
-      const { user_id, product_id } = deletedItem;
-      const user = await readOneUser(user_id);
-      const product = await readOneProduct(product_id);
-      if (!user || !product) {
-        return res.err404mes("Unable to populate cart's fields");
-      } else {
-        deletedItem.user_id = user;
-        deletedItem.product_id = product;
-      }
       return res.suc200mesres("Removed from the cart", deletedItem);
     } catch (err) {
       return next(err);
@@ -231,13 +94,159 @@ class CartsController2 {
   }
   async destroyAll(req, res, next) {
     try {
-      const { uid } = req.params;
-      const deletedItems = await destroyAllService(uid);
+      const user_id = req.user._id;
+      const deletedItems = await destroyAllService(user_id);
       if (deletedItems.length < 1) {
-        return res.err400mes("There are no items in the cart")
+        return res.err400mes("There are no items in the cart");
       }
-      const user = await readOneUser(uid)
-      const { email } = user
+      const user = await readOneUser(user_id);
+      const { email } = user;
+      return res.suc200mesres(`The cart of ${email} has been cleared`);
+    } catch (err) {
+      return next(err);
+    }
+  }
+}
+
+class CartsController2 {
+  async read(req, res, next) {
+    // con paginate
+    try {
+      const filter = {};
+      const opts = {};
+      const user_id = req.user._id; //already present in req (after jwt verification)
+      if (req.query.limit) {
+        opts.limit = req.query.limit;
+      }
+      if (req.query.page) {
+        opts.page = req.query.page;
+      }
+      if (user_id) {
+        filter.user_id = user_id;
+      }
+      const all = await paginateService({ filter, opts });
+      //set paginate info data
+      const paginateInfo = {
+        page: all.page,
+        totalPages: all.totalPages,
+        limit: all.limit,
+        prevPage: all.prevPage,
+        nextPage: all.nextPage,
+        totalDocs: all.totalDocs,
+      };
+      // populating items
+      const items = all.docs;
+      const user = await getUser(user_id);
+      const products = await populateProduct(items);
+      const populatedItems = items.map((item, index) => ({
+        ...item,
+        user_id: user,
+        product_id: products[index],
+      }));
+      return res.suc200respag(populatedItems, paginateInfo);
+    } catch (err) {
+      return next(err);
+    }
+  }
+  async readOne(req, res, next) {
+    try {
+      const { iid } = req.params;
+      const selected = await readOneService(iid);
+      if (!selected) {
+        return res.err404mes("Item not found in the cart");
+      }
+      //console.log(selected)
+      const user_id = req.user._id;
+      const { product_id } = selected;
+      const user = await readOneUser(user_id);
+      const product = await readOneProduct(product_id);
+      if (!user || !product) {
+        return res.err404mes("Unable to populate cart's fields");
+      } 
+      let selectedPopulated = { ...selected }
+      selectedPopulated.user_id = user;
+      selectedPopulated.product_id = product;
+      return res.suc200res(selectedPopulated);
+    } catch (err) {
+      return next(err);
+    }
+  }
+  async create(req, res, next) {
+    try {
+      const data = req.body;
+      const one = await createService(data);
+      if (!one) {
+        return res.err400mes("Error adding item to the cart");
+      }
+      const user_id = req.user._id;
+      const { product_id } = one;
+      const user = await readOneUser(user_id);
+      const product = await readOneProduct(product_id);
+      if  (!user || !product) {
+        return res.err404mes("Unable to populate item.")
+      }
+      let onePopulated = { ...one }
+      onePopulated.user_id = user;
+      onePopulated.product_id = product;
+      return res.suc201mesres("Added to the cart", onePopulated);
+    } catch (err) {
+      return next(err);
+    }
+  }
+  async update(req, res, next) {
+    try {
+      const { iid } = req.params;
+      const data = req.body;
+      const updatedItem = await updateService(iid, data);
+      if (!updatedItem) {
+        return res.err400mes("Error updating cart item");
+      }
+      const user_id = req.user._id;
+      const { product_id } = updatedItem;
+      const user = await readOneUser(user_id);
+      const product = await readOneProduct(product_id);
+      if (!user || !product) {
+        return res.err404mes("Unable to populate cart's fields");
+      };
+      let updatedItemPopulated = { ...updatedItem }
+      updatedItemPopulated.user_id = user;
+      updatedItemPopulated.product_id = product;
+      return res.suc200mesres("Item updated successfully", updatedItemPopulated);
+    } catch (err) {
+      return next(err);
+    }
+  } // podes modificar quantity y state
+  async destroy(req, res, next) {
+    try {
+      const { iid } = req.params;
+      const deletedItem = await destroyService(iid);
+      if (!deletedItem) {
+        return res.err404mes("Item not found");
+      }
+      const user_id = req.user._id;
+      const { product_id } = deletedItem;
+      const user = await readOneUser(user_id);
+      const product = await readOneProduct(product_id);
+      if (!user || !product) {
+        return res.err404mes("Unable to populate cart's fields");
+      } 
+      let deletedItemPopulated = { ...deletedItem };
+      deletedItemPopulated.user_id = user;
+      deletedItemPopulated.product_id = product;
+      return res.suc200mesres("Removed from the cart", deletedItemPopulated);
+    } catch (err) {
+      return next(err);
+    }
+  }
+  async destroyAll(req, res, next) {
+    try {
+      const user_id = req.user._id;
+      const deletedItems = await destroyAllService(user_id);
+      if (deletedItems.length < 1) {
+        return res.err400mes("There are no items in the cart");
+      }
+      const user = await readOneUser(user_id);
+      const { email } = user;
       return res.suc200mesres(`The cart of ${email} has been cleared`);
     } catch (err) {
       return next(err);
