@@ -15,11 +15,14 @@ class UsersDTO {
     this.email = data.email;
     this.password = createHash(data.password);
     this.role = data.role || 0;
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
     this.photo =
       data.photo ||
       "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png";
+    this.verify = false;
+    this.verifyCode = crypto.randomBytes(12).toString("hex");
   }
 }
 
 export default UsersDTO;
-

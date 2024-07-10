@@ -1,7 +1,12 @@
+import {
+  readByEmailService,
+  updateService,
+} from "../services/users.service.js";
+
 class SessionsController {
-  async register(req, res, next) {
+  async register(__req, res, next) {
     try {
-      return res.suc200mes("User successfully registered");
+      return res.suc201mes("User successfully registered");
     } catch (err) {
       return next(err);
     }
@@ -45,9 +50,26 @@ class SessionsController {
       return next(err);
     }
   }
+  async verifyCode(req, res, next) {
+    // take the data coming from the VERIFY FORM
+    // compare the code introduced with the verifyCode of the user (should be ===)
+    try {
+      const { email, code } = req.body;
+      const one = await readByEmailService(email);
+      const verify = code === one.verifyCode;
+      if (!verify) {
+        return res.err400mes("Invalid Code");
+      }
+      await updateService(one._id, { verify: verify });
+      return res.suc200mes("User Verified");
+    } catch (err) {
+      return next(err);
+    }
+  }
 }
 
 const sessionsController = new SessionsController();
 
-const { register, login, online, logout, googleCallback } = sessionsController;
-export { register, login, online, logout, googleCallback };
+const { register, login, online, logout, googleCallback, verifyCode } =
+  sessionsController;
+export { register, login, online, logout, googleCallback, verifyCode };

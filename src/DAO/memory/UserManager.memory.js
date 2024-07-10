@@ -8,11 +8,10 @@ class UserManager {
       throw err;
     }
   }
-  read(role) {
+  read() {
     try {
       console.log(UserManager.#users);
     } catch (err) {
-      console.log("Unable to find the users");
       throw err;
     }
   }
@@ -45,13 +44,7 @@ class UserManager {
     try {
       let allUsers = UserManager.#users;
       let selected = allUsers.find((each) => each._id === id);
-      if (!selected) {
-        throw new Error(
-          "No user found with the specified ID. Please check the ID and try again."
-        );
-      } else {
-        return selected;
-      }
+      return selected;
     } catch (err) {
       throw err;
     }
@@ -60,13 +53,7 @@ class UserManager {
     try {
       let allUsers = UserManager.#users;
       let selected = allUsers.find((each) => each.email === email);
-      if (!selected) {
-        throw new Error(
-          "No user found with the specified ID. Please check the ID and try again."
-        );
-      } else {
-        return selected;
-      }
+      return selected;
     } catch (err) {
       throw err;
     }
@@ -75,15 +62,9 @@ class UserManager {
     try {
       let allUsers = UserManager.#users;
       let selected = allUsers.find((each) => each._id === id);
-      if (!selected) {
-        throw new Error(
-          "No user found with the specified ID. Please check the ID and try again."
-        );
-      } else {
-        let withoutSelected = allUsers.filter((each) => each._id !== id);
-        UserManager.#users = withoutSelected;
-        return selected;
-      }
+      let withoutSelected = allUsers.filter((each) => each._id !== id);
+      UserManager.#users = withoutSelected;
+      return selected;
     } catch (err) {
       console.log(err);
       throw err;
@@ -93,19 +74,11 @@ class UserManager {
     try {
       let allUsers = UserManager.#users;
       let selected = allUsers.find((each) => each._id === id);
-      if (selected) {
-        for (let prop in data) {
-          selected[prop] = data[prop];
-        }
-        UserManager.#users.push(selected);
-        return selected;
-      } else {
-        const error = new Error(
-          "No user found with the specified ID. Please check the ID and try again."
-        );
-        error.statusCode = 404;
-        throw error;
+      for (let prop in data) {
+        selected[prop] = data[prop];
       }
+      UserManager.#users.push(selected);
+      return selected;
     } catch (err) {
       throw err;
     }
@@ -121,7 +94,7 @@ userManager.create({
   role: 1,
   photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
   createdAt: "2024-06-22T15:07:25.193Z",
-  updatedAt: "2024-06-22T15:07:25.193Z"
+  updatedAt: "2024-06-22T15:07:25.193Z",
 });
 
 userManager.create({
@@ -131,7 +104,7 @@ userManager.create({
   role: 1,
   photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
   createdAt: "2024-06-22T15:07:25.193Z",
-  updatedAt: "2024-06-22T15:07:25.193Z"
+  updatedAt: "2024-06-22T15:07:25.193Z",
 });
 
 userManager.create({
@@ -141,7 +114,7 @@ userManager.create({
   role: 0,
   photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
   createdAt: "2024-06-22T15:07:25.193Z",
-  updatedAt: "2024-06-22T15:07:25.193Z"
+  updatedAt: "2024-06-22T15:07:25.193Z",
 });
 
 userManager.create({
@@ -151,12 +124,10 @@ userManager.create({
   role: 0,
   photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
   createdAt: "2024-06-22T15:07:25.193Z",
-  updatedAt: "2024-06-22T15:07:25.193Z"
+  updatedAt: "2024-06-22T15:07:25.193Z",
 });
 
-
 export default userManager;
-
 
 //TESTING
 // node src/data/memory/UserManager.js

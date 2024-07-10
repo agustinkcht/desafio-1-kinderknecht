@@ -50,12 +50,12 @@ class ProductManager {
         allProducts = allProducts.filter(
           (product) => product.category === filter.category
         );
-      };
+      }
       if (filter.title) {
-        allProducts = allProducts.filter(
-          (product) => filter.title.test(product.title)
+        allProducts = allProducts.filter((product) =>
+          filter.title.test(product.title)
         );
-      } 
+      }
       const totalDocs = allProducts.length;
       const limit = opts.limit || 10;
       const page = opts.page || 1;
@@ -68,7 +68,7 @@ class ProductManager {
         limit,
         prevPage: page > 1 ? page - 1 : null,
         nextPage: page < totalPages ? page + 1 : null,
-        totalDocs
+        totalDocs,
       };
       return { docs: paginatedProducts, ...paginateInfo };
     } catch (err) {
@@ -80,15 +80,7 @@ class ProductManager {
       let allProducts = await fs.promises.readFile(this.path, "utf-8");
       allProducts = JSON.parse(allProducts);
       let selected = allProducts.find((each) => each._id === id);
-      if (selected) {
-        return selected;
-      } else {
-        const error = new Error(
-          "No product found with the specified ID. Please check the ID and try again."
-        );
-        error.statusCode = 404;
-        throw error;
-      }
+      return selected;
     } catch (err) {
       throw err;
     }
@@ -98,18 +90,10 @@ class ProductManager {
       let allProducts = await fs.promises.readFile(this.path, "utf-8");
       allProducts = JSON.parse(allProducts);
       let selected = allProducts.find((each) => each._id === id);
-      if (selected) {
-        let withoutSelected = allProducts.filter((each) => each._id !== id);
-        withoutSelected = JSON.stringify(withoutSelected, null, 4);
-        await fs.promises.writeFile(this.path, withoutSelected);
-        return selected;
-      } else {
-        const error = new Error(
-          "No product found with the specified ID. Please check the ID and try again."
-        );
-        error.statusCode = 404;
-        throw error;
-      }
+      let withoutSelected = allProducts.filter((each) => each._id !== id);
+      withoutSelected = JSON.stringify(withoutSelected, null, 4);
+      await fs.promises.writeFile(this.path, withoutSelected);
+      return selected;
     } catch (err) {
       throw err;
     }
@@ -118,20 +102,12 @@ class ProductManager {
     try {
       let allProducts = await this.read();
       let selected = allProducts.find((each) => each._id === id);
-      if (selected) {
-        for (let prop in data) {
-          selected[prop] = data[prop];
-        }
-        allProducts = JSON.stringify(allProducts, null, 4);
-        await fs.promises.writeFile(this.path, allProducts);
-        return selected;
-      } else {
-        const error = new Error(
-          "No product found with the specified ID. Please check the ID and try again."
-        );
-        error.statusCode = 404;
-        throw error;
+      for (let prop in data) {
+        selected[prop] = data[prop];
       }
+      allProducts = JSON.stringify(allProducts, null, 4);
+      await fs.promises.writeFile(this.path, allProducts);
+      return selected;
     } catch (err) {
       throw err;
     }

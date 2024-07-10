@@ -18,6 +18,8 @@ const environment = {
   SECRET_JWT: process.env.SECRET_JWT,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  GOOGLE_EMAIL: process.env.GOOGLE_EMAIL,
+  GOOGLE_PASSWORD: process.env.GOOGLE_PASSWORD
 };
 // .env devuelve da acceso a las variables de entorno del proceso actual 
 

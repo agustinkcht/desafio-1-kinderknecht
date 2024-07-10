@@ -34,5 +34,23 @@
         "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
         "createdAt": "2024-06-22T15:07:25.193Z",
         "updatedAt": "2024-06-22T15:07:25.193Z"
+    },
+    {
+        "_id": "3a0bb674be60cf0a0d2fc0cc",
+        "createdAt": "2024-07-09T20:48:37.058Z",
+        "updatedAt": "2024-07-09T20:48:37.058Z",
+        "email": "frankmalkov@gmail.com",
+        "password": "$2b$10$vjWfsqSPf5Lm1VV7zpRTJOiv6lzZROFDrvP15YmHWYbkQkvqUcRCK",
+        "role": 0,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+    },
+    {
+        "_id": "38237b0aad3af3212f2106ee",
+        "createdAt": "2024-07-09T21:29:17.114Z",
+        "updatedAt": "2024-07-09T21:29:17.114Z",
+        "email": "anastasiyakreslina@gmail.com",
+        "password": "$2b$10$i5mBQJyaFZx9SK9vh3E7BeRI0y7ogjPq9BWg6GZzYY6rpIwTuHOY6",
+        "role": 0,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
     }
 ]

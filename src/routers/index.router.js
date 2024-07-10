@@ -1,23 +1,21 @@
 import CustomRouter from "./CustomRouter.js";
 import apiRouter from "./api/index.api.js";
-import { fork } from "child_process";
+import sendEmail from "../utils/mailing.util.js";
 
 class IndexRouter extends CustomRouter {
   init() {
     this.use("/api", apiRouter);
-    this.read("/fork", ["PUBLIC"], (req, res, next) => {
+    this.create("/api/nodemailer", ["PUBLIC"], async(req, res, next) => {
       try {
-        const childProcess = fork("./src/processes/sum.proc.js");
-        childProcess.send("start");
-        childProcess.on("message", (result) => {
-          return res.suc200res(result);
-        });
+        const { email, name } = req.body
+        await sendEmail({ to: email, name })
+        return res.suc200mes("Email Sent")
       } catch (err) {
-        return next(err);
+        return next(err)
       }
-    });
-  };
-};
+    })
+  }
+}
 
 const indexRouter = new IndexRouter();
 

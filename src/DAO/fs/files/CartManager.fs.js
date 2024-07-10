@@ -29,22 +29,11 @@ class CartManager {
     }
   }
   async read(user_id) {
-    if (!user_id) {
-      const error = new Error("Enter user ID");
-      throw error;
-    }
     try {
       let allCarts = await fs.promises.readFile(this.path, "utf-8");
       allCarts = JSON.parse(allCarts);
       let cart = allCarts.filter((each) => each.user_id === user_id);
-      if (cart) {
-        return cart;
-      } else {
-        const error = new Error(
-          `There are no products in the cart of user: ${user_id}`
-        );
-        throw error;
-      }
+      return cart;
     } catch (err) {
       throw err;
     }
@@ -82,13 +71,7 @@ class CartManager {
       let allCarts = await fs.promises.readFile(this.path, "utf-8");
       allCarts = JSON.parse(allCarts);
       let selected = allCarts.find((each) => each._id === id);
-      if (selected) {
-        return selected;
-      } else {
-        const error = new Error(`No item found in the cart with id ${id}`);
-        error.statusCode = 404;
-        throw error;
-      }
+      return selected;
     } catch (err) {
       throw err;
     }
@@ -98,36 +81,25 @@ class CartManager {
       let allCarts = await fs.promises.readFile(this.path, "utf-8");
       allCarts = JSON.parse(allCarts);
       let selected = allCarts.find((each) => each._id === id);
-      if (selected) {
-        let withoutSelected = allCarts.filter((each) => each._id !== id);
-        withoutSelected = JSON.stringify(withoutSelected, null, 4);
-        await fs.promises.writeFile(this.path, withoutSelected);
-        return selected;
-      } else {
-        const error = new Error(`No item found in the cart with id ${id}`);
-        error.statusCode = 404;
-        throw error;
-      }
+      let withoutSelected = allCarts.filter((each) => each._id !== id);
+      withoutSelected = JSON.stringify(withoutSelected, null, 4);
+      await fs.promises.writeFile(this.path, withoutSelected);
+      return selected;
     } catch (err) {
       throw err;
     }
   }
   async destroyMany(user_id) {
     try {
-        let allCarts = await fs.promises.readFile(this.path, "utf-8");
-        allCarts = JSON.parse(allCarts);
-        let many = allCarts.filter((cart) => cart.user_id === user_id);
-        if (!many) {
-            const error = new Error ("No items found associated with the user.")
-            error.statusCode = 404;
-            throw error;
-        }
-        let withoutMany = allCarts.filter((cart) => cart.user_id !== user_id);
-        withoutMany = JSON.stringify(withoutMany, null, 4);
-        await fs.promises.writeFile(this.path, withoutMany);
-        return many;
+      let allCarts = await fs.promises.readFile(this.path, "utf-8");
+      allCarts = JSON.parse(allCarts);
+      let many = allCarts.filter((cart) => cart.user_id === user_id);
+      let withoutMany = allCarts.filter((cart) => cart.user_id !== user_id);
+      withoutMany = JSON.stringify(withoutMany, null, 4);
+      await fs.promises.writeFile(this.path, withoutMany);
+      return many;
     } catch (err) {
-        throw err;
+      throw err;
     }
   }
   async update(id, data) {
@@ -135,18 +107,12 @@ class CartManager {
       let allCarts = await fs.promises.readFile(this.path, "utf-8");
       allCarts = JSON.parse(allCarts);
       let selected = allCarts.find((each) => each._id === id);
-      if (selected) {
-        for (let prop in data) {
-          selected[prop] = data[prop];
-        }
-        allCarts = JSON.stringify(allCarts, null, 4);
-        await fs.promises.writeFile(this.path, allCarts);
-        return selected;
-      } else {
-        const error = new Error(`No item found in the cart with id ${id}`);
-        error.statusCode = 404;
-        throw error;
+      for (let prop in data) {
+        selected[prop] = data[prop];
       }
+      allCarts = JSON.stringify(allCarts, null, 4);
+      await fs.promises.writeFile(this.path, allCarts);
+      return selected;
     } catch (err) {
       throw err;
     }
