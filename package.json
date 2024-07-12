@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node ./server.js -p 9000",
+    "start": "nodemon ./server.js -p 9000 --env prod",
     "dev": "nodemon ./server.js --env dev",
     "memory": "nodemon ./server.js -p 8080 --env dev --persistence memory",
     "fs": "nodemon ./server.js -p 8080 --env dev --persistence fs",
