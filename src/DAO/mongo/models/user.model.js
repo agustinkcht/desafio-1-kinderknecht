@@ -6,12 +6,13 @@ const schema = new Schema(
   {
     email: { type: String, required: true, unique: true, index: true },
     password: { type: String, required: true },
-    role: { type: Number, index: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
+    age: { type: Number },
+    role: { type: Number, index: true },
     photo: { type: String },
-    verify: { type: Boolean, default: false },
-    verifyCode: { type: String, required: true },
+    verified: { type: Boolean },
+    verificationCode: { type: String, required: true },
   },
   {
     timestamps: true,

@@ -4,19 +4,20 @@ import environment from "./env.util.js";
 
 const { GOOGLE_EMAIL, GOOGLE_PASSWORD } = environment;
 
-async function sendEmail(data) {
+async function sendEmail(data) { // receives to, name and code.
   try {
-    // TRANSPORT OBJECT con toda la config para envio de mails
+    // TRANSPORT with all the data needed for sending email
+    // works with verify() and sendMail()
     const transport = createTransport({
       host: "smtp.gmail.com",
       port: 465,
       secure: true,
       auth: { user: GOOGLE_EMAIL, pass: GOOGLE_PASSWORD },
     });
-    // configuro envio de mails
-    await transport.verify(); // si credenciales !correctas salta catch
+    await transport.verify(); // if !credentials, then catch
     await transport.sendMail({
-      // envio mail con data
+      // using the transport, i send the email.
+      // the object inside uses data passed as argument when the function is called.
       from: GOOGLE_EMAIL,
       to: data.to,
       subject: `TechNode Registration Team - ${GOOGLE_EMAIL}`,

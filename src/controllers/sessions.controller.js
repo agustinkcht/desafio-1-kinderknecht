@@ -51,16 +51,16 @@ class SessionsController {
     }
   }
   async verifyCode(req, res, next) {
-    // take the data coming from the VERIFY FORM
+    // take the data coming from the VERIFY FORM ( or postman )
     // compare the code introduced with the verifyCode of the user (should be ===)
     try {
-      const { email, code } = req.body;
+      const { email, code } = req.body; 
       const one = await readByEmailService(email);
-      const verify = code === one.verifyCode;
-      if (!verify) {
-        return res.err400mes("Invalid Code");
-      }
-      await updateService(one._id, { verify: verify });
+      const verified = code === one.verificationCode; // returns boolean
+      if (!verified) { // false
+        return res.err400mes("Invalid Code. Try again.");
+      } // if true:
+      await updateService(one._id, { verified: true }); // turn the verify to true.
       return res.suc200mes("User Verified");
     } catch (err) {
       return next(err);

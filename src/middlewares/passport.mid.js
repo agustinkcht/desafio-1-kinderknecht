@@ -6,7 +6,6 @@ import { createHash } from "../utils/hash.util.js";
 import { verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
 import usersRepository from "../repositories/users.rep.js";
-import crypto from "crypto";
 import sendEmail from "../utils/mailing.util.js";
 
 passport.use(
@@ -34,11 +33,13 @@ passport.use(
         const user = await usersRepository.createRepository(data);
         // una vez que el usuario se creó, la estrategia debe enviar un email
         // con un codigo aleatorio para la verificacion (con crypto)
-        await sendEmail({
+        console.log("pre email")
+        await sendEmail({ // passes to, name and code to the function.
           to: email,
           name: user.firstName,
-          code: user.verifyCode,
+          code: user.verificationCode,
         });
+        console.log("after email")
         return done(null, user);
       } catch (err) {
         return done(err);
@@ -63,7 +64,8 @@ passport.use(
         }
         // check for password and verify:true
         const verifyPassword = verifyHash(password, one.password);
-        const verifyAccount = one.verify;
+        const verifyAccount = one.verified;
+        console.log(verifyAccount, verifyPassword)
         if (!verifyPassword || !verifyAccount) {
           const error = new Error("Invalid Credentials");
           error.statusCode = 401;
