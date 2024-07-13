@@ -7,6 +7,8 @@ import { verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
 import usersRepository from "../repositories/users.rep.js";
 import sendEmail from "../utils/mailing.util.js";
+import CustomError from "../utils/errors/CustomError.js";
+import errors from "../utils/errors/errors.js";
 
 passport.use(
   "register",
@@ -15,31 +17,33 @@ passport.use(
     async (req, email, password, done) => {
       try {
         if (!email || !password) {
-          const error = new Error("Enter a valid email and password");
-          error.statusCode = 400;
-          return done(null, null, error);
+          const error = new CustomError(errors.missingCredentialsMailPass);
+          return done(error);
+        }
+        if (!firstName || !lastName) {
+          const error = new CustomError(errors.missingCredentialsNames);
+          return done(error);
+        }
+        if (!age) {
+          const error = new CustomError(errors.missingCredentialsAge);
+          return done(error);
         }
         const one = await usersRepository.readByEmailRepository(email);
         if (one) {
-          const error = new Error(
-            "Email already taken. Use a different email or log in"
-          );
-          error.statusCode = 409;
+          const error = new CustomError(errors.emailAlreadyTaken);
           return done(error);
         }
+        // crafting user
         const hashPassword = createHash(password);
         password = hashPassword;
         const data = req.body;
         const user = await usersRepository.createRepository(data);
-        // una vez que el usuario se creó, la estrategia debe enviar un email
-        // con un codigo aleatorio para la verificacion (con crypto)
-        console.log("pre email")
-        await sendEmail({ // passes to, name and code to the function.
+        // send email
+        await sendEmail({
           to: email,
           name: user.firstName,
           code: user.verificationCode,
         });
-        console.log("after email")
         return done(null, user);
       } catch (err) {
         return done(err);
@@ -56,20 +60,20 @@ passport.use(
       try {
         const one = await usersRepository.readByEmailRepository(email);
         if (!one) {
-          const error = new Error(
-            "Bad auth from login. Check login info and try again."
-          );
-          error.statusCode = 401;
+          const error = new CustomError(errors.invalidCredentials);
           return done(error);
         }
         // check for password and verify:true
         const verifyPassword = verifyHash(password, one.password);
         const verifyAccount = one.verified;
-        console.log(verifyAccount, verifyPassword)
-        if (!verifyPassword || !verifyAccount) {
-          const error = new Error("Invalid Credentials");
-          error.statusCode = 401;
-          throw error;
+        console.log(verifyAccount, verifyPassword);
+        if (!verifyPassword) {
+          const error = new CustomError(errors.invalidCredentials);
+          return done(error);
+        }
+        if (!verifyAccount) {
+          const error = new CustomError(errors.userNotVerified);
+          return done(error);
         }
         const user = {
           email,
@@ -97,10 +101,9 @@ passport.use(
       callbackURL: "http://localhost:8080/api/sessions/google/callback",
       passReqToCallback: true,
     },
-    async (req, accessToken, refreshToken, profile, done) => {
+    async (req, __accessToken, __refreshToken, profile, done) => {
       try {
         const { id, picture } = profile;
-        console.log(profile);
         let user = await usersRepository.readByEmailRepository(id);
         if (!user) {
           user = {
@@ -138,8 +141,7 @@ passport.use(
         if (data) {
           return done(null, data); // pass the payload to the next middleware.
         } else {
-          const error = new Error("Forbidden from JWT");
-          error.statusCode = 403;
+          const error = new CustomError(errors.forbidden);
           return done(error);
         }
       } catch (err) {
