@@ -12,7 +12,6 @@ class ProductManager {
     try {
       return ProductManager.#products;
     } catch (err) {
-      console.log("Unable to reach the products");
       throw err;
     }
   }
@@ -52,11 +51,6 @@ class ProductManager {
     try {
       let allProducts = ProductManager.#products;
       let selected = allProducts.find((each) => each._id === id);
-      if (!selected) {
-        throw new Error(
-          "No product found with the specified ID. Please check the ID and try again."
-        );
-      }
       return selected;
     } catch (err) {
       throw err;
@@ -66,11 +60,6 @@ class ProductManager {
     try {
       let allProducts = ProductManager.#products;
       let selected = allProducts.find((product) => product._id === id);
-      if (!selected) {
-        throw new Error(
-          "No product found with the specified ID. Please check the ID and try again."
-        );
-      }
       let withoutSelected = allProducts.filter((product) => product._id !== id);
       ProductManager.#products = withoutSelected;
       return selected;
@@ -82,19 +71,11 @@ class ProductManager {
     try {
       let allProducts = ProductManager.#products;
       let selected = allProducts.find((each) => each._id === id);
-      if (selected) {
-        for (let prop in data) {
-          selected[prop] = data[prop];
-        }
-        ProductManager.#products.push(selected);
-        return selected;
-      } else {
-        const error = new Error(
-          "No product found with the specified ID. Please check the ID and try again."
-        );
-        error.statusCode = 404;
-        throw error;
+      for (let prop in data) {
+        selected[prop] = data[prop];
       }
+      ProductManager.#products.push(selected);
+      return selected;
     } catch (err) {
       throw err;
     }

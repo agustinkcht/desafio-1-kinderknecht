@@ -47,15 +47,7 @@ class UserManager {
       let allUsers = await fs.promises.readFile(this.path, "utf-8");
       allUsers = JSON.parse(allUsers);
       let selected = allUsers.find((each) => each.email === email);
-      if (selected) {
-        return selected;
-      } else {
-        const error = new Error(
-          "No user found with the specified email. Please check the email and try again."
-        );
-        error.statusCode = 404;
-        throw error;
-      }
+      return selected;
     } catch (err) {
       throw err;
     }
@@ -93,15 +85,7 @@ class UserManager {
       let allUsers = await fs.promises.readFile(this.path, "utf-8");
       allUsers = JSON.parse(allUsers);
       let selected = allUsers.find((each) => each._id === id);
-      if (selected) {
-        return selected;
-      } else {
-        const error = new Error(
-          "No user found with the specified ID. Please check the ID and try again."
-        );
-        error.statusCode = 404;
-        throw error;
-      }
+      return selected;
     } catch (err) {
       throw err;
     }
@@ -111,20 +95,10 @@ class UserManager {
       let allUsers = await fs.promises.readFile(this.path, "utf-8");
       allUsers = JSON.parse(allUsers);
       let selected = allUsers.find((each) => each._id === id);
-      if (selected) {
-        let withoutSelected = allUsers.filter((each) => each._id !== id);
-        withoutSelected = JSON.stringify(withoutSelected, null, 4);
-        await fs.promises.writeFile(this.path, withoutSelected);
-        console.log("The user has been successfully deleted");
-        console.log(selected);
-        return selected;
-      } else {
-        const error = new Error(
-          "No user found with the specified ID. Please check the ID and try again."
-        );
-        error.statusCode = 404;
-        throw error;
-      }
+      let withoutSelected = allUsers.filter((each) => each._id !== id);
+      withoutSelected = JSON.stringify(withoutSelected, null, 4);
+      await fs.promises.writeFile(this.path, withoutSelected);
+      return selected;
     } catch (err) {
       throw err;
     }
@@ -133,22 +107,12 @@ class UserManager {
     try {
       let allUsers = await this.read();
       let selected = allUsers.find((each) => each._id === id);
-      if (selected) {
-        for (let prop in data) {
-          selected[prop] = data[prop];
-        }
-        allUsers = JSON.stringify(allUsers, null, 4);
-        await fs.promises.writeFile(this.path, allUsers);
-        console.log("The user data has been updated successfully");
-        console.log(selected);
-        return selected;
-      } else {
-        const error = new Error(
-          "No user found with the specified ID. Please check the ID and try again."
-        );
-        error.statusCode = 404;
-        throw error;
+      for (let prop in data) {
+        selected[prop] = data[prop];
       }
+      allUsers = JSON.stringify(allUsers, null, 4);
+      await fs.promises.writeFile(this.path, allUsers);
+      return selected;
     } catch (err) {
       throw err;
     }

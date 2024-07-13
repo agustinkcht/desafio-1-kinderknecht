@@ -8,6 +8,7 @@ async function populateUser(arrayOfItems) {
     return users;
   } catch (err) {
     console.log(err);
+    throw err;
   }
 } // returns array of users
 
@@ -21,6 +22,7 @@ async function populateProduct(arrayOfItems) {
     return products;
   } catch (err) {
     console.log(err);
+    throw err;
   }
 } // returns array of products
 

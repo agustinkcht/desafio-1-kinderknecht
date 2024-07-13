@@ -1,7 +1,7 @@
 import CustomRouter from "../CustomRouter.js";
 import passport from "../../middlewares/passport.mid.js";
 import passportCb from "../../middlewares/passportCb.mid.js";
-import { register, login, logout, online, googleCallback } from "../../controllers/sessions.controller.js";
+import { register, login, logout, online, googleCallback, verifyCode } from "../../controllers/sessions.controller.js";
 
 class SessionsRouter extends CustomRouter {
   init() {
@@ -18,6 +18,7 @@ class SessionsRouter extends CustomRouter {
       passport.authenticate("google", { session: false }),
       googleCallback
     );
+    this.create("/verify", ["PUBLIC"], verifyCode)
   }
 }
 

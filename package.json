@@ -5,11 +5,14 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node ./server.js -p 9000",
+    "start": "nodemon ./server.js -p 9000 --env prod",
     "dev": "nodemon ./server.js --env dev",
-    "memory": "nodemon ./server.js -p 8080 --env prod --persistence memory",
-    "fs": "nodemon ./server.js -p 8080 --env prod --persistence fs",
-    "argv": "nodemon ./server.js -p 8080 --env prod --persistence mongo"
+    "memory": "nodemon ./server.js -p 8080 --env dev --persistence memory",
+    "fs": "nodemon ./server.js -p 8080 --env dev --persistence fs",
+    "argv": "nodemon ./server.js -p 8080 --env prod --persistence mongo",
+    "tdd": "node ./test/sum.tdd.js",
+    "fkrp": "node ./src/mocks/products.mock.js --env dev",
+    "fkru": "node ./src/mocks/users.mock.js --env dev"
   },
   "keywords": [],
   "author": "",
@@ -22,12 +25,14 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-compression": "^1.0.2",
     "express-handlebars": "^7.1.2",
     "express-session": "^1.18.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.3",
     "mongoose-paginate-v2": "^1.8.0",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.9.14",
     "passport": "^0.7.0",
     "passport-google-oauth2": "^0.2.0",
     "passport-jwt": "^4.0.1",
@@ -36,6 +41,7 @@
     "socket.io": "^4.7.5"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "nodemon": "^3.1.0"
   }
 }

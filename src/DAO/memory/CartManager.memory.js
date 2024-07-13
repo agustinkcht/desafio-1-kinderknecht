@@ -47,11 +47,7 @@ class CartManager {
     try {
       let allCarts = CartManager.#carts;
       let selected = allCarts.find((each) => each._id === id);
-      if (!selected) {
-        throw new Error("No item found in the cart");
-      } else {
-        return selected;
-      }
+      return selected;
     } catch (err) {
       throw err;
     }
@@ -60,19 +56,11 @@ class CartManager {
     try {
       let allCarts = CartManager.#carts;
       let selected = allCarts.find((each) => each._id === id);
-      if (selected) {
-        for (let prop in data) {
-          selected[prop] = data[prop];
-        }
-        CartManager.#carts.push(selected);
-        return selected;
-      } else {
-        const error = new Error(
-          "No item found with the specified ID. Please check the ID and try again."
-        );
-        error.statusCode = 404;
-        throw error;
+      for (let prop in data) {
+        selected[prop] = data[prop];
       }
+      CartManager.#carts.push(selected);
+      return selected;
     } catch (err) {
       throw err;
     }
@@ -81,9 +69,6 @@ class CartManager {
     try {
       let allCarts = CartManager.#carts;
       let selected = allCarts.find((each) => each._id === id);
-      if (!selected) {
-        throw new Error("No item found with the specified id.");
-      }
       let withoutSelected = allCarts.filter((each) => each._id !== id);
       CartManager.#carts = withoutSelected;
       return selected;
@@ -95,9 +80,6 @@ class CartManager {
     try {
       let allCarts = CartManager.#carts;
       let many = allCarts.filter((each) => each.user_id === user_id);
-      if (!many) {
-        throw new Error("No items found with the specified id");
-      }
       let withoutMany = allCarts.filter((each) => each.user_id !== user_id);
       CartManager.#carts = withoutMany;
       return many;
@@ -150,8 +132,6 @@ cartManager.create({
   quantity: 3,
   state: "reserved",
 });
-
-
 
 // TESTING
 // node src/data/memory/CartManager.js
