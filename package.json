@@ -15,7 +15,7 @@
     "fkru": "node ./src/mocks/users.mock.js --env dev"
   },
   "keywords": [],
-  "author": "",
+  "author": "Agustin Kinderknecht <agustinkcht@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",

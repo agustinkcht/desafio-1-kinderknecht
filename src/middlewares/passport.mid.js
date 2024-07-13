@@ -17,20 +17,20 @@ passport.use(
     async (req, email, password, done) => {
       try {
         if (!email || !password) {
-          const error = new CustomError(errors.missingCredentialsMailPass);
+          const error = CustomError.new(errors.missingCredentialsMailPass);
           return done(error);
         }
         if (!firstName || !lastName) {
-          const error = new CustomError(errors.missingCredentialsNames);
+          const error = CustomError.new(errors.missingCredentialsNames);
           return done(error);
         }
         if (!age) {
-          const error = new CustomError(errors.missingCredentialsAge);
+          const error = CustomError.new(errors.missingCredentialsAge);
           return done(error);
         }
         const one = await usersRepository.readByEmailRepository(email);
         if (one) {
-          const error = new CustomError(errors.emailAlreadyTaken);
+          const error = CustomError.new(errors.emailAlreadyTaken);
           return done(error);
         }
         // crafting user
@@ -60,7 +60,7 @@ passport.use(
       try {
         const one = await usersRepository.readByEmailRepository(email);
         if (!one) {
-          const error = new CustomError(errors.invalidCredentials);
+          const error = CustomError.new(errors.invalidCredentials);
           return done(error);
         }
         // check for password and verify:true
@@ -68,11 +68,11 @@ passport.use(
         const verifyAccount = one.verified;
         console.log(verifyAccount, verifyPassword);
         if (!verifyPassword) {
-          const error = new CustomError(errors.invalidCredentials);
+          const error = CustomError.new(errors.invalidCredentials);
           return done(error);
         }
         if (!verifyAccount) {
-          const error = new CustomError(errors.userNotVerified);
+          const error = CustomError.new(errors.userNotVerified);
           return done(error);
         }
         const user = {
@@ -141,7 +141,7 @@ passport.use(
         if (data) {
           return done(null, data); // pass the payload to the next middleware.
         } else {
-          const error = new CustomError(errors.forbidden);
+          const error = CustomError.new(errors.forbidden);
           return done(error);
         }
       } catch (err) {

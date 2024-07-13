@@ -1,13 +1,7 @@
 # challenges-kinderknecht
 
-Sprint10
-- Improvements regarding env.
-- User data normaliced across dependencies - firstName, lastName, age, verified & verifyCode added as props.
-- Mailing with SMTP for verification of users. Verification instance added in register.
-- Mock builders with Fakerjs available for mocking users and products.
-- 1000 products mocked for dev.
-- Compression using Gzip+Brotli
-- Error section added in utils, with Error dictionary & CustomError. 
+Sprint11
+
 
 RUNNING APP:
 - For dev mode: npm run dev (mongo), npm run fs (file system), npm run memory (memory)
