@@ -20,6 +20,7 @@ passport.use(
           const error = CustomError.new(errors.missingCredentialsMailPass);
           return done(error);
         }
+        const { firstName, lastName, age } = req.body;
         if (!firstName || !lastName) {
           const error = CustomError.new(errors.missingCredentialsNames);
           return done(error);

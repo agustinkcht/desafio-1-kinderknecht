@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/token.util.js";
 import usersRepository from "../repositories/users.rep.js";
+import logger from "../utils/winston.util.js";
 
 class CustomRouter {
   constructor() {
@@ -35,21 +36,38 @@ class CustomRouter {
     res.suc201mesres = (message, response) =>
       res.json({ statusCode: 201, message, response });
     //error 4xx
-    res.err400mes = (message) => res.json({ statusCode: 400, message });
+    res.err400mes = (message) => {
+      const statusCode = 400;
+      const errorMessage = `${statusCode} - ${req.method} ${
+        req.url
+      } - ${message} - ${new Date().toLocaleTimeString()} `; // crafting message
+      logger.ERROR(errorMessage);
+      return res.json({ statusCode: 400, message });
+    };
     res.err401mes = (message) => res.json({ statusCode: 401, message });
-    res.err403 = () =>
-      res.json({ statusCode: 403, message: "Forbidden From Policies" });
+    res.err403 = () => {
+      const statusCode = 403;
+      const message = "Forbidden from policies";
+      const errorMessage = `${statusCode} - ${req.method} ${
+        req.url
+      } - ${message} - ${new Date().toLocaleTimeString()} `; // crafting message
+      logger.ERROR(errorMessage);
+      return res.json({ statusCode: 403, message });
+    };
     res.err403mes = () => res.json({ statusCode: 403, message });
     res.err404 = () => res.json({ statusCode: 404, message: "Not Found" });
     res.err404mes = (message) => res.json({ statusCode: 404, message });
-    res.err409mes = (message) => res.json({ statusCode: 409, message })
+    res.err409mes = (message) => res.json({ statusCode: 409, message });
     return next();
   };
   policies = (policiesArray) => async (req, res, next) => {
     try {
       if (policiesArray.includes("PUBLIC")) return next();
       let token = req.cookies.token;
-      if (!token) return res.err401mes("Bad Auth From Policies - No token - No session opened");
+      if (!token)
+        return res.err401mes(
+          "Bad Auth From Policies - No token - No session opened"
+        );
       token = verifyToken(token); // uses verifyToken to de-tokenize the data
       const { role, email } = token;
       if (

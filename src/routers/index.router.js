@@ -1,10 +1,12 @@
 import CustomRouter from "./CustomRouter.js";
 import apiRouter from "./api/index.api.js";
+import artilleryRouter from "./artillery.router.js";
 import sendEmail from "../utils/mailing.util.js";
 
 class IndexRouter extends CustomRouter {
   init() {
     this.use("/api", apiRouter);
+    this.use("/artillery", artilleryRouter)
     this.create("/api/nodemailer", ["PUBLIC"], async(req, res, next) => {
       try {
         const { email, name } = req.body // coming from the register form (or postman)

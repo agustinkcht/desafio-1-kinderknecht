@@ -3,7 +3,8 @@ import express from "express";
 import environment from "./src/utils/env.util.js";
 //import dbConnect from "./src/utils/dbConnect.util.js";
 import { createServer } from "http";
-import morgan from "morgan";
+//import morgan from "morgan";
+import winston from "./src/middlewares/winston.mid.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import compression from "express-compression";
@@ -28,7 +29,7 @@ nodeServer.listen(port, handleServerStart);
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static("public"));
-server.use(morgan("dev"));
+server.use(winston);
 server.use(cookieParser(environment.SECRET_COOKIE));
 server.use(cors({ origin: true, credentials: true }));
 server.use(
