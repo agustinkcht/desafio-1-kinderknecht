@@ -26,7 +26,7 @@ class SessionsController {
         // req.user brought from the payload extracted from the token in the 'jwt' midd.
         return res.suc200online(req.user._id, req.user.email, req.user.role);
       } else {
-        return res.err401mes("Offline");
+        return res.err401offline();
       }
     } catch (err) {
       return next(err);
@@ -37,7 +37,7 @@ class SessionsController {
       if (req.user.online) {
         return res.clearCookie("token").suc200mes("Session Closed");
       } else {
-        return res.err401mes("No session opened");
+        return res.err401noSession();
       }
     } catch (err) {
       return next(err);
@@ -58,7 +58,7 @@ class SessionsController {
       const one = await readByEmailService(email);
       const verified = code === one.verificationCode; // returns boolean
       if (!verified) { // false
-        return res.err400mes("Invalid Code. Try again.");
+        return res.err400invalidCode();
       } // if true:
       await updateService(one._id, { verified: true }); // turn the verify to true.
       return res.suc200mes("User Verified");

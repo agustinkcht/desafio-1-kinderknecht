@@ -5,9 +5,7 @@ async function isValidEmail(req, res, next) {
     const { email } = req.body;
     const one = await usersRepository.readByEmailRepository(email);
     if (one) {
-      res.err409mes(
-        "Email already registered. Use a different email or log in"
-      );
+      res.err409emailAlreadyTaken()
     }
     return next();
   } catch (err) {

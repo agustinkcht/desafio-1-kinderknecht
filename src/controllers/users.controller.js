@@ -28,7 +28,7 @@ class UsersController {
       if (selected) {
         return res.suc200res(selected);
       } else {
-        return res.err404();
+        return res.err404user();
       }
     } catch (err) {
       return next(err);
@@ -69,7 +69,7 @@ class UsersController {
       if (selected) {
         return res.suc200res(selected);
       } else {
-        return res.err404();
+        return res.err404user();
       }
     } catch (err) {
       return next(err);
@@ -93,7 +93,7 @@ class UsersController {
       const { uid } = req.params;
       const deletedUser = await destroyService(uid);
       if (!deletedUser) {
-        return res.err404mes("User not found");
+        return res.err404user();
       }
       return res.suc200mesres("User deleted successfully", deletedUser);
     } catch (err) {

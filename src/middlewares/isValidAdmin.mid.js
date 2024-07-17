@@ -8,7 +8,7 @@ async function isValidAdmin(req, res, next) {
     if (role === "1") {
       return next();
     } else {
-      return res.err403mes("Action not allowed");
+      return res.err403();
     }
   } catch (err) {
     return next(err);

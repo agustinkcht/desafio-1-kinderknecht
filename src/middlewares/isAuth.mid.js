@@ -8,7 +8,7 @@ function isAuth(req, res, next) {
       req.user = data;
       return next();
     } else {
-      return res.res403mes("Forbidden action.");
+      return res.err403();
     }
   } catch (err) {
     console.log("JWT Verification Error:", err.message);

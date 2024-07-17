@@ -5,9 +5,7 @@ async function isValidUser(req, res, next) {
     const { email } = req.body;
     const one = await usersRepository.readByEmailRepository(email);
     if (!one) {
-      return res.err401mes(
-        "Bad auth from login. Check login info and try again."
-      );
+      return res.err401invalidCredentials();
     }
     return next();
   } catch (err) {
