@@ -48,7 +48,7 @@ class CartsController1 {
       const { iid } = req.params;
       const selected = await readOneService(iid);
       if (!selected) {
-        return res.err404mes("Item not found in the cart");
+        return res.err404item();
       }
       return res.suc200res(selected);
     } catch (err) {
@@ -60,7 +60,7 @@ class CartsController1 {
       const data = req.body;
       const one = await createService(data);
       if (!one) {
-        return res.err400mes("Error adding item to the cart");
+        return res.err400addCartItem();
       }
       return res.suc201mesres("Added to the cart", one);
     } catch (err) {
@@ -73,7 +73,7 @@ class CartsController1 {
       const data = req.body;
       const updatedItem = await updateService(iid, data);
       if (!updatedItem) {
-        return res.err400mes("Error updating cart item");
+        return res.err400updateCartItem();
       }
       return res.suc200mesres("Item updated successfully", updatedItem);
     } catch (err) {
@@ -85,7 +85,7 @@ class CartsController1 {
       const { iid } = req.params;
       const deletedItem = await destroyService(iid);
       if (!deletedItem) {
-        return res.err404mes("Item not found");
+        return res.err404item();
       }
       return res.suc200mesres("Removed from the cart", deletedItem);
     } catch (err) {
@@ -97,7 +97,7 @@ class CartsController1 {
       const user_id = req.user._id;
       const deletedItems = await destroyAllService(user_id);
       if (deletedItems.length < 1) {
-        return res.err400mes("There are no items in the cart");
+        return res.err404itemsCart();
       }
       const user = await readOneUser(user_id);
       const { email } = user;
@@ -153,7 +153,7 @@ class CartsController2 {
       const { iid } = req.params;
       const selected = await readOneService(iid);
       if (!selected) {
-        return res.err404mes("Item not found in the cart");
+        return res.err404item();
       }
       //console.log(selected)
       const user_id = req.user._id;
@@ -161,9 +161,9 @@ class CartsController2 {
       const user = await readOneUser(user_id);
       const product = await readOneProduct(product_id);
       if (!user || !product) {
-        return res.err404mes("Unable to populate cart's fields");
-      } 
-      let selectedPopulated = { ...selected }
+        return res.err404info();
+      }
+      let selectedPopulated = { ...selected };
       selectedPopulated.user_id = user;
       selectedPopulated.product_id = product;
       return res.suc200res(selectedPopulated);
@@ -176,16 +176,16 @@ class CartsController2 {
       const data = req.body;
       const one = await createService(data);
       if (!one) {
-        return res.err400mes("Error adding item to the cart");
+        return res.err400addCartItem();
       }
       const user_id = req.user._id;
       const { product_id } = one;
       const user = await readOneUser(user_id);
       const product = await readOneProduct(product_id);
-      if  (!user || !product) {
-        return res.err404mes("Unable to populate item.")
+      if (!user || !product) {
+        return res.err404info();
       }
-      let onePopulated = { ...one }
+      let onePopulated = { ...one };
       onePopulated.user_id = user;
       onePopulated.product_id = product;
       return res.suc201mesres("Added to the cart", onePopulated);
@@ -199,19 +199,22 @@ class CartsController2 {
       const data = req.body;
       const updatedItem = await updateService(iid, data);
       if (!updatedItem) {
-        return res.err400mes("Error updating cart item");
+        return res.err400updateCartItem();
       }
       const user_id = req.user._id;
       const { product_id } = updatedItem;
       const user = await readOneUser(user_id);
       const product = await readOneProduct(product_id);
       if (!user || !product) {
-        return res.err404mes("Unable to populate cart's fields");
-      };
-      let updatedItemPopulated = { ...updatedItem }
+        return res.err404info();
+      }
+      let updatedItemPopulated = { ...updatedItem };
       updatedItemPopulated.user_id = user;
       updatedItemPopulated.product_id = product;
-      return res.suc200mesres("Item updated successfully", updatedItemPopulated);
+      return res.suc200mesres(
+        "Item updated successfully",
+        updatedItemPopulated
+      );
     } catch (err) {
       return next(err);
     }
@@ -221,15 +224,15 @@ class CartsController2 {
       const { iid } = req.params;
       const deletedItem = await destroyService(iid);
       if (!deletedItem) {
-        return res.err404mes("Item not found");
+        return res.err404item();
       }
       const user_id = req.user._id;
       const { product_id } = deletedItem;
       const user = await readOneUser(user_id);
       const product = await readOneProduct(product_id);
       if (!user || !product) {
-        return res.err404mes("Unable to populate cart's fields");
-      } 
+        return res.err404info();
+      }
       let deletedItemPopulated = { ...deletedItem };
       deletedItemPopulated.user_id = user;
       deletedItemPopulated.product_id = product;
@@ -243,7 +246,7 @@ class CartsController2 {
       const user_id = req.user._id;
       const deletedItems = await destroyAllService(user_id);
       if (deletedItems.length < 1) {
-        return res.err400mes("There are no items in the cart");
+        return res.err404itemsCart();
       }
       const user = await readOneUser(user_id);
       const { email } = user;

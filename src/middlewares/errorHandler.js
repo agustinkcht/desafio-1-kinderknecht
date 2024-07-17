@@ -3,15 +3,13 @@ import logger from "../utils/winston.util.js";
 // it according to the data that's passing through it.
 
 function errorHandler(error, req, res, _next) {
-  const statusCode = error.statusCode;
-  const message = error.message;
-  const errorMessage = `${statusCode} - ${req.method} ${
+  const errorMessage = `${error.statusCode} - ${req.method} ${
     req.url
-  } - ${message} - ${new Date().toLocaleTimeString()} `; // crafting message
+  } - ${error.message} - ${new Date().toLocaleTimeString()} `; // crafting message
   logger.ERROR(errorMessage); 
   return res.json({
-    statusCode: statusCode || 500,
-    message: message || "API Error",
+    statusCode: error.statusCode || 500,
+    message: error.message || "Fatal",
   });
 }
 

@@ -9,7 +9,7 @@ async function isValidPassword(req, res, next) {
     if (verify) {
       return next();
     } else {
-      return res.err401mes("Invalid credentials");
+      return res.err401invalidCredentials();
     }
   } catch (err) {
     return next(err);

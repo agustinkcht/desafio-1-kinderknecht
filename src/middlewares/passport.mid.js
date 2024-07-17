@@ -17,21 +17,21 @@ passport.use(
     async (req, email, password, done) => {
       try {
         if (!email || !password) {
-          const error = CustomError.new(errors.missingCredentialsMailPass);
+          const error = CustomError.new(errors.err400missingFieldsMailPass);
           return done(error);
         }
         const { firstName, lastName, age } = req.body;
         if (!firstName || !lastName) {
-          const error = CustomError.new(errors.missingCredentialsNames);
+          const error = CustomError.new(errors.err400missingFieldsNames);
           return done(error);
         }
         if (!age) {
-          const error = CustomError.new(errors.missingCredentialsAge);
+          const error = CustomError.new(errors.err400missingFieldsAge);
           return done(error);
         }
         const one = await usersRepository.readByEmailRepository(email);
         if (one) {
-          const error = CustomError.new(errors.emailAlreadyTaken);
+          const error = CustomError.new(errors.err409emailAlreadyTaken);
           return done(error);
         }
         // crafting user
@@ -61,7 +61,7 @@ passport.use(
       try {
         const one = await usersRepository.readByEmailRepository(email);
         if (!one) {
-          const error = CustomError.new(errors.invalidCredentials);
+          const error = CustomError.new(errors.err401invalidCredentials);
           return done(error);
         }
         // check for password and verify:true
@@ -69,11 +69,11 @@ passport.use(
         const verifyAccount = one.verified;
         console.log(verifyAccount, verifyPassword);
         if (!verifyPassword) {
-          const error = CustomError.new(errors.invalidCredentials);
+          const error = CustomError.new(errors.err401invalidCredentials);
           return done(error);
         }
         if (!verifyAccount) {
-          const error = CustomError.new(errors.userNotVerified);
+          const error = CustomError.new(errors.err401userNotVerified);
           return done(error);
         }
         const user = {
@@ -142,7 +142,7 @@ passport.use(
         if (data) {
           return done(null, data); // pass the payload to the next middleware.
         } else {
-          const error = CustomError.new(errors.forbidden);
+          const error = CustomError.new(errors.err403);
           return done(error);
         }
       } catch (err) {

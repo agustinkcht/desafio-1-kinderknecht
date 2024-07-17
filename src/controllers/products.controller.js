@@ -13,7 +13,7 @@ class ProductsController {
       const data = req.body;
       const newProduct = await createService(data);
       return res.suc200mesres(
-        `Product created successfully with id ${newProduct._id}`, 
+        `Product created successfully with id ${newProduct._id}`,
         newProduct
       );
     } catch (err) {
@@ -55,7 +55,7 @@ class ProductsController {
       if (selected) {
         return res.suc200res(selected);
       } else {
-        res.err404();
+        res.err404product();
       }
     } catch (err) {
       return next(err);
@@ -76,8 +76,8 @@ class ProductsController {
       const { pid } = req.params;
       const deletedProduct = await destroyService(pid);
       if (!deletedProduct) {
-        return res.err404mes("Product not found")
-      };
+        return res.err404product();
+      }
       return res.suc200mesres("Product deleted successfully", deletedProduct);
     } catch (err) {
       return next(err);
