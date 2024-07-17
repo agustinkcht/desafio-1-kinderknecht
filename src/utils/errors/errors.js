@@ -1,4 +1,13 @@
 const errors = {
+  //testing
+  errorTest: {
+    message: "ERROR Test OK. Check console for the logged results.",
+    statusCode: 400,
+  },
+  fatalTest: {
+    message: "FATAL Test OK. Check console for the logged results.",
+    statusCode: 500,
+  },
   // 400 - bad request - related to the server needs
   err400: {
     message: "Bad request",
@@ -72,7 +81,10 @@ const errors = {
     message:
       "Your account has not been verifiedh. Check your email for verification instructions.",
   },
-  err401noSession: { message: "No session opened. User offline.", statusCode: 401 },
+  err401noSession: {
+    message: "No session opened. User offline.",
+    statusCode: 401,
+  },
   err401offline: { message: "Offline", statusCode: 401 },
   // 403 - forbidden
   err403: { message: "Forbidden Action", statusCode: 403 },

@@ -23,7 +23,7 @@ class CustomRouter {
       }
     });
   } // applies all the callback functions (middlewares, function) using the current instance of the CustomRouter. If there is an error, it handles it.
-  response = (req, res, next) => {
+  response = (__req, res, next) => {
     // standarized JSON responses for the requests. Meant to be used as middleware.
     //success 2xx
     res.suc200mes = (message) => res.json({ statusCode: 200, message });
@@ -40,6 +40,13 @@ class CustomRouter {
     // ERRORS
     // passed to the custom error, that uses error dictionary to craft a new Error object and throws it into the error handler.
     // every error now goes on & on to the error handler.
+    //testing
+    res.errorTest = () => {
+      CustomError.new(errors.errorTest);
+    };
+    res.fatalTest = () => {
+      CustomError.new(errors.fatalTest);
+    };
     // 400 - bad request
     res.err400 = () => {
       CustomError.new(errors.err400);
@@ -136,19 +143,15 @@ class CustomRouter {
     };
     // 500 - internal server error - fatal
     res.err500fatal = () => {
-      CustomError.new(errors.err500fatal)
-    }
+      CustomError.new(errors.err500fatal);
+    };
     return next();
-    
   };
   policies = (policiesArray) => async (req, res, next) => {
     try {
       if (policiesArray.includes("PUBLIC")) return next();
       let token = req.cookies.token;
-      if (!token)
-        return res.err401mes(
-          "Bad Auth From Policies - No token - No session opened"
-        );
+      if (!token) return res.err401noSession();
       token = verifyToken(token); // uses verifyToken to de-tokenize the data
       const { role, email } = token;
       if (

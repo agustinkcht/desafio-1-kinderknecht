@@ -3,12 +3,14 @@ import logger from "../utils/winston.util.js";
 // it according to the data that's passing through it.
 
 function errorHandler(error, req, res, _next) {
-  const errorMessage = `${error.statusCode} - ${req.method} ${
+  const statusCode = error.statusCode
+  const errorMessage = `${statusCode} - ${req.method} ${
     req.url
   } - ${error.message} - ${new Date().toLocaleTimeString()} `; // crafting message
-  logger.ERROR(errorMessage); 
+  // checking status for sending ERROR level or FATAL.
+  statusCode < 500 ? logger.ERROR(errorMessage) : logger.FATAL(errorMessage);
   return res.json({
-    statusCode: error.statusCode || 500,
+    statusCode: statusCode || 500,
     message: error.message || "Fatal",
   });
 }
