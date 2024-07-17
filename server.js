@@ -1,9 +1,9 @@
 // external dependencies
 import express from "express";
 import environment from "./src/utils/env.util.js";
-//import dbConnect from "./src/utils/dbConnect.util.js";
+import cluster from "cluster";
+import { cpus } from "os";
 import { createServer } from "http";
-//import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import compression from "express-compression";
@@ -22,9 +22,19 @@ const port = environment.PORT || argsUtil.p;
 const handleServerStart = async () => {
   logger.INFO(`Server is now running on port ${port}`);
 };
-// extra for socket -not used at the moment
 const nodeServer = createServer(server);
-nodeServer.listen(port, handleServerStart);
+// cluster config
+const cores = cpus().length; // cores of the computer (8)
+
+if (cluster.isPrimary) {
+  console.log("primary process");
+  for (let i=1; i <= cores; i++) {
+    cluster.fork();
+  }
+} else {
+  console.log("worker process" + process.pid);
+  nodeServer.listen(port, handleServerStart);
+}
 
 //middlewares
 server.use(express.json());

@@ -16,7 +16,8 @@
     "artSimplex": "artillery quick --count 20 --num 100 'http://localhost:8080/artillery/simplex' -o ./test/artillery/simplex.json",
     "artComplex": "artillery quick --count 20 --num 100 'http://localhost:8080/artillery/complex' -o ./test/artillery/complex.json",
     "artFlow" : "artillery run ./test/artillery/flow.yaml -o ./test/artillery/flow.json",
-    "artFlowReport": "artillery report ./test/artillery/flow.json"
+    "artFlowReport": "artillery report ./test/artillery/flow.json",
+    "image": "docker build -t technode-prod ."
   },
   "keywords": [],
   "author": "Agustin Kinderknecht <agustinkcht@gmail.com>",
