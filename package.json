@@ -5,11 +5,11 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon ./server.js -p 9000 --env prod",
+    "start": "nodemon ./server.js --env prod",
     "dev": "nodemon ./server.js --env dev",
-    "memory": "nodemon ./server.js -p 8080 --env dev --persistence memory",
-    "fs": "nodemon ./server.js -p 8080 --env dev --persistence fs",
-    "argv": "nodemon ./server.js -p 8080 --env prod --persistence mongo",
+    "memory": "nodemon ./server.js --env dev --persistence memory",
+    "fs": "nodemon ./server.js --env dev --persistence fs",
+    "argv": "nodemon ./server.js --env prod --persistence mongo",
     "tdd": "node ./test/sum.tdd.js",
     "fkrp": "node ./src/mocks/products.mock.js --env dev",
     "fkru": "node ./src/mocks/users.mock.js --env dev",
@@ -17,7 +17,11 @@
     "artComplex": "artillery quick --count 20 --num 100 'http://localhost:8080/artillery/complex' -o ./test/artillery/complex.json",
     "artFlow" : "artillery run ./test/artillery/flow.yaml -o ./test/artillery/flow.json",
     "artFlowReport": "artillery report ./test/artillery/flow.json",
-    "image": "docker build -t technode-prod ."
+    "image": "docker build -t technode-prod .",
+    "container": "docker run -p 8080:8080 technode8080",
+    "publish": "docker tag technode-prod agustinkcht/technode:1.0.0 & docker push agustinkcht/technode:1.0.0",
+    "orq": "kubectl apply -f ./orq.yaml",
+    "technode": "minikube service technode-service"
   },
   "keywords": [],
   "author": "Agustin Kinderknecht <agustinkcht@gmail.com>",
