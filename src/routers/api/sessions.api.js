@@ -2,10 +2,12 @@ import CustomRouter from "../CustomRouter.js";
 import passport from "../../middlewares/passport.mid.js";
 import passportCb from "../../middlewares/passportCb.mid.js";
 import { register, login, logout, online, googleCallback, verifyCode } from "../../controllers/sessions.controller.js";
+import validator from "../../middlewares/joi.mid.js";
+import userSchema from "../../dao/schemas/user.schema.js";
 
 class SessionsRouter extends CustomRouter {
   init() {
-    this.create("/register", ["PUBLIC"], passportCb("register"), register);
+    this.create("/register", ["PUBLIC"], validator(userSchema), passportCb("register"), register);
     this.create("/login", ["PUBLIC"], passportCb("login"), login);
     this.read("/online", ["USER", "ADMIN"], passportCb("jwt"), online);
     this.create("/logout", ["USER", "ADMIN"], passportCb("jwt"), logout);
