@@ -4,7 +4,8 @@ import environment from "./env.util.js";
 
 const { GOOGLE_EMAIL, GOOGLE_PASSWORD } = environment;
 
-async function sendEmail(data) { // receives to, name and code.
+async function sendVerificationEmail(data) {
+  // receives to, name and code.
   try {
     // TRANSPORT with all the data needed for sending email
     // works with verify() and sendMail()
@@ -33,5 +34,28 @@ async function sendEmail(data) { // receives to, name and code.
   }
 }
 
-export default sendEmail;
+async function sendRecoveryEmail(data) {
+  try {
+    const transport = createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: { user: GOOGLE_EMAIL, pass: GOOGLE_PASSWORD },
+    }); // brought from environment util
+    await transport.verify();
+    await transport.sendMail({
+      from: GOOGLE_EMAIL,
+      to: data.to,
+      subject: `Technode Password Recovery - ${GOOGLE_EMAIL}`,
+      html: `
+            <h1 style="color: blue"> Hey ${data.to}, here's your password reset code: </h1>
+            <h2> ${data.code} </h2>
+            <span> Please enter this code on the recovery page. Keep it private and don't share it with anyone. Remember, no one from TechNode will ever ask for this code. </span>
+        `,
+    });
+  } catch (err) {
+    throw err;
+  }
+}
 
+export { sendVerificationEmail, sendRecoveryEmail };
