@@ -6,7 +6,7 @@ import { createHash } from "../utils/hash.util.js";
 import { verifyHash } from "../utils/hash.util.js";
 import { createToken } from "../utils/token.util.js";
 import usersRepository from "../repositories/users.rep.js";
-import sendEmail from "../utils/mailing.util.js";
+import { sendVerificationEmail } from "../utils/mailing.util.js";
 import CustomError from "../utils/errors/CustomError.js";
 import errors from "../utils/errors/errors.js";
 
@@ -40,7 +40,7 @@ passport.use(
         const data = req.body;
         const user = await usersRepository.createRepository(data);
         // send email
-        await sendEmail({
+        await sendVerificationEmail({
           to: email,
           name: user.firstName,
           code: user.verificationCode,

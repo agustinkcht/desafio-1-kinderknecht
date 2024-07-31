@@ -54,5 +54,19 @@
         "verificationCode": "21e1a4b6e839e763c472df67",
         "createdAt": "2024-06-22T15:07:25.193Z",
         "updatedAt": "2024-06-22T15:07:25.193Z"
+    },
+    {
+        "_id": "4fd5d4cd4d88234e8b4ed743",
+        "email": "agustinkcht@gmail.com",
+        "password": "$2b$10$XzR4kemCXBXvQjckZiP3ue5EcS7zuWt5oSp8yAP8Xc2mfDVjJ5LXm",
+        "firstName": "Agustin",
+        "lastName": "Kinderknecht",
+        "age": 22,
+        "role": 1,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
+        "verified": true,
+        "verificationCode": "078406783d20e3e46dfed40f",
+        "createdAt": "2024-07-31T14:10:44.100Z",
+        "updatedAt": "2024-07-31T14:10:44.100Z"
     }
 ]

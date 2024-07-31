@@ -79,7 +79,7 @@ const errors = {
   },
   err401userNotVerified: {
     message:
-      "Your account has not been verifiedh. Check your email for verification instructions.",
+      "Your account has not been verified. Check your email for verification instructions.",
   },
   err401noSession: {
     message: "No session opened. User offline.",

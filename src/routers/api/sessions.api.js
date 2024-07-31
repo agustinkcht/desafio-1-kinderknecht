@@ -1,7 +1,7 @@
 import CustomRouter from "../CustomRouter.js";
 import passport from "../../middlewares/passport.mid.js";
 import passportCb from "../../middlewares/passportCb.mid.js";
-import { register, login, logout, online, googleCallback, verifyCode } from "../../controllers/sessions.controller.js";
+import { register, login, logout, online, googleCallback, verifyCode, recoveryCode, resetPassword } from "../../controllers/sessions.controller.js";
 import validator from "../../middlewares/joi.mid.js";
 import userSchema from "../../dao/schemas/user.schema.js";
 
@@ -20,7 +20,9 @@ class SessionsRouter extends CustomRouter {
       passport.authenticate("google", { session: false }),
       googleCallback
     );
-    this.create("/verify", ["PUBLIC"], verifyCode)
+    this.create("/verify", ["PUBLIC"], verifyCode),
+    this.create("/password", ["PUBLIC"], recoveryCode),
+    this.update("/password", ["PUBLIC"], resetPassword)
   }
 }
 
