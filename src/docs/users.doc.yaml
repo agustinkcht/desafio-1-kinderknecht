@@ -1,0 +1,229 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: User's unique hexadecimal ID.
+        email:
+          type: string
+          description: User's email.
+        password:
+          type: string
+          description: User's password.
+        firstName:
+          type: string
+          description: User's first name.
+        lastName:
+          type: string
+          description: User's last name.
+        age:
+          type: number
+          description: User's age.
+        role:
+          type: number
+          description: User's role appwise. Defines authorization. If not introduced, the default value is 0.
+        photo:
+          type: string
+          description: User's profile picture URL. If not introduced, a default picture is set.
+        verified:
+          type: boolean
+          description: Defines if the user's account has been verified using the verification code.
+        verificationCode:
+          type: string
+          description: User's unique hexadecimal code for verification.
+        createdAt:
+          type: string
+          description: Explicits the date when the user was created. Uses timestamp in ISO 8601 format.
+        updatedAt:
+          type: string
+          description: Explicits the date when the user was created. Uses timestamp in ISO 8601 format.
+      example:
+        email: bobmoog@gmail.com
+        password: s3curep4ss
+        firstName: Robert
+        lastName: Moog
+        age: 90
+        role: 1
+  responses:
+    suc200res:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code for success in the request.
+        response:
+          type: object
+          description: Payload to be returned, consisting of the user's data related to the context.
+      example:
+    suc200respag(many):
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code for success in the request for the users using pagination.
+        response:
+          type: object
+          description: Payload to be returned, consistent of an object with the paginated data.
+        info:
+          type: object
+          description: Pagination data.
+      example:
+        statusCode: 200
+        response: 
+          - _id: 6681805ee857f2ed5dbf802e
+            email: bobmoog@gmail.com
+            password: s3curep4ss
+            firstName: Robert
+            lastName: Moog
+            age: 90
+            role: 1
+            photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+            verified: true
+            verificationCode: 38a956cc75f9a344eb30641a
+            createdAt: 2024-06-22T15:07:25.193Z
+            updatedAt: 2024-06-22T15:07:25.193Z
+          - _id: 668180cbe857f2ed5dbf8034
+            email: charlesgardes@gmail.com
+            password: $2b$10$MQOE90ZUrshWwRLeHjg79uV8U.ygNWsPK9hFeySPEGIPrrHj5TX86
+            firstName: Charles
+            lastName: Gardes
+            age: 42
+            role: 0
+            photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+            verified: true
+            verificationCode: 21e1a4b6e839e763c472df67
+            createdAt: 2024-06-22T15:07:25.193Z
+            updatedAt: 2024-06-22T15:07:25.193Z
+        paginateInfo:
+          page: 1
+          totalPages: 1
+          limit: 10
+          prevPage: null
+          nextPage: null
+          totalDocs: 2       
+    suc200mesres:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code for success in the request.
+        message:
+          type: string
+          description: Message to be returned with info about the operation.
+        response: 
+          type: object
+          description: Payload to be returned, consistent of the user data related to the context.
+      example:    
+    suc201mesres:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code related to succes in creation of a user.
+        message:
+          type: string
+          description: Message to be returned with info about the operation.
+        response: 
+          type: object
+          description: Payload to be returned, consistent of the new user.
+      example:
+        statusCode: 201
+        message: User created successfully
+        response: 
+          _id: 6681805ee857f2ed5dbf802e
+          email: bobmoog@gmail.com
+          password: s3curep4ss
+          firstName: Robert
+          lastName: Moog
+          age: 90
+          role: 1
+          photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+          verified: true
+          verificationCode: 38a956cc75f9a344eb30641a
+          createdAt: 2024-06-22T15:07:25.193Z
+          updatedAt: 2024-06-22T15:07:25.193Z
+    err401user:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code for failure related to invalid credentials, unauthorized, and no session opened.
+        message: 
+          type: string
+          description: Message to be returned with information about the failure.
+      example:
+        statusCode: 401
+        message: Invalid credentials. Check your information and try again.
+    err400missingFields:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code for failure related to missing fields in creation.
+        message: 
+          type: string
+          description: Message to be returned with information about the failure.
+      example:
+        statusCode: 400
+        message: Missing fields.
+    err404user:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code for failure related to the imposibility to find a user.
+        message: 
+          type: string
+          description: Descriptive text with not found message
+      example:
+        statusCode: 404
+        message: User not found.
+    err500fatal:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code for failure related to a fatal error in the server.
+        message: 
+          type: string
+          description: Descriptive text with fatal server error message.
+      example:
+        statusCode: 500
+        message: Internal server error. Fatal.
+paths:
+  /api/sessions/register:
+    post:
+      summary: Path for registration of a new user.
+      tags:
+        - User
+      requestBody:
+        required: true
+        description: Data for user registration.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        201:
+          description: Success regarding user registration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc201mesres'
+        400:
+          description: Failure regarding user registration due to missing fields.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err400missingFields'
+    

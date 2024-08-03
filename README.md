@@ -1,25 +1,6 @@
 # challenges-kinderknecht
 
-Sprint11
-
-|| server clusterization - docker - kubernetes & minikube - password reset ||
-
------------------
-
-SERVER now in cluster format. Available with 8 worker processes.
-
-DOCKERFILE configured. Available to create an image and container.
-
-KUBERNETES & MINIKUBE:
-- Installation done.
-- YAML manifest created.
-- Orchestration available for creating pods, service & deployment. 
-
-PASSWORD RESET:
-- "Forgot password?" added in login.
-- View created for password reset form.
-- POST /api/sessions/password sends email with verification code.
-- PUT /api/sessions/password checks the verification code and updates the password.
+Sprint13
 
 -----------------
 

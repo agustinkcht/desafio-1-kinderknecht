@@ -1,0 +1,39 @@
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: User's unique hexadecimal ID.
+        email:
+          type: string
+          description: User's email.
+        password:
+          type: string
+          description: User's password.
+        firstName:
+          type: string
+          description: User's first name.
+        lastName:
+          type: string
+          description: User's last name.
+        age:
+          type: number
+          description: User's age.
+        role:
+          type: number
+          description: User's role appwise. Defines authorization.
+        photo:
+          type: string
+          description: User's profile picture URL.
+        verified:
+          type: boolean
+          description: Defines if the user's account has been verified using the verification code.
+        verificationCode:
+          type: string
+          description: User's unique hexadecimal code for verification.
+        createdAt:
+          type: string
+          description: Explicits the date when the user was created. Uses timestamp in ISO 8601 format.
+        updatedAt:
+          type: string
+          description: Explicits the date when the user was created. Uses timestamp in ISO 8601 format.

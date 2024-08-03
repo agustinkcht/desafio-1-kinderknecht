@@ -1,10 +1,10 @@
 import CustomRouter from "../CustomRouter.js";
-import isValidData from "../../middlewares/isValidData.mid.js";
+import isValidEmail from "../../middlewares/isValidEmail.mid.js"
 import { create, read, readOne, update, destroy, readByEmail } from "../../controllers/users.controller.js";
 
 class UsersRouter extends CustomRouter {
   init() {
-    this.create("/", ["PUBLIC"], isValidData, create);
+    this.create("/", ["PUBLIC"], isValidEmail, create);
     this.read("/", ["USER", "ADMIN"], read);
     this.read("/email/:email", ["USER", "ADMIN"], readByEmail);
     this.read("/:uid", ["USER", "ADMIN"], readOne);

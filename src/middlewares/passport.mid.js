@@ -67,7 +67,6 @@ passport.use(
         // check for password and verify:true
         const verifyPassword = verifyHash(password, one.password);
         const verifyAccount = one.verified;
-        console.log(verifyAccount, verifyPassword);
         if (!verifyPassword) {
           const error = CustomError.new(errors.err401invalidCredentials);
           return done(error);

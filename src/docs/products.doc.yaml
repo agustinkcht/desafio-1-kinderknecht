@@ -1,0 +1,139 @@
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Product's title.
+        photo:
+          type: string
+          description: Product's image. Must be URL format.
+        category:
+          type: string
+          description: Category to which the product belongs.
+        price:
+          type: number
+          description: Product's price.
+        stock:
+          type: number
+          description: Quantity of stock available.
+      example:
+        title: Airpods Pro 2
+        photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
+        category: accessories
+        price: 249
+        stock: 40
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+  responses:
+    suc201mesres:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code related to succes in creation of a product.
+        message:
+          type: string
+          description: Message to be returned with info about the operation, plus the ID.
+        response: 
+          type: object
+          description: Payload to be returned, consistent of the new product.
+      example:
+        statusCode: 201
+        message: 'Product created successfully with id 663cea2c57109ba2e5d3b56f'
+        response:
+          _id: 663cea2c57109ba2e5d3b56f
+          createdAt: 2024-06-26T18:10:45.461Z
+          updatedAt: 2024-06-26T18:10:45.461Z
+          title: Airpods Pro 2
+          photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
+          category: accessories
+          price: 249
+          stock: 40
+    suc200res:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code related to succes in retrieving a product..
+        response: 
+          type: object
+          description: Payload to be returned, consistent of the product.
+      example:
+        statusCode: 200
+        response:
+          _id: 663cea2c57109ba2e5d3b56f
+          createdAt: 2024-06-26T18:10:45.461Z
+          updatedAt: 2024-06-26T18:10:45.461Z
+          title: Airpods Pro 2
+          photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
+          category: accessories
+          price: 249
+          stock: 40
+    err400missingFields:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code for failure related to missing fields in creation.
+        message: 
+          type: string
+          description: Message to be returned with information about the failure.
+      example:
+        statusCode: 400
+        message: Missing fields.
+paths:
+  /api/products:
+    post:
+      summary: Path for the creation of a new product.
+      tags:
+        - Product
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        201:
+          description: Success regarding product creation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc201mesres'
+        400:
+          description: Failure regarding user registration due to missing fields.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err400missingFields'
+  /api/products/{pid}:
+    get:
+      summary: Path for retrieving product(s)
+      tags:
+        - Product
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: _id of the product to be retrieved.
+          schema:
+            type: string
+      responses:
+        suc200res:
+          description: Success retrieving a product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200res'
+
+      
