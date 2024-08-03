@@ -1,11 +1,11 @@
 import CustomRouter from "../CustomRouter.js";
-//import isValidAdmin from "../../middlewares/isValidAdmin.mid.js";
-import isValidProduct from "../../middlewares/isValidProduct.mid.js";
 import { create, read, readOne, update, destroy } from "../../controllers/products.controller.js"
+import validator from "../../middlewares/joi.mid.js";
+import productSchema from "../../dao/schemas/product.schema.js";
 
 class ProductsRouter extends CustomRouter {
   init() {
-    this.create("/", ["ADMIN"], isValidProduct, create);
+    this.create("/", ["ADMIN"], validator(productSchema), create);
     this.read("/", ["PUBLIC"], read);
     this.read("/:pid", ["PUBLIC"], readOne);
     this.update("/:pid", ["ADMIN"], update);

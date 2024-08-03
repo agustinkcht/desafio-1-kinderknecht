@@ -27,46 +27,9 @@ const errors = {
     message: "Invalid code. Check your information and try again.",
     statusCode: 400,
   },
-  // session
-  err400offline: {
-    message: "No session opened. User offline.",
-    statusCode: 400,
-  },
-  err400online: {
-    message: "Session already opened. User online.",
-    statusCode: 400,
-  },
   // missing fields
   err400missingFields: {
     message: "Please, complete obligatory information.",
-    statusCode: 400,
-  },
-  err400missingFieldsAge: {
-    message: "Please, provide your age",
-    statusCode: 400,
-  },
-  err400missingFieldsMailPass: {
-    message: "Please, provide both a valid email address and password.",
-    statusCode: 400,
-  },
-  err400missingFieldsNames: {
-    message: "Please, provide both a fist name and last name.",
-    statusCode: 400,
-  },
-  err400missingFieldsProduct: {
-    message: "The product must be specified",
-    statusCode: 400,
-  },
-  err400missingFieldsProductTitle: {
-    message: "Please, provide a product title.",
-    statusCode: 400,
-  },
-  err400missingFieldsQuantity: {
-    message: "Quantity must be specified.",
-    statusCode: 400,
-  },
-  err400missingFieldsUserId: {
-    message: "User ID must be specified.",
     statusCode: 400,
   },
 
