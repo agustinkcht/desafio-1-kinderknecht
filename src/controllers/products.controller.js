@@ -12,7 +12,7 @@ class ProductsController {
     try {
       const data = req.body;
       const newProduct = await createService(data);
-      return res.suc200mesres(
+      return res.suc201mesres(
         `Product created successfully with id ${newProduct._id}`,
         newProduct
       );
@@ -66,7 +66,7 @@ class ProductsController {
       const { pid } = req.params;
       const data = req.body;
       const updatedProduct = await updateService(pid, data);
-      return res.suc200res(updatedProduct);
+      return res.suc200mesres("Product updated successfully" + updatedProduct);
     } catch (err) {
       return next(err);
     }

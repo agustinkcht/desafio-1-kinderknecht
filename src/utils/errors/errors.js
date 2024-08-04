@@ -29,7 +29,7 @@ const errors = {
   },
   // missing fields
   err400missingFields: {
-    message: "Please, complete obligatory information.",
+    message: "Please, complete obligatory information to continue.",
     statusCode: 400,
   },
 

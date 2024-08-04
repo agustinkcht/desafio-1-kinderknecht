@@ -3,22 +3,56 @@ components:
     Product:
       type: object
       properties:
+        _id: 
+          type: string
+          description: Unique identifier for the product, represented as a 12-digit hexadecimal code. Generated automatically. 
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the product was created. Generated automatically.
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the product was last updated. Generated automatically.
         title:
           type: string
           description: Product's title.
         photo:
           type: string
-          description: Product's image. Must be URL format.
+          description: Product's image. Must be URL format. A default image is set in case no URL is provided at the moment of creation.
         category:
           type: string
-          description: Category to which the product belongs.
+          description: Category to which the product belongs. Default is "TBD."
         price:
           type: number
-          description: Product's price.
+          description: Product's price. Default is 1.
         stock:
           type: number
-          description: Quantity of stock available.
+          description: Quantity of stock available. Default is 1.
+    ProductInput:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Product's title. Required.
+        photo:
+          type: string
+          description: Product's image URL. Optional. A default image is set if not provided.
+        category:
+          type: string
+          description: Category of the product. Optional. Default is "TBD."
+        price:
+          type: number
+          description: Product's price. Optional. Default is 1.
+        stock:
+          type: number
+          description: Quantity of stock available. Optional. Default is 1.
+      required:
+        - title
       example:
+        _id: 663cea2c57109ba2e5d3b56f
+        createdAt: 2024-06-26T18:10:45.461Z
+        updatedAt: 2024-06-26T18:10:45.461Z
         title: Airpods Pro 2
         photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
         category: accessories
@@ -36,13 +70,13 @@ components:
         statusCode:
           type: integer
           format: int64
-          description: Status code related to succes in creation of a product.
+          description: Status code indicating successful operation.
         message:
           type: string
-          description: Message to be returned with info about the operation, plus the ID.
+          description: Message providing details about the operation.
         response: 
           type: object
-          description: Payload to be returned, consistent of the new product.
+          description: The product returned as result of the operation.
       example:
         statusCode: 201
         message: 'Product created successfully with id 663cea2c57109ba2e5d3b56f'
@@ -55,16 +89,16 @@ components:
           category: accessories
           price: 249
           stock: 40
-    suc200res:
+    suc200res(one):
       type: object
       properties:
         statusCode:
           type: integer
           format: int64
-          description: Status code related to succes in retrieving a product..
+          description: Status code indicating successful operation.
         response: 
           type: object
-          description: Payload to be returned, consistent of the product.
+          description: The product returned as result of the operation.
       example:
         statusCode: 200
         response:
@@ -76,25 +110,205 @@ components:
           category: accessories
           price: 249
           stock: 40
-    err400missingFields:
+    suc200res(many):
       type: object
       properties:
         statusCode:
           type: integer
           format: int64
-          description: Status code for failure related to missing fields in creation.
-        message: 
+          description: Status code indicating successful operation.
+        response: 
+          type: array
+          description: The products returned as result of the operation.
+      example:
+        statusCode: 200
+        response:
+          - _id: 663cea2c57109ba2e5d3b56f
+            createdAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z
+            title: Airpods Pro 2
+            photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
+            category: accessories
+            price: 249
+            stock: 40
+          - _id: 663cea2c57109ba2e5d3b571
+            createdAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z
+            title: Airpods Max
+            photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
+            category: accessories
+            price: 549
+            stock: 40
+          - _id: 663cea2c57109ba2e5d3b573
+            createdAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z
+            title: iPhone 15 pro
+            photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
+            category: phones
+            price: 999
+            stock: 30
+    suc200respag:
+      type: object
+      description: Successful operation returning paginated product(s). It can return both multiple products or the one(s) that matches the query params.
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+        response: 
+          type: array
+          description: The product(s) returned as result of the operation.
+        paginateInfo:
+          type: object
+          description: Information about pagination.
+          properties:
+            page:
+              type: integer
+              format: int64
+              description: Current page number.
+            totalPages:
+              type: integer
+              format: int64
+              description: Total number of pages available.
+            limit:
+              type: integer
+              format: int64
+              description: Number of documents (products) per page.
+            prevPage:
+              type: integer
+              format: int64
+              description: Previous page number.
+            prevPage:
+              type: integer
+              format: int64
+              description: Next page number.
+            totalDocs:
+              type: integer
+              format: int64
+              description: Total number of documents (products) available.  
+      example:
+        statusCode: 200
+        response:
+          - _id: 663cea2c57109ba2e5d3b56f
+            title: Airpods Pro 2
+            photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
+            category: accessories
+            price: 249
+            stock: 40
+          - _id: 663cea2c57109ba2e5d3b571
+            title: Airpods Max
+            photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
+            category: accessories
+            price: 549
+            stock: 40
+          - _id: 663cea2c57109ba2e5d3b573
+            title: iPhone 15 pro
+            photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
+            category: phones
+            price: 999
+            stock: 30
+        paginateInfo:
+             page: 1
+             totalPages: 501
+             limit: 3
+             prevPage: null
+             nextPage: 2
+             totalDocs: 1502 
+    suc200mesres(update):
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+        message:
           type: string
-          description: Message to be returned with information about the failure.
+          description: Message providing details about the operation.
+        response: 
+          type: object
+          description: The product returned as result of the operation.
+      example:
+        statusCode: 201
+        message: Product updated successfully
+        response:
+          _id: 663cea2c57109ba2e5d3b56f
+          createdAt: 2024-06-26T18:10:45.461Z
+          updatedAt: 2024-06-26T18:10:45.461Z
+          title: Airpods Pro 2
+          photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
+          category: accessories
+          price: 249
+          stock: 40
+    suc200mesres(delete):
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
+        response: 
+          type: object
+          description: The product returned as result of the operation.
+      example:
+        statusCode: 201
+        message: Product deleted successfully
+        response:
+          _id: 663cea2c57109ba2e5d3b56f
+          createdAt: 2024-06-26T18:10:45.461Z
+          updatedAt: 2024-06-26T18:10:45.461Z
+          title: Airpods Pro 2
+          photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
+          category: accessories
+          price: 249
+          stock: 40
+    err400badRequest:
+      type: object
+      properties: 
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating the failure of the operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
       example:
         statusCode: 400
-        message: Missing fields.
+        message: Please, complete obligatory information to continue.
+    err403forbidden:
+      type: object
+      properties: 
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating the failure of the operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
+      example:
+        statusCode: 403
+        message: Forbidden action.
+    err404notFound:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating failed operation.
+        message:
+          type: string
+          description: Message providing details about the operation
+      example:
+        statusCode: 201
+        message: Product not found.
 paths:
   /api/products:
     post:
-      summary: Path for the creation of a new product.
+      summary: Create a new product.
       tags:
-        - Product
+        - ProductInput
       security:
         - cookieAuth: []
       requestBody:
@@ -102,23 +316,75 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Product'
+              $ref: '#/components/schemas/ProductInput'
       responses:
         201:
-          description: Success regarding product creation.
+          description: New product successfully created.
           content:
             application/json:
               schema:
                 $ref: '#/components/responses/suc201mesres'
         400:
-          description: Failure regarding user registration due to missing fields.
+          description: The request failed due to missing required fields or unsupported inputs.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err400missingFields'
+                $ref: '#/components/responses/err400badRequest'
+        403:
+          description: The request failed due to authorization issues.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err403forbidden'
+    get:
+      summary: Retrieve all products, with optional query parameters.
+      tags:
+        - Product
+      parameters:
+        - name: category
+          in: query
+          description: Filter products by category.
+          required: false
+          schema:
+            type: string
+        - name: title
+          in: query
+          description: Filter products by title.
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Number of products to return per page.
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: page
+          in: query
+          description: Page number for pagination.
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: Successful operation returning all products, or product(s) based on query parameters.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/suc200res(many)'
+                  - $ref: '#/components/responses/suc200respag'
+        404:
+          description: Operation failed returning product(s).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound'  
   /api/products/{pid}:
     get:
-      summary: Path for retrieving product(s)
+      summary: Retrieve a product that matches the ID.
       tags:
         - Product
       parameters:
@@ -129,11 +395,91 @@ paths:
           schema:
             type: string
       responses:
-        suc200res:
+        200:
           description: Success retrieving a product.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/suc200res'
-
-      
+                $ref: '#/components/responses/suc200res(one)'
+        404:
+          description: Operation failed returning the product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound'         
+    put:
+      summary: Update a product. Specify the props to be modified in the request's body.
+      tags:
+        - ProductInput
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: _id of the product to be updated.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success updating a product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200mesres(update)'
+        400:
+          description: The request failed due to unsupported inputs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err400badRequest'
+        403:
+          description: The request failed due to authorization issues.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err403forbidden'
+        404:
+          description: Operation failed finding the product to update.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound' 
+    delete:
+      summary: Delete a product that matches the ID.
+      tags:
+        - Product
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: _id of the product to be deleted.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success deleting a product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200mesres(delete)'
+        403:
+          description: The request failed due to authorization issues.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err403forbidden'
+        404:
+          description: Operation failed finding the product to be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound' 
