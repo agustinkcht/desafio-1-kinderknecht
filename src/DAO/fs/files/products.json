@@ -467,5 +467,25 @@
         "category": "TBD",
         "price": "499",
         "stock": 1
+    },
+    {
+        "_id": "bfa7cbb87d560859b734dbab",
+        "createdAt": "2024-08-05T12:57:07.748Z",
+        "updatedAt": "2024-08-05T12:57:07.748Z",
+        "title": "z4",
+        "photo": "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
+        "category": "TBD",
+        "price": "340",
+        "stock": 1
+    },
+    {
+        "_id": "81c60691c988f277cbb7f7a8",
+        "title": "z4",
+        "photo": "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
+        "category": "TBD",
+        "price": "340",
+        "stock": 1,
+        "createdAt": "2024-08-05T12:57:46.378Z",
+        "updatedAt": "2024-08-05T12:57:46.378Z"
     }
 ]

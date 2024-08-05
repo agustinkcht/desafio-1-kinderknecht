@@ -4,20 +4,20 @@ const cartSchema = joi.object({
   user_id: joi
     .string()
     .required()
-    .pattern(new RegExp("^[0-9a-fA-F]{12}$"))
+    .pattern(new RegExp("^[0-9a-fA-F]{24}$"))
     .messages({
       "any.required": "User ID is required",
       "string.pattern.base":
-        "User ID must be a a 12-character hexadecimal code",
+        "User ID must be a a 24-digit hexadecimal code",
     }),
   product_id: joi
     .string()
     .required()
-    .pattern(new RegExp("^[0-9a-fA-F]{12}$"))
+    .pattern(new RegExp("^[0-9a-fA-F]{24}$"))
     .messages({
       "any.required": "Product ID is required",
       "string.pattern.base":
-        "Product ID must be a a 12-character hexadecimal code",
+        "Product ID must be a a 24-digit hexadecimal code",
     }),
   quantity: joi.number().min(1).max(999).messages({
     "number.base": "Quantity must be a number",

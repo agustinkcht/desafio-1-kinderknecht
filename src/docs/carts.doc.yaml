@@ -1,0 +1,647 @@
+components:
+  schemas:
+    Cart:
+      type: object
+      description: This schema defines the structure and data types for cart objects. This format ensures proper interaction with cart data and consistency across operations.
+      properties:
+        _id:
+          type: string
+          description: Unique identifier for the cart item, represented as a 24-digit hexadecimal code. Generated automatically. 
+        user_id:
+          type: string
+          description: Reference to the user who owns the cart. Represented as a 24-digit hexadecimal code.
+        product_id:
+          type: string
+          description: Reference to the product added to the cart. Represented as a 24-digit hexadecimal code.
+        quantity:
+          type: integer
+          format: int64
+          description: Number of units of the product in the cart. Default is 1.
+        state:
+          type: string
+          enum:
+            - reserved
+            - paid
+            - delivered
+          description: Current status of the cart. Default is 'reserved'.
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the user was created. Uses timestamp in ISO 8601 format. Generated automatically.
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the user was last updated. Uses timestamp in ISO 8601 format. Generated automatically.
+      example:
+        _id: 139c455ec8b76c3a0f3e6b5f
+        user_id: 6681805ee857f2ed5dbf802e
+        product_id: 663cea2c57109ba2e5d3b56f
+        quantity: 3
+        state: reserved
+        createdAt: 2024-08-05T18:23:10.400Z
+        updatedAt: 2024-08-05T18:23:10.400Z
+    CartCreate:
+      type: object
+      description: This schema defines the structure and data types for creating a cart item. It specifies the required and optional fields needed for the operation.
+      properties:
+        user_id:
+          type: string
+          description: Reference to the user who owns the cart. Represented as a 24-digit hexadecimal code.
+        product_id:
+          type: string
+          description: Reference to the product added to the cart. Represented as a 24-digit hexadecimal code.
+        quantity:
+          type: integer
+          format: int64
+          description: Number of units of the product in the cart. Default is 1.
+        state:
+          type: string
+          enum:
+            - reserved
+            - paid
+            - delivered
+          description: Current status of the cart. Default is 'reserved'.
+      required:
+        - user_id
+        - product_id
+      example:
+        user_id: 6681805ee857f2ed5dbf802e
+        product_id: 663cea2c57109ba2e5d3b56f
+        quantity: 3
+    CartUpdate:
+      type: object
+      description: This schema defines the structure and data types for updating a cart item. It specifies the fields needed for the operation. Please note that while every single property is an optional field in the request body, in order to perform an actual update, at least one of the mentioned optional fields must be provided. If not, the request will be processed successfully, but no modifications will be made to the cart item.  
+      properties:
+        quantity:
+          type: integer
+          format: int64
+          description: Number of units of the product in the cart. 
+        state:
+          type: string
+          enum:
+            - reserved
+            - paid
+            - delivered
+          description: Current status of the cart. 
+      example:
+        quantity: 2
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+      description: Used for authentication and authorization in API requests. Consists of an API key passed in the cookie named "token". 
+responses:
+    suc201mesres:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
+        response: 
+          type: object
+          description: The cart returned as result of the operation.
+          $ref: '#/components/schemas/Cart'
+      example:
+        statusCode: 201
+        message: 'Cart created successfully with id 139c455ec8b76c3a0f3e6b5f'
+        response:
+          _id: 139c455ec8b76c3a0f3e6b5f
+          user_id: 6681805ee857f2ed5dbf802e
+          product_id: 663cea2c57109ba2e5d3b56f
+          quantity: 3
+          state: reserved
+          createdAt: 2024-08-05T18:23:10.400Z
+          updatedAt: 2024-08-05T18:23:10.400Z
+    suc200res(one):
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+        response: 
+          type: object
+          description: The cart returned as result of the operation.
+          $ref: '#/components/schemas/Cart'
+      example:
+        statusCode: 200
+        response:
+          _id: 139c455ec8b76c3a0f3e6b5f
+          user_id: 6681805ee857f2ed5dbf802e
+          product_id: 663cea2c57109ba2e5d3b56f
+          quantity: 3
+          state: reserved
+          createdAt: 2024-08-05T18:23:10.400Z
+          updatedAt: 2024-08-05T18:23:10.400Z
+    suc200res(ticket):
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+        response: 
+          type: object
+          description: The ticket returned as result of the operation.
+      example:
+        statusCode: 200
+        response:
+          user_id: 6691882c4d21c1bc0efdd683
+          total: 2675
+          date: 2024-08-05T20:44:30.623Z
+    suc200res(many):
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+        response: 
+          type: array
+          description: The carts returned as result of the operation.
+          items: 
+            $ref: '#/components/schemas/Cart'
+      example:
+        statusCode: 200
+        response:
+          - _id: 139c455ec8b76c3a0f3e6b5f
+            createdAt: 2024-08-05T18:23:10.400Z
+            updatedAt: 2024-08-05T18:23:10.400Z
+            user_id: 6681805ee857f2ed5dbf802e
+            product_id: 663cea2c57109ba2e5d3b56f
+            quantity: 3
+            state: reserved
+          - _id: ce4871515d214c2eddb5e94a
+            user_id: 6681805ee857f2ed5dbf802e
+            product_id: 663cea2c57109ba2e5d3b573
+            quantity: 1
+            state: reserved
+            createdAt: 2024-08-05T20:05:32.703Z
+            updatedAt: 2024-08-05T20:05:32.703Z
+          - _id: 58c2408cfbe0f4dc75de4930
+            user_id: 6681805ee857f2ed5dbf802e
+            product_id: 663cea2c57109ba2e5d3b580
+            quantity: 1
+            state: reserved
+            createdAt: 2024-08-05T20:05:42.486Z
+            updatedAt: 2024-08-05T20:05:42.486Z
+    suc200respag:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+        response: 
+          type: array
+          description: The cart(s) returned as result of the operation.
+          items: 
+            $ref: '#/components/schemas/Cart'
+        paginateInfo:
+          type: object
+          description: Information about pagination.
+          properties:
+            page:
+              type: integer
+              format: int64
+              description: Current page number.
+            totalPages:
+              type: integer
+              format: int64
+              description: Total number of pages available.
+            limit:
+              type: integer
+              format: int64
+              description: Number of documents (carts) per page.
+            prevPage:
+              type: integer
+              format: int64
+              description: Previous page number.
+            nextPage:
+              type: integer
+              format: int64
+              description: Next page number.
+            totalDocs:
+              type: integer
+              format: int64
+              description: Total number of documents (carts) available.  
+      example:
+        statusCode: 200
+        response:
+          - _id: 139c455ec8b76c3a0f3e6b5f
+            createdAt: 2024-08-05T18:23:10.400Z
+            updatedAt: 2024-08-05T18:23:10.400Z
+            user_id: 6681805ee857f2ed5dbf802e
+            product_id: 663cea2c57109ba2e5d3b56f
+            quantity: 3
+            state: reserved
+          - _id: ce4871515d214c2eddb5e94a
+            user_id: 6681805ee857f2ed5dbf802e
+            product_id: 663cea2c57109ba2e5d3b573
+            quantity: 1
+            state: reserved
+            createdAt: 2024-08-05T20:05:32.703Z
+            updatedAt: 2024-08-05T20:05:32.703Z
+          - _id: 58c2408cfbe0f4dc75de4930
+            user_id: 6681805ee857f2ed5dbf802e
+            product_id: 663cea2c57109ba2e5d3b580
+            quantity: 1
+            state: reserved
+            createdAt: 2024-08-05T20:05:42.486Z
+            updatedAt: 2024-08-05T20:05:42.486Z
+        paginateInfo:
+             page: 1
+             totalPages: 1
+             limit: 3
+             prevPage: null
+             nextPage: null
+             totalDocs: 3 
+    suc200mesres(update):
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
+        response: 
+          type: object
+          description: The cart returned as result of the operation.
+          $ref: '#/components/schemas/Cart'
+      example:
+        statusCode: 200
+        message: Cart updated successfully
+        response:
+          _id: 139c455ec8b76c3a0f3e6b5f
+          user_id: 6681805ee857f2ed5dbf802e
+          product_id: 663cea2c57109ba2e5d3b56f
+          quantity: 2
+          state: reserved
+          createdAt: 2024-08-05T18:23:10.400Z
+          updatedAt: 2024-08-05T18:23:10.400Z
+    suc200mesres(delete):
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
+        response: 
+          type: object
+          description: The cart returned as result of the operation.
+          $ref: '#/components/schemas/Cart'
+      example:
+        statusCode: 200
+        message: Cart deleted successfully
+        response:
+          _id: 139c455ec8b76c3a0f3e6b5f
+          user_id: 6681805ee857f2ed5dbf802e
+          product_id: 663cea2c57109ba2e5d3b56f
+          quantity: 3
+          state: reserved
+          createdAt: 2024-08-05T18:23:10.400Z
+          updatedAt: 2024-08-05T18:23:10.400Z
+    suc200mes(deleteAll):
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
+      example:
+        statusCode: 200
+        message: The cart of bobmoog@gmail.com has been cleared
+    err400badRequest:
+      type: object
+      properties: 
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating the failure of the operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
+      example:
+        statusCode: 400
+        message: Error processing the request.
+    err403forbidden:
+      type: object
+      properties: 
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating the failure of the operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
+      example:
+        statusCode: 403
+        message: Forbidden action.
+    err404notFound:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating failed operation.
+        message:
+          type: string
+          description: Message providing details about the operation
+      example:
+        statusCode: 404
+        message: Cart not found.
+    err500fatal:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating fatal internal server error.
+        message:
+          type: string
+          description: Message providing details about the error.
+      example:
+        statusCode: 500
+        message: Internal server error. Fatal.  
+paths:
+  /api/carts:
+    post:
+      summary: Create a new cart item.
+      tags:
+        - Cart
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartCreate'
+      responses:
+        201:
+          description: New cart successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc201mesres'
+        400:
+          description: The request failed due to missing required fields or unsupported inputs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err400badRequest'
+        403:
+          description: The request failed due to authorization issues.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err403forbidden'
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
+    get:
+      summary: Retrieve all cart items of a user, with optional query parameters
+      tags:
+        - Cart
+      parameters:
+        - name: uid
+          in: query
+          description: Retrieve all cart items of a user.
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Number of products to return per page.
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: page
+          in: query
+          description: Page number for pagination.
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: Successful operation returning all cart items, or item(s) based on query parameters.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/responses/suc200res(many)'
+                  - $ref: '#/components/responses/suc200respag'
+        404:
+          description: Operation failed returning cart item(s).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound'  
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
+  /api/carts/{iid}:
+    get:
+      summary: Retrieve a cart item that matches the ID.
+      tags:
+        - Cart
+      parameters:
+        - name: iid
+          in: path
+          required: true
+          description: _id of the cart item to be retrieved.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success retrieving a cart item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200res(one)'
+        404:
+          description: Operation failed returning the cart item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound'      
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'   
+    put:
+      summary: Update a cart item. Specify the props to be modified in the request's body.
+      tags:
+        - Cart
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartUpdate'
+      parameters:
+        - name: iid
+          in: path
+          required: true
+          description: _id of the cart item to be updated.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success updating a cart item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200mesres(update)'
+        400:
+          description: The request failed due to unsupported inputs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err400badRequest'
+        403:
+          description: The request failed due to authorization issues.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err403forbidden'
+        404:
+          description: Operation failed finding the cart item to update.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound' 
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
+    delete:
+      summary: Delete a cart item that matches the ID.
+      tags:
+        - Cart
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: iid
+          in: path
+          required: true
+          description: _id of the cart item to be deleted.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success deleting a cart item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200mesres(delete)'
+        403:
+          description: The request failed due to authorization issues.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err403forbidden'
+        404:
+          description: Operation failed finding the cart item to be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound' 
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
+  /api/carts/all:
+    delete:
+      summary: Delete the entire cart of a user.
+      tags:
+        - Cart
+      security:
+        - cookieAuth: []
+      responses:
+        200:
+          description: Success deleting the entire cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200mes(deleteAll)'
+        403:
+          description: The request failed due to authorization issues.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err403forbidden'
+        404:
+          description: Operation failed finding the cart item to be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound' 
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
+  /api/tickets:
+    get:
+      summary: Provides a total cost summary for the cart's contents before clearing it.
+      tags:
+        - Cart
+      security:
+        - cookieAuth: []
+      responses:
+        200:
+          description: Success obtaining a ticket.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200mes(deleteAll)'
+        403:
+          description: The request failed due to authorization issues.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err403forbidden'
+        404:
+          description: Operation failed due to resource-related problems.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound' 
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
+      

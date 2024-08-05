@@ -72,7 +72,7 @@ const userSchema = joi.object({
     "boolean.base": "Verified must be a boolean",
   }),
   verificationCode: joi.string().messages({
-    "string.base": "Verification code must be a 12-digit hexadecimal code",
+    "string.base": "Verification code must be a 24-digit hexadecimal code",
   }),
 });
 

@@ -103,6 +103,5 @@ class UsersController {
 }
 
 const usersController = new UsersController();
-
-const { create, read, readByEmail, readOne, update, destroy } = usersController;
+const { create, read, readByEmail, readOne, update, destroy } = usersController; // defining
 export { create, read, readByEmail, readOne, update, destroy };

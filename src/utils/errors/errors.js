@@ -19,7 +19,7 @@ const errors = {
     statusCode: 400,
   },
   err400updateCartItem: {
-    message: "Error updating item to the cart",
+    message: "Error updating cart item",
     statusCode: 400,
   },
   // code

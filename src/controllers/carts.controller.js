@@ -101,7 +101,7 @@ class CartsController1 {
       }
       const user = await readOneUser(user_id);
       const { email } = user;
-      return res.suc200mesres(`The cart of ${email} has been cleared`);
+      return res.suc200mes(`The cart of ${email} has been cleared`);
     } catch (err) {
       return next(err);
     }
@@ -250,7 +250,7 @@ class CartsController2 {
       }
       const user = await readOneUser(user_id);
       const { email } = user;
-      return res.suc200mesres(`The cart of ${email} has been cleared`);
+      return res.suc200mes(`The cart of ${email} has been cleared`);
     } catch (err) {
       return next(err);
     }
@@ -260,7 +260,7 @@ class CartsController2 {
 const persistence = argsUtil.persistence;
 let cartsController;
 
-switch (persistence) {
+switch (persistence) { // choosing controller depending on persistency
   case "memory":
     cartsController = new CartsController2();
     break;

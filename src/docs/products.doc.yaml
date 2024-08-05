@@ -2,18 +2,11 @@ components:
   schemas:
     Product:
       type: object
+      description: This schema defines the structure and data types for product objects. This format ensures proper interaction with product data and consistency across operations.
       properties:
         _id: 
           type: string
-          description: Unique identifier for the product, represented as a 12-digit hexadecimal code. Generated automatically. 
-        createdAt:
-          type: string
-          format: date-time
-          description: Timestamp when the product was created. Generated automatically.
-        updatedAt:
-          type: string
-          format: date-time
-          description: Timestamp when the product was last updated. Generated automatically.
+          description: Unique identifier for the product, represented as a 24-digit hexadecimal code. Generated automatically. 
         title:
           type: string
           description: Product's title.
@@ -22,15 +15,34 @@ components:
           description: Product's image. Must be URL format. A default image is set in case no URL is provided at the moment of creation.
         category:
           type: string
-          description: Category to which the product belongs. Default is "TBD."
+          description: Category to which the product belongs. Default is "TBD".
         price:
           type: number
           description: Product's price. Default is 1.
         stock:
-          type: number
+          type: integer
+          format: int64
           description: Quantity of stock available. Default is 1.
-    ProductInput:
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the product was created. Uses timestamp in ISO 8601 format. Generated automatically.
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the product was last updated. Uses timestamp in ISO 8601 format. Generated automatically.
+      example:
+        _id: 663cea2c57109ba2e5d3b56f
+        title: Airpods Pro 2
+        photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
+        category: accessories
+        price: 249
+        stock: 40
+        createdAt: 2024-06-26T18:10:45.461Z
+        updatedAt: 2024-06-26T18:10:45.461Z
+    ProductCreate:
       type: object
+      description: This schema defines the structure and data types for creating a product. It specifies the required and optional fields needed for the operation. 
       properties:
         title:
           type: string
@@ -45,24 +57,46 @@ components:
           type: number
           description: Product's price. Optional. Default is 1.
         stock:
-          type: number
+          type: integer
+          format: int64
           description: Quantity of stock available. Optional. Default is 1.
       required:
         - title
       example:
-        _id: 663cea2c57109ba2e5d3b56f
-        createdAt: 2024-06-26T18:10:45.461Z
-        updatedAt: 2024-06-26T18:10:45.461Z
         title: Airpods Pro 2
         photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
         category: accessories
         price: 249
         stock: 40
+    ProductUpdate:
+      type: object
+      description: This schema defines the structure and data types for updating a product. It specifies the fields needed for the operation. Please note that while every single property is an optional field in the request body, in order to perform an actual update, at least one of the mentioned optional fields must be provided. If not, the request will be processed successfully, but no modifications will be made to the product.  
+      properties:
+        title:
+          type: string
+          description: Product's title. Required.
+        photo:
+          type: string
+          description: Product's image URL. Optional. A default image is set if not provided.
+        category:
+          type: string
+          description: Category of the product. Optional. Default is "TBD."
+        price:
+          type: number
+          description: Product's price. Optional. Default is 1.
+        stock:
+          type: integer
+          format: int64
+          description: Quantity of stock available. Optional. Default is 1.
+      example:
+        price: 299
+        stock: 60
   securitySchemes:
     cookieAuth:
       type: apiKey
       in: cookie
       name: token
+      description: Used for authentication and authorization in API requests. Consists of an API key passed in the cookie named "token". 
   responses:
     suc201mesres:
       type: object
@@ -77,18 +111,19 @@ components:
         response: 
           type: object
           description: The product returned as result of the operation.
+          $ref: '#/components/schemas/Product'
       example:
         statusCode: 201
         message: 'Product created successfully with id 663cea2c57109ba2e5d3b56f'
         response:
           _id: 663cea2c57109ba2e5d3b56f
-          createdAt: 2024-06-26T18:10:45.461Z
-          updatedAt: 2024-06-26T18:10:45.461Z
           title: Airpods Pro 2
           photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
           category: accessories
           price: 249
           stock: 40
+          createdAt: 2024-06-26T18:10:45.461Z
+          updatedAt: 2024-06-26T18:10:45.461Z
     suc200res(one):
       type: object
       properties:
@@ -99,17 +134,18 @@ components:
         response: 
           type: object
           description: The product returned as result of the operation.
+          $ref: '#/components/schemas/Product'
       example:
         statusCode: 200
         response:
           _id: 663cea2c57109ba2e5d3b56f
-          createdAt: 2024-06-26T18:10:45.461Z
-          updatedAt: 2024-06-26T18:10:45.461Z
           title: Airpods Pro 2
           photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
           category: accessories
           price: 249
           stock: 40
+          createdAt: 2024-06-26T18:10:45.461Z
+          updatedAt: 2024-06-26T18:10:45.461Z
     suc200res(many):
       type: object
       properties:
@@ -120,36 +156,37 @@ components:
         response: 
           type: array
           description: The products returned as result of the operation.
+          items: 
+            $ref: '#/components/schemas/Product'
       example:
         statusCode: 200
         response:
           - _id: 663cea2c57109ba2e5d3b56f
-            createdAt: 2024-06-26T18:10:45.461Z
-            updatedAt: 2024-06-26T18:10:45.461Z
             title: Airpods Pro 2
             photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
             category: accessories
             price: 249
             stock: 40
-          - _id: 663cea2c57109ba2e5d3b571
             createdAt: 2024-06-26T18:10:45.461Z
             updatedAt: 2024-06-26T18:10:45.461Z
+          - _id: 663cea2c57109ba2e5d3b571
             title: Airpods Max
             photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
             category: accessories
             price: 549
             stock: 40
-          - _id: 663cea2c57109ba2e5d3b573
             createdAt: 2024-06-26T18:10:45.461Z
-            updatedAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z            
+          - _id: 663cea2c57109ba2e5d3b573
             title: iPhone 15 pro
             photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
             category: phones
             price: 999
             stock: 30
+            createdAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z
     suc200respag:
       type: object
-      description: Successful operation returning paginated product(s). It can return both multiple products or the one(s) that matches the query params.
       properties:
         statusCode:
           type: integer
@@ -158,6 +195,8 @@ components:
         response: 
           type: array
           description: The product(s) returned as result of the operation.
+          items: 
+            $ref: '#/components/schemas/Product'
         paginateInfo:
           type: object
           description: Information about pagination.
@@ -178,7 +217,7 @@ components:
               type: integer
               format: int64
               description: Previous page number.
-            prevPage:
+            nextPage:
               type: integer
               format: int64
               description: Next page number.
@@ -195,18 +234,24 @@ components:
             category: accessories
             price: 249
             stock: 40
+            createdAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z
           - _id: 663cea2c57109ba2e5d3b571
             title: Airpods Max
             photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
             category: accessories
             price: 549
             stock: 40
+            createdAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z            
           - _id: 663cea2c57109ba2e5d3b573
             title: iPhone 15 pro
             photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
             category: phones
             price: 999
             stock: 30
+            createdAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z
         paginateInfo:
              page: 1
              totalPages: 501
@@ -227,18 +272,19 @@ components:
         response: 
           type: object
           description: The product returned as result of the operation.
+          $ref: '#/components/schemas/Product'
       example:
-        statusCode: 201
+        statusCode: 200
         message: Product updated successfully
         response:
           _id: 663cea2c57109ba2e5d3b56f
-          createdAt: 2024-06-26T18:10:45.461Z
-          updatedAt: 2024-06-26T18:10:45.461Z
           title: Airpods Pro 2
           photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
           category: accessories
           price: 249
           stock: 40
+          createdAt: 2024-06-26T18:10:45.461Z
+          updatedAt: 2024-06-26T18:10:45.461Z
     suc200mesres(delete):
       type: object
       properties:
@@ -252,18 +298,19 @@ components:
         response: 
           type: object
           description: The product returned as result of the operation.
+          $ref: '#/components/schemas/Product'
       example:
-        statusCode: 201
+        statusCode: 200
         message: Product deleted successfully
         response:
           _id: 663cea2c57109ba2e5d3b56f
-          createdAt: 2024-06-26T18:10:45.461Z
-          updatedAt: 2024-06-26T18:10:45.461Z
           title: Airpods Pro 2
           photo: https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png
           category: accessories
           price: 249
           stock: 40
+          createdAt: 2024-06-26T18:10:45.461Z
+          updatedAt: 2024-06-26T18:10:45.461Z
     err400badRequest:
       type: object
       properties: 
@@ -301,14 +348,27 @@ components:
           type: string
           description: Message providing details about the operation
       example:
-        statusCode: 201
+        statusCode: 404
         message: Product not found.
+    err500fatal:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating fatal internal server error.
+        message:
+          type: string
+          description: Message providing details about the error.
+      example:
+        statusCode: 500
+        message: Internal server error. Fatal.
 paths:
   /api/products:
     post:
       summary: Create a new product.
       tags:
-        - ProductInput
+        - Product
       security:
         - cookieAuth: []
       requestBody:
@@ -316,7 +376,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProductInput'
+              $ref: '#/components/schemas/ProductCreate'
       responses:
         201:
           description: New product successfully created.
@@ -336,6 +396,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/responses/err403forbidden'
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
     get:
       summary: Retrieve all products, with optional query parameters.
       tags:
@@ -382,6 +448,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/responses/err404notFound'  
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
   /api/products/{pid}:
     get:
       summary: Retrieve a product that matches the ID.
@@ -406,11 +478,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err404notFound'         
+                $ref: '#/components/responses/err404notFound'      
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'   
     put:
       summary: Update a product. Specify the props to be modified in the request's body.
       tags:
-        - ProductInput
+        - Product
       security:
         - cookieAuth: []
       requestBody:
@@ -418,7 +496,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProductInput'
+              $ref: '#/components/schemas/ProductUpdate'
       parameters:
         - name: pid
           in: path
@@ -451,6 +529,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/responses/err404notFound' 
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
     delete:
       summary: Delete a product that matches the ID.
       tags:
@@ -483,3 +567,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/responses/err404notFound' 
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'

@@ -7,8 +7,6 @@ class ProductsDTO {
   constructor(data) {
     persistence !== "mongo" &&
       (this._id = crypto.randomBytes(12).toString("hex"));
-    persistence !== "mongo" && (this.createdAt = new Date());
-    persistence !== "mongo" && (this.updatedAt = new Date());
     this.title = data.title;
     this.photo =
       data.photo ||
@@ -16,6 +14,8 @@ class ProductsDTO {
     this.category = data.category || "TBD";
     this.price = data.price || 1;
     this.stock = data.stock || 1;
+    persistence !== "mongo" && (this.createdAt = new Date());
+    persistence !== "mongo" && (this.updatedAt = new Date());
   }
 }
 

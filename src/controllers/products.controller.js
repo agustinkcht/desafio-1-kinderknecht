@@ -47,7 +47,7 @@ class ProductsController {
     } catch (err) {
       return next(err);
     }
-  } // con paginate
+  } // w pagination
   async readOne(req, res, next) {
     try {
       const { pid } = req.params;
@@ -86,6 +86,5 @@ class ProductsController {
 }
 
 const productsController = new ProductsController();
-
-const { create, read, readOne, update, destroy } = productsController;
+const { create, read, readOne, update, destroy } = productsController; // defining
 export { create, read, readOne, update, destroy };
