@@ -122,7 +122,6 @@ class SessionsController {
 }
 
 const sessionsController = new SessionsController();
-
 const {
   register,
   login,
@@ -132,7 +131,7 @@ const {
   verifyCode,
   recoveryCode,
   resetPassword,
-} = sessionsController;
+} = sessionsController; // defining 
 export {
   register,
   login,

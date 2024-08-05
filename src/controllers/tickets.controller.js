@@ -60,6 +60,5 @@ class TicketsController {
 }
 
 const ticketsController = new TicketsController();
-
-const { generateTicket } = ticketsController;
+const { generateTicket } = ticketsController; // defining
 export default generateTicket;

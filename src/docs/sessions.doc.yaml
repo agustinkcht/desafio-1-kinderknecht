@@ -1,0 +1,533 @@
+components:
+  schemas:
+    User:
+      type: object
+      description: This schema defines the structure and data types for user objects.
+      properties:
+        _id:
+          type: string
+          description: Unique identifier for the user, represented as a 24-digit hexadecimal code. Generated automatically. 
+        email:
+          type: string
+          description: User's email adress. Used for authentication.
+        password:
+          type: string
+          description: User's password.
+        firstName:
+          type: string
+          description: User's first name.
+        lastName:
+          type: string
+          description: User's last name.
+        age:
+          type: integer
+          format: int64
+          description: User's age.
+        role:
+          type: integer
+          format: int64
+          description: User's role appwise. Used for authorization. Default is 0.
+        photo:
+          type: string
+          description: User's profile image. Must be URL format. A default image is set in case no URL is provided at the moment of creation.
+        verified:
+          type: boolean
+          description: Defines if the user's account has been verified using the verification code. Default is "false".
+        verificationCode:
+          type: string
+          description: User's unique code for account verification. Represented as a 24-digit hexadecimal code. Generated automatically. 
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the user was created. Uses timestamp in ISO 8601 format. Generated automatically.
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the user was last updated. Uses timestamp in ISO 8601 format. Generated automatically.
+      example:
+        _id: 6681805ee857f2ed5dbf802e
+        email: bobmoog@gmail.com
+        password: s3curep4ss
+        firstName: Robert
+        lastName: Moog
+        age: 90
+        role: 1
+        photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+        verified: true
+        verificationCode: 38a956cc75f9a344eb30641a
+        createdAt: 2024-06-22T15:07:25.193Z
+        updatedAt: 2024-06-22T15:07:25.193Z
+    Register:
+      type: object
+      description: This schema defines the structure and data types for user registration requests. Inmediatelly after registration, an email is sent to the user's adress with the verification code.
+      properties:
+        email: 
+          type: string
+          description: User's email adress
+        password:
+          type: string
+          description: User's password.
+        firstName:
+          type: string
+          description: User's first name.
+        lastName:
+          type: string
+          description: User's last name.
+        age:
+          type: integer
+          format: int64
+          description: User's age.
+        role:
+          type: integer
+          format: int64
+          description: User's role appwise. Used for authorization. Default is 0.
+        photo:
+          type: string
+          description: User's profile image. Must be URL format. A default image is set in case no URL is provided at the moment of creation.
+      required:
+        - email
+        - password
+        - firstName
+        - lastName
+        - age
+      example:
+        email: bobmoog@gmail.com
+        password: s3curep4ss
+        firstName: Robert
+        lastName: Moog
+        age: 90
+        role: 1
+    Login:
+      type: object
+      description: This schema outlines the structure and data types required for login requests. To successfully log in, a user must first be verified. If the user's account is not verified, login attempts will be denied.
+      properties:
+        email: 
+          type: string
+          description: User's email adress
+        password:
+          type: string
+          description: User's password.
+      required:
+        - email
+        - password
+      example:
+        email: bobmoog@gmail.com
+        password: s3curep4ss
+    Online:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: User's unique 24-digit hexadecimal identifier code. 
+        email:
+          type: string
+          description: User's email adress. 
+        role:
+          type: integer
+          format: int64
+          description: User's role appwise. 
+      required:
+        - _id
+        - email
+        - role
+      example:
+        _id: 6681805ee857f2ed5dbf802e
+        email: bobmoog@gmail.com
+        role: 1
+    VerifyAccount:
+      type: object
+      description: This schema defines the structure and data types for performing user's account verification, consisting of introducing its email and verification code. After executing this operation, the "verified" prop in the user object is modified to "true", granting acces to the app.
+      properties:
+        email:
+          type: string
+          format: email
+          description: User's email adress. 
+        code:
+          type: string
+          format: int64
+          description: User's 24-digit hexadecimal verification code generated automatically at the registration phase, and provided to the user via e-mail. 
+      example:
+        email: bobmoog@gmail.com
+        code: 38a956cc75f9a344eb30641a
+    RecoveryCode:
+      type: object
+      description: This schema define what's needed to send a recovery code to a user. 
+      properties:
+        email:
+          type: string
+          format: email
+          description: User's email adress, target of the app's mailing service.
+          required: true
+      example:
+        email: bobmoog@gmail.com
+    ResetPassword:
+      type: object
+      description: This schema defines the structure and data types for performing user's password reset.
+      properties:
+        code:
+          type: string
+          format: int64
+          description: Secret 24-digit hexadecimal code for password reset. 
+        password:
+          type: string
+          description: User's new password.
+      example:
+        code: 78a956cc75f9a344hb30641d
+        password: n3ws3curep4ss
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+      description: Used for authentication and authorization in API requests. Consists of an API key passed in the cookie named "token". 
+  responses:
+    suc201mes:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
+      example:
+        statusCode: 201
+        message: 'User successfully registered'
+    suc200mes:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
+      example:
+        statusCode: 200
+        message: 'Successful operation'
+    err400badRequest:
+      type: object
+      properties: 
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating the failure of the operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
+      example:
+        statusCode: 400
+        message: Error processing the request, check information and try again.
+    err401invalidCredentials:
+      type: object
+      properties: 
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating the failure of the operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
+      example:
+        statusCode: 401
+        message: Invalid credentials. Check your information and try again.
+    err403forbidden:
+      type: object
+      properties: 
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating the failure of the operation.
+        message:
+          type: string
+          description: Message providing details about the operation.
+      example:
+        statusCode: 403
+        message: Forbidden action.
+    err404notFound:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating failed operation.
+        message:
+          type: string
+          description: Message providing details about the operation
+      example:
+        statusCode: 404
+        message: Not found.
+    err409conflict:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating failed operation.
+        message:
+          type: string
+          description: Message providing details about the operation
+      example:
+        statusCode: 409
+        message: Email already taken. Please choose a different one or log in.
+    err500fatal: 
+paths:
+  /api/sessions/register:
+    post:
+      summary: Register a new user passing through passport strategy. When this operation is successful, a new user is created, and an e-mail is sent to its adress with the secret code for account verification.
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+      responses:
+        201: 
+          description: New user successfully registered and created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc201mes'
+        400:
+          description: The request failed due to missing required fields or unsupported inputs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err400badRequest'
+        409:
+          description: The request failed due to a resource conflict.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err409conflict'
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
+  /api/sessions/login:
+    post:
+      summary: Log in into account. For executing this operation successfully, the user needs to be verified. If not, the access will be blocked and a message will pop as a reminder for the user to check its email inbox for the verification code, and verify its accound.
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        200: 
+          description: User logged in successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200mes'
+        400:
+          description: The request failed due to missing required fields or unsupported inputs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err400badRequest'
+        401:
+          description: The request failed due to invalid credentials. It can be triggered due to mispelled information, lack of account verification, etc.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err401invalidCredentials'
+        404:
+          description: The request failed due to a resource not being found when attempting to log in.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound'
+        409:
+          description: The request failed due to a resource conflict.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err409conflict'
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
+  /api/sessions/logout:
+    post:
+      summary: Logs out the user from its account by removing the session cookie. For executing this operation successfully, the user needs to be online.
+      tags:
+        - Sessions
+      responses:
+        200: 
+          description: Logged out.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200mes'
+        401:
+          description: The request failed due to invalid credentials. It can be triggered due to the user not being online at the moment of the execution.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err401invalidCredentials'
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
+  /api/sessions/online:
+    post:
+      summary: Return the online status of the user. Requires user to be logged in to be successful.
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Online'
+      responses:
+        200: 
+          description: User online.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200mes'
+        400:
+          description: The request failed due to missing required fields or unsupported inputs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err400badRequest'
+        401:
+          description: The request failed due to invalid credentials. It can be triggered due to the user not being logged it at the moment of the execution.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err401invalidCredentials'
+        404:
+          description: The request failed due to a resource not being found when performing the operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound'
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
+  /api/sessions/verify:
+    post:
+      summary: Verifies user's account by checking the match of the user's verification code, and the one it provides in the request body. When this operation is successful, the user's "verified" property switchs to "true", granting full access to the application.
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyAccount'
+      responses:
+        200: 
+          description: User verified successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200mes'
+        400:
+          description: The request failed due to missing required fields or unsupported inputs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err400badRequest'
+        401:
+          description: The request failed due to invalid credentials. It can be triggered due to a mispelled code or email.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err401invalidCredentials'
+        404:
+          description: The request failed due to a resource not being found when performing the operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound'
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
+  /api/sessions/password:
+    post:
+      summary: Sends an e-mail to the user's adress with a secret code for password reset.
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecoveryCode'
+      responses:
+        200: 
+          description: Recovery code sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200mes'
+        404:
+          description: The request failed due to the user's email not being found in the database.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err404notFound'
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'
+    put:
+      summary: The user introduces its secret code (already sent to the user via e-mal) and its new password. After executing this operation, the user will be able to log in with its new password.
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+      responses:
+        200: 
+          description: Password updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/suc200mes'
+        400:
+          description: The request failed due to missing required fields or unsupported inputs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err400badRequest'
+        401:
+          description: The request failed due to invalid credentials. It can be triggered due to a mispelled code.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err401invalidCredentials'
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/err500fatal'

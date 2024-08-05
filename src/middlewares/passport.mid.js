@@ -16,19 +16,6 @@ passport.use(
     { passReqToCallback: true, usernameField: "email" },
     async (req, email, password, done) => {
       try {
-        if (!email || !password) {
-          const error = CustomError.new(errors.err400missingFieldsMailPass);
-          return done(error);
-        }
-        const { firstName, lastName, age } = req.body;
-        if (!firstName || !lastName) {
-          const error = CustomError.new(errors.err400missingFieldsNames);
-          return done(error);
-        }
-        if (!age) {
-          const error = CustomError.new(errors.err400missingFieldsAge);
-          return done(error);
-        }
         const one = await usersRepository.readByEmailRepository(email);
         if (one) {
           const error = CustomError.new(errors.err409emailAlreadyTaken);
@@ -67,7 +54,6 @@ passport.use(
         // check for password and verify:true
         const verifyPassword = verifyHash(password, one.password);
         const verifyAccount = one.verified;
-        console.log(verifyAccount, verifyPassword);
         if (!verifyPassword) {
           const error = CustomError.new(errors.err401invalidCredentials);
           return done(error);

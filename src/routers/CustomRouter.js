@@ -62,37 +62,9 @@ class CustomRouter {
     res.err400invalidCode = () => {
       CustomError.new(errors.err400invalidCode);
     };
-    // session
-    res.err400offline = () => {
-      CustomError.new(errors.err400offline);
-    };
-    res.err400online = () => {
-      CustomError.new(errors.err400online);
-    };
     // missing fields
     res.err400missingFields = () => {
       CustomError.new(errors.err400missingFields);
-    };
-    res.err400missingFieldsAge = () => {
-      CustomError.new(errors.err400missingFieldsAge);
-    };
-    res.err400missingFieldsMailPass = () => {
-      CustomError.new(errors.err400missingFieldsMailPass);
-    };
-    res.err400missingFieldsNames = () => {
-      CustomError.new(errors.err400missingFieldsNames);
-    };
-    res.err400missingFieldsProduct = () => {
-      CustomError.new(errors.err400missingFieldsProduct);
-    };
-    res.err400missingFieldsProductTitle = () => {
-      CustomError.new(errors.err400missingFieldsProductTitle);
-    };
-    res.err400missingFieldsQuantity = () => {
-      CustomError.new(errors.err400missingFieldsQuantity);
-    };
-    res.err400missingFieldsUserId = () => {
-      CustomError.new(errors.err400missingFieldsUserId);
     };
     // 401 - unauthorized
     res.err401 = () => {

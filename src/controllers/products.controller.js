@@ -12,7 +12,7 @@ class ProductsController {
     try {
       const data = req.body;
       const newProduct = await createService(data);
-      return res.suc200mesres(
+      return res.suc201mesres(
         `Product created successfully with id ${newProduct._id}`,
         newProduct
       );
@@ -47,7 +47,7 @@ class ProductsController {
     } catch (err) {
       return next(err);
     }
-  } // con paginate
+  } // w pagination
   async readOne(req, res, next) {
     try {
       const { pid } = req.params;
@@ -66,7 +66,7 @@ class ProductsController {
       const { pid } = req.params;
       const data = req.body;
       const updatedProduct = await updateService(pid, data);
-      return res.suc200res(updatedProduct);
+      return res.suc200mesres("Product updated successfully" + updatedProduct);
     } catch (err) {
       return next(err);
     }
@@ -86,6 +86,5 @@ class ProductsController {
 }
 
 const productsController = new ProductsController();
-
-const { create, read, readOne, update, destroy } = productsController;
+const { create, read, readOne, update, destroy } = productsController; // defining
 export { create, read, readOne, update, destroy };

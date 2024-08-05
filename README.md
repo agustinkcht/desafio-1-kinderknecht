@@ -1,25 +1,19 @@
 # challenges-kinderknecht
 
-Sprint11
+Sprint13
 
-|| server clusterization - docker - kubernetes & minikube - password reset ||
+API DOCUMENTATION - JOI
 
------------------
+JOI 
+  - implemented for all resources to check data input format, and to return messages to the user in case the format is incorrect.
+  - Schemas made for user, product, cart
+  - Obsolete middlewares deleted
 
-SERVER now in cluster format. Available with 8 worker processes.
-
-DOCKERFILE configured. Available to create an image and container.
-
-KUBERNETES & MINIKUBE:
-- Installation done.
-- YAML manifest created.
-- Orchestration available for creating pods, service & deployment. 
-
-PASSWORD RESET:
-- "Forgot password?" added in login.
-- View created for password reset form.
-- POST /api/sessions/password sends email with verification code.
-- PUT /api/sessions/password checks the verification code and updates the password.
+API DOCUMENTATION 
+  - Entire API documentation done using swagger. 
+  - YAML files with schemas, responses and paths created for users, products, carts, sessions.
+  - Accessible via:
+    /api/docs
 
 -----------------
 
