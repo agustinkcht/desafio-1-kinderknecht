@@ -21,7 +21,9 @@
     "container": "docker run -p 8080:8080 technode8080",
     "publish": "docker tag technode-prod agustinkcht/technode:1.0.0 & docker push agustinkcht/technode:1.0.0",
     "orq": "kubectl apply -f ./orq.yaml",
-    "technode": "minikube service technode-service"
+    "technode": "minikube service technode-service",
+    "mocha": "mocha ./test/mocha",
+    "chai": "mocha ./test/chai"
   },
   "keywords": [],
   "author": "Agustin Kinderknecht <agustinkcht@gmail.com>",
@@ -57,6 +59,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "chai": "^5.1.1",
+    "mocha": "^10.7.3",
     "nodemon": "^3.1.0"
   }
 }

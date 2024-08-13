@@ -1,19 +1,8 @@
 # challenges-kinderknecht
 
-Sprint13
+Sprint14
 
-API DOCUMENTATION - JOI
-
-JOI 
-  - implemented for all resources to check data input format, and to return messages to the user in case the format is incorrect.
-  - Schemas made for user, product, cart
-  - Obsolete middlewares deleted
-
-API DOCUMENTATION 
-  - Entire API documentation done using swagger. 
-  - YAML files with schemas, responses and paths created for users, products, carts, sessions.
-  - Accessible via:
-    /api/docs
+- testing with mocha & chai
 
 -----------------
 
