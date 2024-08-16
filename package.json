@@ -22,8 +22,9 @@
     "publish": "docker tag technode-prod agustinkcht/technode:1.0.0 & docker push agustinkcht/technode:1.0.0",
     "orq": "kubectl apply -f ./orq.yaml",
     "technode": "minikube service technode-service",
-    "mocha": "mocha ./test/mocha",
-    "chai": "mocha ./test/chai"
+    "mocha": "mocha ./test/mocha --env dev",
+    "chai": "mocha ./test/chai --env dev",
+    "sup": "mocha ./test/supertest --env dev"
   },
   "keywords": [],
   "author": "Agustin Kinderknecht <agustinkcht@gmail.com>",
@@ -53,6 +54,7 @@
     "passport-local": "^1.0.0",
     "session-file-store": "^1.5.0",
     "socket.io": "^4.7.5",
+    "supertest": "^7.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "winston": "^3.13.1"

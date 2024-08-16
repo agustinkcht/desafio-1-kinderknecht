@@ -1,8 +1,9 @@
 # challenges-kinderknecht
 
-Sprint14
+Sprint14 (partially done)
 
 - testing with mocha & chai
+- flow testing using supertest
 
 -----------------
 
