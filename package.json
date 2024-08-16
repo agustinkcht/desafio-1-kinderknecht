@@ -5,8 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon ./server.js --env prod",
-    "dev": "nodemon ./server.js --env dev",
+    "start": "node ./server.js",
+    "dev": "node ./server.js --env dev",
     "memory": "nodemon ./server.js --env dev --persistence memory",
     "fs": "nodemon ./server.js --env dev --persistence fs",
     "argv": "nodemon ./server.js --env prod --persistence mongo",
