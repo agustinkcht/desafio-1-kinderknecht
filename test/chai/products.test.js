@@ -7,12 +7,14 @@ describe(
     () => {
         const data = { title: "Apple Airtag", category: "accessories" }
         let id;
+        // obligatory values
         it(
             "Property TITLE must be a string",
             () => {
                 expect(data.title).to.be.a("string")
             }
         )
+        // testing CRUD
         it(
             "The creation of a product receives an object with a _id prop",
             async () => {

@@ -24,7 +24,11 @@
     "technode": "minikube service technode-service",
     "mocha": "mocha ./test/mocha --env dev",
     "chai": "mocha ./test/chai --env dev",
-    "sup": "mocha ./test/supertest --env dev"
+    "sup": "mocha ./test/supertest --env dev",
+    "stu": "mocha ./test/supertest/users.test.js --env dev",
+    "stp": "mocha ./test/supertest/products.test.js --env dev",
+    "sts": "mocha ./test/supertest/sessions.test.js --env dev",
+    "stc": "mocha ./test/supertest/carts.test.js --env dev"
   },
   "keywords": [],
   "author": "Agustin Kinderknecht <agustinkcht@gmail.com>",
