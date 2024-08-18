@@ -1,6 +1,5 @@
 import { expect } from "chai";
 import requester from "../../src/utils/requester.util.js";
-import usersRepository from "../../src/repositories/users.rep.js";
 
 describe(
     "Testing resource: USERS",
@@ -10,7 +9,7 @@ describe(
             password: "s3curep4ss"
         }
         const user = {
-            email: "alberteinstein@gmail.com",
+            email: "alberteinstein5@gmail.com",
             password: "S3curep4ss",
             firstName: "Albert",
             lastName: "Einstein",
@@ -59,13 +58,22 @@ describe(
             }
         )
         it(
+            "Read all users filtering by role",
+            async() => {
+                const response = await requester
+                  .get("/users?role=1")
+                  .set("Cookie", token)
+                const { _body } = response
+                expect(_body.statusCode).to.be.equals(200)
+            }
+        )
+        it(
             "Read one user",
             async() => {
                 const one = await requester
                 .get(`/users/${uid}`)
                 .set("Cookie", token)
                 const { _body } = one
-                console.log(_body)
                 expect(_body.statusCode).to.be.equals(200)
             }
         )
@@ -77,7 +85,6 @@ describe(
                 .send(userData)
                 .set("Cookie", token)
                 const { _body } = one
-                console.log(_body)
                 expect(_body.statusCode).to.be.equals(200)
             }
         )

@@ -66,7 +66,7 @@ class ProductsController {
       const { pid } = req.params;
       const data = req.body;
       const updatedProduct = await updateService(pid, data);
-      return res.suc200mesres("Product updated successfully" + updatedProduct);
+      return res.suc200mesres("Product updated successfully", updatedProduct);
     } catch (err) {
       return next(err);
     }

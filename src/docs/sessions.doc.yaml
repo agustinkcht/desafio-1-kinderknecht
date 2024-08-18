@@ -383,7 +383,7 @@ paths:
               schema:
                 $ref: '#/components/responses/err500fatal'
   /api/sessions/online:
-    post:
+    get:
       summary: Return the online status of the user. Requires user to be logged in to be successful.
       tags:
         - Sessions

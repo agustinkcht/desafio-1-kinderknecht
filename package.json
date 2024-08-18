@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon ./server.js",
+    "start": "node ./server.js",
     "dev": "nodemon ./server.js --env dev",
     "memory": "nodemon ./server.js --env dev --persistence memory",
     "fs": "nodemon ./server.js --env dev --persistence fs",
@@ -18,7 +18,7 @@
     "artFlow": "artillery run ./test/artillery/flow.yaml -o ./test/artillery/flow.json",
     "artFlowReport": "artillery report ./test/artillery/flow.json",
     "image": "docker build -t technode-prod .",
-    "container": "docker run -p 8080:8080 technode8080",
+    "container": "docker run -p 8080:8080 technode-prod",
     "publish": "docker tag technode-prod agustinkcht/technode:1.0.0 & docker push agustinkcht/technode:1.0.0",
     "orq": "kubectl apply -f ./orq.yaml",
     "technode": "minikube service technode-service",
