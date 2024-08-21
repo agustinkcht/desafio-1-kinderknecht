@@ -89,6 +89,16 @@ describe(
             }
         )
         it(
+            "Log out",
+            async() => {
+                const response = await requester
+                .post("/sessions/logout")
+                .set("Cookie", token)
+                const { _body } = response
+                expect(_body.statusCode).to.be.equals(200)
+            }
+        )
+        it(
             "Delete a user",
             async() => {
                 const one = await requester

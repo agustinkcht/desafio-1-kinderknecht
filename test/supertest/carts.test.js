@@ -83,7 +83,6 @@ describe(
                 .get(`/carts?${uid}`)
                 .set("Cookie", token)
                 const { _body } = one
-                console.log(_body)
                 expect(_body.statusCode).to.be.equals(200)
             }
         )
@@ -105,7 +104,6 @@ describe(
                 .send(itemData)
                 .set("Cookie", token)
                 const { _body } = one
-                console.log(_body)
                 expect(_body.statusCode).to.be.equals(200)
             }
         )
@@ -126,7 +124,6 @@ describe(
                 .get("/tickets")
                 .set("Cookie", token)
                 const { _body } = one
-                console.log(_body)
                 expect(_body.statusCode).to.be.equals(200)
             }
         )
@@ -137,6 +134,16 @@ describe(
                 .delete("/carts/all")
                 .set("Cookie", token)
                 const { _body } = all
+                expect(_body.statusCode).to.be.equals(200)
+            }
+        )
+        it(
+            "Log out",
+            async() => {
+                const response = await requester
+                .post("/sessions/logout")
+                .set("Cookie", token)
+                const { _body } = response
                 expect(_body.statusCode).to.be.equals(200)
             }
         )

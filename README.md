@@ -1,9 +1,12 @@
 # challenges-kinderknecht
 
-Sprint14 (partially done)
+Sprint14 
 
-- testing with mocha & chai
-- flow testing using supertest
+--- TESTING FOR THE APPLICATION - Chai - Mocha - Supertest - Artillery ---
+
+- Integration testing with SUPERTEST for all app's resources: Users, Products, Carts, Sessions.
+- Unit testing using MOCHA & CHAI for specific operations in the Products resource.
+- Stress testing with Artillery for a simple 3-operation application flow.
 
 -----------------
 
