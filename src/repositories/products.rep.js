@@ -64,8 +64,8 @@ class ProductsRepository {
         throw err;
       }
     }
-  }
+}
 
-  const productsRepository = new ProductsRepository(productManager)
-  
-  export default productsRepository;
+const productsRepository = new ProductsRepository(productManager)
+
+export default productsRepository;

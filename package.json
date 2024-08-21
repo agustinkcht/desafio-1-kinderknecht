@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon ./server.js --env prod",
+    "start": "node ./server.js",
     "dev": "nodemon ./server.js --env dev",
     "memory": "nodemon ./server.js --env dev --persistence memory",
     "fs": "nodemon ./server.js --env dev --persistence fs",
@@ -18,10 +18,17 @@
     "artFlow": "artillery run ./test/artillery/flow.yaml -o ./test/artillery/flow.json",
     "artFlowReport": "artillery report ./test/artillery/flow.json",
     "image": "docker build -t technode-prod .",
-    "container": "docker run -p 8080:8080 technode8080",
+    "container": "docker run -p 8080:8080 technode-prod",
     "publish": "docker tag technode-prod agustinkcht/technode:1.0.0 & docker push agustinkcht/technode:1.0.0",
     "orq": "kubectl apply -f ./orq.yaml",
-    "technode": "minikube service technode-service"
+    "technode": "minikube service technode-service",
+    "mocha": "mocha ./test/mocha --env dev",
+    "chai": "mocha ./test/chai --env dev",
+    "sup": "mocha ./test/supertest --env dev",
+    "stu": "mocha ./test/supertest/users.test.js --env dev",
+    "stp": "mocha ./test/supertest/products.test.js --env dev",
+    "sts": "mocha ./test/supertest/sessions.test.js --env dev",
+    "stc": "mocha ./test/supertest/carts.test.js --env dev"
   },
   "keywords": [],
   "author": "Agustin Kinderknecht <agustinkcht@gmail.com>",
@@ -51,12 +58,15 @@
     "passport-local": "^1.0.0",
     "session-file-store": "^1.5.0",
     "socket.io": "^4.7.5",
+    "supertest": "^7.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "winston": "^3.13.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "chai": "^5.1.1",
+    "mocha": "^10.7.3",
     "nodemon": "^3.1.0"
   }
 }

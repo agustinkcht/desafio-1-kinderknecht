@@ -35,7 +35,7 @@ if (cluster.isPrimary) {
   }
 } else {
   console.log("worker process" + process.pid);
-  nodeServer.listen(port, handleServerStart);
+  nodeServer.listen(port, "0.0.0.0", handleServerStart);
 }
 // SWAGGER config
 const specs = swaggerJSDoc(swaggerOptions);

@@ -72,8 +72,8 @@ class UsersRepository {
         throw err;
       }
     }
-  }
+}
 
-  const usersRepository = new UsersRepository(userManager)
-  
-  export default usersRepository;
+const usersRepository = new UsersRepository(userManager)
+
+export default usersRepository;

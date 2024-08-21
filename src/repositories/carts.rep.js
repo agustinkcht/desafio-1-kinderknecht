@@ -64,8 +64,8 @@ class CartsRepository {
         throw err;
       }
     }
-  }
+}
 
-  const cartsRepository = new CartsRepository(cartManager)
-  
-  export default cartsRepository;
+const cartsRepository = new CartsRepository(cartManager)
+
+export default cartsRepository;

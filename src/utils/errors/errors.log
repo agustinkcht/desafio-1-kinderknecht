@@ -9,3 +9,4 @@
 [33mERROR[39m: 401 - POST /api/sessions/login - Invalid credentials. Check your information and try again. - 2:16:55 PM 
 [33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:19:28 PM 
 [33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:19:28 PM 
+[31mFATAL[39m: undefined - GET /api/users/?role=1&page&limit - invalid signature - 1:18:06 PM 

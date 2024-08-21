@@ -1,19 +1,12 @@
 # challenges-kinderknecht
 
-Sprint13
+Sprint14 
 
-API DOCUMENTATION - JOI
+--- TESTING FOR THE APPLICATION - Chai - Mocha - Supertest - Artillery ---
 
-JOI 
-  - implemented for all resources to check data input format, and to return messages to the user in case the format is incorrect.
-  - Schemas made for user, product, cart
-  - Obsolete middlewares deleted
-
-API DOCUMENTATION 
-  - Entire API documentation done using swagger. 
-  - YAML files with schemas, responses and paths created for users, products, carts, sessions.
-  - Accessible via:
-    /api/docs
+- Integration testing with SUPERTEST for all app's resources: Users, Products, Carts, Sessions.
+- Unit testing using MOCHA & CHAI for specific operations in the Products resource.
+- Stress testing with Artillery for a simple 3-operation application flow.
 
 -----------------
 

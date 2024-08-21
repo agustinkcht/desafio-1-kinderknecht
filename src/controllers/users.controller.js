@@ -81,7 +81,7 @@ class UsersController {
       const data = req.body;
       const updatedUser = await updateService(uid, data);
       return res.suc200mesres(
-        `User with id ${uid} updated successfully`,
+        "User updated successfully",
         updatedUser
       );
     } catch (err) {
