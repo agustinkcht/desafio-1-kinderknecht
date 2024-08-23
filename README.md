@@ -1,12 +1,8 @@
 # challenges-kinderknecht
 
-Sprint14 
+Sprint15
 
---- TESTING FOR THE APPLICATION - Chai - Mocha - Supertest - Artillery ---
-
-- Integration testing with SUPERTEST for all app's resources: Users, Products, Carts, Sessions.
-- Unit testing using MOCHA & CHAI for specific operations in the Products resource.
-- Stress testing with Artillery for a simple 3-operation application flow.
+- Stripe payment integration implemented.
 
 -----------------
 
@@ -16,3 +12,15 @@ INSTRUCTIONS for running app:
 - Admin user (working on all persistencies): bobmoog@gmail.com | s3curep4ss
 
 Use postman for complete access to the resources. Don't forget to log in!
+
+PAYMENT TESTING:
+
+- valid test card: 
+Card Number: 4242 4242 4242 4242
+Expiration date: Any future date.
+Cvv: any 3-digit number
+
+- invalid cards:
+Insufficient funds: 4000 0000 0000 9995
+Expired card: 4000 0000 0000 0069
+Processing error: 4000 0000 0000 0119

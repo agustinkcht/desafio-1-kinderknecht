@@ -20,8 +20,11 @@ const ticketTemplate = (total, formattedDate) => `
     </div>
 `;
 
-const doneBtn = `
- <button href="/" class="btn btn-primary" onclick="clearCart()">Done</button>
+const returnToCatalogBtn = `
+ <a href="/" class="btn btn-primary">Return to Catalog</a>
+`;
+const proceedToPaymentBtn = `
+ <button class="btn btn-primary" onclick="fetchPayments()">Proceed to Payment</button>
 `;
 
 const dateOptions = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'};
@@ -42,7 +45,8 @@ async function fetchData() {
                 .map(each => template(each))
                 .join('');
                 document.querySelector('#itemsOnCart').innerHTML = itemsHtml;
-                document.querySelector('#returnToHome').innerHTML = doneBtn;   
+                document.querySelector('#returnToCatalog').innerHTML = returnToCatalogBtn;   
+                document.querySelector('#proceedToPayment').innerHTML = proceedToPaymentBtn;  
             } else {
                 let noItemsMessage = `Unable to generate ticket`;
                 document.querySelector('#itemsOnCart').innerHTML = noItemsMessage
@@ -74,26 +78,24 @@ async function fetchTicket() {
 
 }
 
-async function clearCart() {
+async function fetchPayments() {
+    const opts = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+    }
     try {
-        const url = "/api/carts/all";
-        const opts = {
-            method: "DELETE",
-            headers: {"Content-Type" : "application/json"}
-        };
-        let response = await fetch(url, opts);
+        let response = await fetch('/api/payments/', opts)
         response = await response.json()
-        console.log('Purchase ended. Cart cleared.', response)
-        alert('Redirecting home')
-        location.replace("/")
+        console.log(response)
+        location.replace(response) // url to stripe checkout  
     } catch (error) {
-        console.log('error clearing cart', error)
+        console.error(error)     
     }
 }
-
-window.clearCart = clearCart;
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchData();
     fetchTicket();
 });
+
+window.fetchPayments = fetchPayments;
