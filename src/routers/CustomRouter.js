@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/token.util.js";
 import usersRepository from "../repositories/users.rep.js";
-import logger from "../utils/winston.util.js";
 import CustomError from "../utils/errors/CustomError.js";
 import errors from "../utils/errors/errors.js";
 
@@ -121,18 +120,19 @@ class CustomRouter {
   };
   policies = (policiesArray) => async (req, res, next) => {
     try {
-      if (policiesArray.includes("PUBLIC")) return next();
-      let token = req.cookies.token;
+      if (policiesArray.includes("PUBLIC")) return next(); // if PUBLIC, no session is needed
+      let token = req.cookies.token; // otherwise, you need the session, so check if there's one active
       if (!token) return res.err401noSession();
       token = verifyToken(token); // uses verifyToken to de-tokenize the data
       const { role, email } = token;
       if (
         (policiesArray.includes("USER") && role === 0) ||
-        (policiesArray.includes("ADMIN") && role === 1)
-      ) {
+        (policiesArray.includes("ADMIN") && role === 1) ||
+        (policiesArray.includes("PREMIUM") && role === 2 )
+      ) { // retrieve user data 
         const user = await usersRepository.readByEmailRepository(email);
         delete user.password; // protecting password.
-        req.user = user; // incorporate user object to the req object
+        req.user = user; // incorporate user object to the req object. (any operation when logged in contains user data)
         return next();
       } else {
         return res.err403();

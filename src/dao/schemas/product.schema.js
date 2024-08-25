@@ -14,6 +14,14 @@ const productSchema = joi.object({
     "string.min": "Category must contain at least 1 characters",
     "string.max": "Category must contain less than 50 characters",
   }),
+  supplier_id: joi
+    .string()
+    .required()
+    .pattern(new RegExp("^[0-9a-fA-F]{24}$"))
+    .messages({
+      "any.required": "Supplier ID is required",
+      "string.pattern.base": "Supplier ID must be a a 24-digit hexadecimal code",
+    }),
   price: joi.number().min(0).max(9999999).messages({
     "number.base": "Price must be a number",
     "number.min": "The minimum price is 0",

@@ -7,6 +7,7 @@ class ProductsDTO {
   constructor(data) {
     persistence !== "mongo" &&
       (this._id = crypto.randomBytes(12).toString("hex"));
+    this.supplier_id = data.supplier_id; 
     this.title = data.title;
     this.photo =
       data.photo ||
