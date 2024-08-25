@@ -34,8 +34,6 @@ const schema = new Schema(
 schema.plugin(mongoosePaginate);
 
 // MIDDLEWARES PRE para POPULATE
-
-
 schema.pre("create", function () {
   this.populate({
     path: "user_id",
@@ -56,18 +54,6 @@ schema.pre("find", function () {
     path: "product_id",
   });
 });
-schema.pre("paginate", function () {
-    this.populate({
-      path: "user_id",
-
-    });
-  });
-  schema.pre("paginate", function () {
-    this.populate({
-      path: "product_id",
-
-    });
-  });
 schema.pre("findOne", function () {
   this.populate({
     path: "user_id",

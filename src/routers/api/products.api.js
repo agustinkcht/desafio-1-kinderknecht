@@ -5,11 +5,11 @@ import productSchema from "../../dao/schemas/product.schema.js";
 
 class ProductsRouter extends CustomRouter {
   init() {
-    this.create("/", ["ADMIN"], validator(productSchema), create);
+    this.create("/", ["ADMIN", "PREMIUM"], validator(productSchema), create);
     this.read("/", ["PUBLIC"], read);
     this.read("/:pid", ["PUBLIC"], readOne);
-    this.update("/:pid", ["ADMIN"], update);
-    this.destroy("/:pid", ["ADMIN"], destroy);
+    this.update("/:pid", ["ADMIN", "PREMIUM"], update);
+    this.destroy("/:pid", ["ADMIN", "PREMIUM"], destroy);
   }
 }
 

@@ -36,17 +36,7 @@ const schema = new Schema(
 schema.plugin(mongoosePaginate);
 
 // PRE (popullate)
-schema.pre("create", function () {
-  this.populate({
-    path: "supplier_id",
-  });
-});
 schema.pre("find", function () {
-  this.populate({
-    path: "supplier_id",
-  });
-});
-schema.pre("paginate", function () {
   this.populate({
     path: "supplier_id",
   });
@@ -65,6 +55,11 @@ schema.pre("findOneAndDelete", function () {
   this.populate({
     path: "supplier_id",
   });
+});
+
+// POST ()
+schema.post("save", async function () {
+  await this.populate({ path: "supplier_id" });
 });
 
 const Product = model(collection, schema);

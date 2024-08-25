@@ -86,7 +86,7 @@ const productManager = new ProductManager();
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b56f",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "Airpods Pro 2",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -99,7 +99,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b570",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "Apple EarPods",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -112,7 +112,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b571",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "Airpods Max",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -125,7 +125,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b572",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "Airpods 3rd gen",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -138,7 +138,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b573",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "iPhone 15 Pro",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -151,7 +151,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b574",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "iPhone 14",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -164,7 +164,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b575",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "Apple Watch 9",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -177,7 +177,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b576",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "MacBook Air 13 M2",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -190,7 +190,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b577",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "MacBook Pro 14 M3",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -203,7 +203,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b578",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "Mac Studio M2 Max",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -216,7 +216,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b579",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "iPhone SE Plus",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -229,7 +229,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b57a",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "iPhone XR2",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -242,7 +242,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b57b",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "iPhone 11",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -255,7 +255,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b57c",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "iPhone XS",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -268,7 +268,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b57d",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "iPhone 8",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -281,7 +281,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b57e",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "iPhone 7 Plus",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -294,7 +294,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b57f",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "AirPods Pro Lite",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -307,7 +307,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b580",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "AirTag Keychain",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -320,7 +320,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b581",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "AirTag Leather Loop",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -333,7 +333,7 @@ productManager.create({
 
 productManager.create({
   _id: "663cea2c57109ba2e5d3b582",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "Apple Watch Series 8",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -346,7 +346,7 @@ productManager.create({
 
 productManager.create({
   _id: "663ceb1057109ba2e5d3b583",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "Apple Watch Sport Loop Band",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -359,7 +359,7 @@ productManager.create({
 
 productManager.create({
   _id: "663ceb1057109ba2e5d3b584",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "Apple Watch Milanese Loop Band",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -372,7 +372,7 @@ productManager.create({
 
 productManager.create({
   _id: "663ceb1057109ba2e5d3b585",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "MacBook Pro 16 M4",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -385,7 +385,7 @@ productManager.create({
 
 productManager.create({
   _id: "663ceb1057109ba2e5d3b586",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "MacBook Air 14 M2",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -398,7 +398,7 @@ productManager.create({
 
 productManager.create({
   _id: "663ceb1057109ba2e5d3b587",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "iMac Pro 32-inch",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",
@@ -411,7 +411,7 @@ productManager.create({
 
 productManager.create({
   _id: "663ceb1057109ba2e5d3b588",
-  supplier_id: "66918b794d21c1bc0efdd69e",
+  supplier_id: "66818054e857f2ed5dbf802c",
   title: "Mac Mini Pro",
   photo:
     "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png",

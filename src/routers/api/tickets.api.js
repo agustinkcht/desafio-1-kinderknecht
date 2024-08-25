@@ -3,7 +3,7 @@ import generateTicket from "../../controllers/tickets.controller.js";
 
 class TicketsRouter extends CustomRouter {
   init() {
-    this.read("/", ["USER", "ADMIN"], generateTicket);
+    this.read("/", ["USER", "PREMIUM"], generateTicket);
   };
 };
 

@@ -1,15 +1,6 @@
 import joi from "joi-oid";
 
 const cartSchema = joi.object({
-  user_id: joi
-    .string()
-    .required()
-    .pattern(new RegExp("^[0-9a-fA-F]{24}$"))
-    .messages({
-      "any.required": "User ID is required",
-      "string.pattern.base":
-        "User ID must be a a 24-digit hexadecimal code",
-    }),
   product_id: joi
     .string()
     .required()

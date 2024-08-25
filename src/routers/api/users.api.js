@@ -7,11 +7,11 @@ import userSchema from "../../dao/schemas/user.schema.js";
 class UsersRouter extends CustomRouter {
   init() {
     this.create("/", ["PUBLIC"], validator(userSchema), isValidEmail, create);
-    this.read("/", ["USER", "ADMIN"], read);
-    this.read("/email/:email", ["USER", "ADMIN"], readByEmail);
-    this.read("/:uid", ["USER", "ADMIN"], readOne);
-    this.update("/:uid", ["USER", "ADMIN"], update);
-    this.destroy("/:uid", ["USER", "ADMIN"], destroy);
+    this.read("/", ["USER", "ADMIN", "PREMIUM"], read);
+    this.read("/email/:email", ["USER", "ADMIN", "PREMIUM"], readByEmail);
+    this.read("/:uid", ["USER", "ADMIN", "PREMIUM"], readOne);
+    this.update("/:uid", ["USER", "ADMIN", "PREMIUM"], update);
+    this.destroy("/:uid", ["USER", "ADMIN", "PREMIUM"], destroy);
   }
 }
 
