@@ -5,8 +5,8 @@ printOnlineIcons();
 
 document.querySelector("#submit").addEventListener("click", async () => {
   const data = {
-    code: document.querySelector("#code").value,
-    password: document.querySelector("#password").value
+    code: document.querySelector("#code").value.trim() || undefined,
+    password: document.querySelector("#password").value.trim() || undefined
   };
   const opts = {
     method: "PUT",

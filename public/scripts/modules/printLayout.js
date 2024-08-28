@@ -8,6 +8,7 @@ async function printOfflineIcons() {
                 template = `
                 <a class="nav-link active" aria-current="page" href="/pages/login.html">Login</a>
                 <a class="nav-link active" aria-current="page" href="/pages/register.html">Register</a>
+                <a class="nav-link active" aria-current="page" href="/pages/verify.html">Verification</a>
                 `;
                 document.querySelector('#print-offline-icons').innerHTML = template;
             }    

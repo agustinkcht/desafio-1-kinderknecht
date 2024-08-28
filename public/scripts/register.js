@@ -6,12 +6,13 @@ printOnlineIcons();
 document.querySelector("#register").addEventListener("click", async () => {
   alert("Processing... Press OK and wait")
   const data = {
-    email: document.querySelector("#email").value,
-    password: document.querySelector("#password").value,
-    firstName: document.querySelector("#firstName").value,
-    lastName: document.querySelector("#lastName").value,
-    age: Number(document.querySelector("#age").value),
-    role: Number(document.querySelector("#role").value)
+    email: document.querySelector("#email").value.trim() || undefined,
+    password: document.querySelector("#password").value.trim() || undefined,
+    firstName: document.querySelector("#firstName").value.trim() || undefined,
+    lastName: document.querySelector("#lastName").value.trim() || undefined,
+    age: document.querySelector("#age").value.trim() ? Number(document.querySelector("#age").value) : undefined,
+    role: document.querySelector("#role").value.trim() ? Number(document.querySelector("#role").value) : undefined,
+    photo: document.querySelector("#photo").value.trim() || undefined
   };
   const opts = {
     method: "POST",

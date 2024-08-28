@@ -27,6 +27,12 @@ class ProductsController1 {
   async read(req, res, next) {
     try {
       const filter = {};
+      // if user online, and is PREMIUM, don't show their own products
+      if (req.user) {
+        if (req.user.role === 2) {
+          filter.supplier_id = { $ne: req.user._id };
+        }
+      }
       if (req.query.category) {
         filter.category = req.query.category;
       }
@@ -46,12 +52,42 @@ class ProductsController1 {
         nextPage: all.nextPage,
         totalDocs: all.totalDocs,
       };
-      const response = all.docs;
+      let response = all.docs;
       return res.suc200respag(response, paginateInfo);
     } catch (err) {
       return next(err);
     }
   } // w pagination
+  async readMine(req, res, next) {
+    try {
+      const filter = {}
+      filter.supplier_id = req.user._id
+      if (req.query.category) {
+        filter.category = req.query.category;
+      }
+      if (req.query.title) {
+        filter.title = new RegExp(req.query.title, "i");
+      }
+      const opts = {
+        limit: parseInt(req.query.limit) || 3,
+        page: parseInt(req.query.page) || 1,
+      };
+      const all = await paginateService({ filter, opts });
+      const paginateInfo = {
+        page: all.page,
+        totalPages: all.totalPages,
+        limit: all.limit,
+        prevPage: all.prevPage,
+        nextPage: all.nextPage,
+        totalDocs: all.totalDocs,
+      };
+      let response = all.docs;
+      return res.suc200respag(response, paginateInfo);
+
+    } catch (err) {
+      return next(err);
+    }
+  }
   async readOne(req, res, next) {
     try {
       const { pid } = req.params;
@@ -97,8 +133,8 @@ class ProductsController2 {
       data.supplier_id = supplier_id;
       const newProduct = await createService(data);
       // popullating field supplier_id for the response
-      const supplier = await usersRepository.readOneRepository(supplier_id)
-      let newProductPopullated = { ...newProduct }
+      const supplier = await usersRepository.readOneRepository(supplier_id);
+      let newProductPopullated = { ...newProduct };
       newProductPopullated.supplier_id = supplier;
       return res.suc201mesres(
         `Product created successfully with id ${newProduct._id}`,
@@ -111,6 +147,12 @@ class ProductsController2 {
   async read(req, res, next) {
     try {
       const filter = {};
+      // if user online, and is PREMIUM, don't show their own products
+      if (req.user) {
+        if (req.user.role === 2) {
+          filter.supplier_id = { $ne: req.user._id };
+        }
+      }
       if (req.query.category) {
         filter.category = req.query.category;
       }
@@ -134,25 +176,68 @@ class ProductsController2 {
       const response = all.docs;
       const responsePopullated = await Promise.all(
         response.map(async (each) => {
-          const supplier = await usersRepository.readOneRepository(each.supplier_id)
-          return { ...each, supplier_id: supplier }
+          const supplier = await usersRepository.readOneRepository(
+            each.supplier_id
+          );
+          return { ...each, supplier_id: supplier };
         })
-      )
+      );
       return res.suc200respag(responsePopullated, paginateInfo);
     } catch (err) {
       return next(err);
     }
   } // w pagination
+  async readMine(req, res, next) {
+    try {
+      const filter = {};
+      // if user online, and is PREMIUM, don't show their own products
+      filter.supplier_id = req.user._id
+      if (req.query.category) {
+        filter.category = req.query.category;
+      }
+      if (req.query.title) {
+        filter.title = new RegExp(req.query.title, "i");
+      }
+      const opts = {
+        limit: parseInt(req.query.limit) || 3,
+        page: parseInt(req.query.page) || 1,
+      };
+      const all = await paginateService({ filter, opts });
+      const paginateInfo = {
+        page: all.page,
+        totalPages: all.totalPages,
+        limit: all.limit,
+        prevPage: all.prevPage,
+        nextPage: all.nextPage,
+        totalDocs: all.totalDocs,
+      };
+      // popullating supplier_id field
+      const response = all.docs;
+      const responsePopullated = await Promise.all(
+        response.map(async (each) => {
+          const supplier = await usersRepository.readOneRepository(
+            each.supplier_id
+          );
+          return { ...each, supplier_id: supplier };
+        })
+      );
+      return res.suc200respag(responsePopullated, paginateInfo);
+    } catch (err) {
+      return next(err);
+    }
+  }
   async readOne(req, res, next) {
     try {
       const { pid } = req.params;
       const selected = await readOneService(pid);
       if (!selected) {
         return res.err404product();
-      } 
+      }
       // poppulate field supplier_id
-      const supplier = await usersRepository.readOneRepository(selected.supplier_id)
-      selected.supplier_id = supplier
+      const supplier = await usersRepository.readOneRepository(
+        selected.supplier_id
+      );
+      selected.supplier_id = supplier;
       return res.suc200res(selected);
     } catch (err) {
       return next(err);
@@ -164,8 +249,10 @@ class ProductsController2 {
       const data = req.body;
       const updatedProduct = await updateService(pid, data);
       // popullating field supplier_id
-      const supplier = await usersRepository.readOneRepository(updatedProduct.supplier_id)
-      updatedProduct.supplier_id = supplier
+      const supplier = await usersRepository.readOneRepository(
+        updatedProduct.supplier_id
+      );
+      updatedProduct.supplier_id = supplier;
       return res.suc200mesres("Product updated successfully", updatedProduct);
     } catch (err) {
       return next(err);
@@ -178,8 +265,10 @@ class ProductsController2 {
       if (!deletedProduct) {
         return res.err404product();
       }
-      const supplier = await usersRepository.readOneRepository(deletedProduct.supplier_id)
-      deletedProduct.supplier_id = supplier
+      const supplier = await usersRepository.readOneRepository(
+        deletedProduct.supplier_id
+      );
+      deletedProduct.supplier_id = supplier;
       return res.suc200mesres("Product deleted successfully", deletedProduct);
     } catch (err) {
       return next(err);
@@ -202,5 +291,5 @@ switch (persistence) {
     break;
 }
 
-const { create, read, readOne, update, destroy } = productsController; 
-export { create, read, readOne, update, destroy };
+const { create, read, readMine, readOne, update, destroy } = productsController;
+export { create, read, readMine, readOne, update, destroy };

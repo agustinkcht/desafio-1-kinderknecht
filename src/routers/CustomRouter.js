@@ -120,9 +120,19 @@ class CustomRouter {
   };
   policies = (policiesArray) => async (req, res, next) => {
     try {
-      if (policiesArray.includes("PUBLIC")) return next(); // if PUBLIC, no session is needed
-      let token = req.cookies.token; // otherwise, you need the session, so check if there's one active
-      if (!token) return res.err401noSession();
+      let token = req.cookies.token; // check if there's a session active
+      if (policiesArray.includes("PUBLIC") && (!token)) {
+        return next(); // if PUBLIC and no session opened, just go on
+      } 
+      if (policiesArray.includes("PUBLIC") && (token)) {
+        token = verifyToken(token); // uses verifyToken to de-tokenize the data
+        const { email } = token;
+        const user = await usersRepository.readByEmailRepository(email)
+        delete user.password;
+        req.user = user // if PUBLIC and a user is logged in, incorporate user data to the req
+        return next()
+      }
+      if (!token) return res.err401noSession(); // if NOT PUBLIC and there is no session, OUT
       token = verifyToken(token); // uses verifyToken to de-tokenize the data
       const { role, email } = token;
       if (
