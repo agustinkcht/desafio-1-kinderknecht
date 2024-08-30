@@ -12,17 +12,19 @@ const template = (data) => `
         </a>
     </div>
     <form class="card-body d-flex flex-column m-3">
-        <h4 class="mb-1">Photo:</h4>
-        <input class="mb-3 w-40" type="text" name="photo" id="photo" placeholder=${data.photo}>
+        <span class="mb-1">Supplier: ${data.supplier_id.firstName} ${data.supplier_id.lastName}</span>
         <h4 class="mb-1">Title:</h4>
         <input class="mb-3 w-40" type="text" name="title" id="title" placeholder=${data.title}>
         <h4 class="mb-1">Category:</h4>
         <input class="mb-3 w-40" type="text" name="category" id="category" placeholder=${data.category}>
+        <h4 class="mb-1">Photo:</h4>
+        <input class="mb-3 w-40" type="text" name="photo" id="photo" placeholder=${data.photo}>
         <h4 class="mb-1">Price:</h4>
         <input class="mb-3 w-40" type="number" name="price" id="price" placeholder=${data.price}>
         <h4 class="mb-1">Stock:</h4>
         <input class="mb-3 w-40" type="number" name="stock" id="stock" placeholder=${data.stock}>
         <button type="button" class="btn btn-primary" onclick="updateProduct('${data._id}')">Done</button>
+        <a href="#" id="delete" class="mt-2 text-danger text-center" onclick="deleteProduct('${data._id}')">Delete Product</a>
     </form>
 </div> 
 `;
@@ -76,6 +78,25 @@ async function updateProduct() {
     }
 }
 
+async function deleteProduct(pid) {
+    try {
+        const opts = {
+            method: "DELETE",
+            headers: { "Content-Type" : "application/json" }
+        }
+        let res = await fetch(`/api/products/${pid}`, opts)
+        res = await res.json()
+        console.log(res)
+        if (res.statusCode !== 200) {
+            return alert("Unable to delete product", res.message)
+        }
+        alert(res.message)
+        location.replace("/pages/me.html")
+    } catch (err) {
+        console.log("Error. Unable to delete product.")        
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => { // execute getProduct ASAPL (page load)
     if(!pid) {
         document.querySelector("#productNotFound").innerHTML = "Product not found"
@@ -84,3 +105,4 @@ document.addEventListener('DOMContentLoaded', () => { // execute getProduct ASAP
 });
 
 window.updateProduct = updateProduct;
+window.deleteProduct = deleteProduct;

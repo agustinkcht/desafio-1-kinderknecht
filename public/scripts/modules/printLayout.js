@@ -15,7 +15,6 @@ async function printOfflineIcons() {
     } catch (err) {
         console.error('Error printing offline icons')     
     }
-
 };
 
 async function printOnlineIcons() {
@@ -23,13 +22,34 @@ async function printOnlineIcons() {
         let template = "";
         let online = await fetch('/api/sessions/online');
         online = await online.json();
+        const { role } = online
         if (online.statusCode === 200) {
             console.log('Online', online);
-            template = `
-            <a class="nav-link active" aria-current="page" href="/pages/user.html">Profile</a>
-            <a class="nav-link active" aria-current="page" href="/pages/cart.html" id="cart-icon">Cart</a>
-            <button class="nav-link active" type="button" id="logout-btn" style="border: solid 1px; border-radius: 4px; margin-left: 4px;">Log Out</button>
-            `
+            switch (role) {
+                case 0:
+                    template = `
+                    <a class="nav-link active" aria-current="page" href="/pages/user.html">Profile</a>
+                    <a class="nav-link active" aria-current="page" href="/pages/cart.html">Cart</a>
+                    <button class="nav-link active" type="button" id="logout-btn" style="border: solid 1px; border-radius: 4px; margin-left: 4px;">Log Out</button>
+                    `
+                    break;
+                case 1:
+                    template = `
+                    <a class="nav-link active" aria-current="page" href="/pages/user.html">Profile</a>
+                    <a class="nav-link active" aria-current="page" href="/pages/new.html">Publish</a>
+                    <button class="nav-link active" type="button" id="logout-btn" style="border: solid 1px; border-radius: 4px; margin-left: 4px;">Log Out</button>
+                    `
+                    break;
+                case 2:
+                    template = `
+                    <a class="nav-link active" aria-current="page" href="/pages/user.html">Profile</a>
+                    <a class="nav-link active" aria-current="page" href="/pages/cart.html">Cart</a>
+                    <a class="nav-link active" aria-current="page" href="/pages/new.html">Sell</a>
+                    <a class="nav-link active" aria-current="page" href="/pages/publications.html">Publications</a>
+                    <button class="nav-link active" type="button" id="logout-btn" style="border: solid 1px;border-radius: 4px; margin-left: 4px;">Log Out</button>
+                    `
+                    break;
+            }
             document.querySelector('#print-online-icons').innerHTML = template
             document.querySelector('#logout-btn').onclick = async () => {
                 const opts = {

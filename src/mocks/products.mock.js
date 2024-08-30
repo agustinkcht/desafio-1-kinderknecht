@@ -7,7 +7,7 @@ import productsRepository from "../repositories/products.rep.js";
 async function createData() {
   try {
     dbConnect(); // because this file is executed outside the server.
-    for (let i = 1; i <= 474; i++) {
+    for (let i = 1; i <= 10; i++) {
       // creating properties
       const supplier_id = "66918b794d21c1bc0efdd69e";
       const title = faker.commerce.productName();
