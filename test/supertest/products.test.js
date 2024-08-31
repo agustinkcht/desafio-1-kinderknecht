@@ -4,8 +4,8 @@ import requester from "../../src/utils/requester.util.js";
 describe(
     "Testing resource: PRODUCTS",
     function() {
-        const adminUser = {
-            email: "bobmoog@gmail.com",
+        const premiumUser = {
+            email: "wendycarlos@gmail.com",
             password: "s3curep4ss"
         }
         const product = {
@@ -19,12 +19,42 @@ describe(
         let token
         let pid
         it(
-            "Log in with admin user to access the resource management",
+            "Log in with premium user to access the resource management",
             async() => {
-                const response = await requester.post("/sessions/login").send(adminUser)
+                const response = await requester.post("/sessions/login").send(premiumUser)
                 const { _body, headers } = response
                 token = headers["set-cookie"][0].split(";")[0]
                 expect(_body.statusCode).to.be.equals(200);
+            }
+        )
+        it(
+            "Read all products (should only retrieve products from other sellers)",
+            async() => {
+                const response = await requester
+                  .get("/products")
+                  .set("Cookie", token)
+                const { _body } = response
+                expect(_body.statusCode).to.be.equals(200)
+            }
+        )
+        it(
+            "Read all products filtering by category (should only retrieve products from other sellers)",
+            async() => {
+                const response = await requester
+                  .get("/products?category=headphones")
+                  .set("Cookie", token)
+                const { _body } = response
+                expect(_body.statusCode).to.be.equals(200)
+            }
+        )
+        it(
+            "Read all MY products (should only retrieve products published by the user)",
+            async() => {
+                const response = await requester
+                  .get("/products/me")
+                  .set("Cookie", token)
+                const { _body } = response
+                expect(_body.statusCode).to.be.equals(200)
             }
         )
         it(
@@ -38,26 +68,6 @@ describe(
                 // set variable UID for the next tests
                 pid = _body.response._id
                 expect(_body.statusCode).to.be.equals(201)
-            }
-        )
-        it(
-            "Read all products",
-            async() => {
-                const response = await requester
-                  .get("/products")
-                  .set("Cookie", token)
-                const { _body } = response
-                expect(_body.statusCode).to.be.equals(200)
-            }
-        )
-        it(
-            "Read all products filtering by category",
-            async() => {
-                const response = await requester
-                  .get("/products?category=accessories")
-                  .set("Cookie", token)
-                const { _body } = response
-                expect(_body.statusCode).to.be.equals(200)
             }
         )
         it(

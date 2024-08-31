@@ -50,7 +50,7 @@ describe(
             async() => {
                 const response = await requester
                 .post("/sessions/login")
-                .send(user)
+                .send({email: user.email, password: user.password})
                 const { _body, headers } = response
                 token = headers["set-cookie"][0].split(";")[0]
                 expect(_body.statusCode).to.be.equals(200);

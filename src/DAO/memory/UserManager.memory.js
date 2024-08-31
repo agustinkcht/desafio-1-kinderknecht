@@ -94,7 +94,7 @@ userManager.create({
   firstName: "Wendy",
   lastName: "Carlos",
   age: 84,
-  role: 1,
+  role: 2,
   photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
   verified: true,
   verificationCode: "3712cc5816166ef4293b2c8b",
