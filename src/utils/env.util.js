@@ -13,9 +13,11 @@ config({ path });
 const environment = {
   PORT: process.env.PORT,
   MONGO_URI: process.env.MONGO_URI,
+  PUBLIC_STRIPE: process.env.PUBLIC_STRIPE,
   SECRET_COOKIE: process.env.SECRET_COOKIE,
   SECRET_SESSION: process.env.SECRET_SESSION,
   SECRET_JWT: process.env.SECRET_JWT,
+  SECRET_STRIPE: process.env.SECRET_STRIPE,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   GOOGLE_EMAIL: process.env.GOOGLE_EMAIL,

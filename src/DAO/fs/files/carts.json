@@ -1,29 +1,20 @@
 [
     {
         "_id": "139c455ec8b76c3a0f3e6b5f",
-        "createdAt": "2024-08-05T18:23:10.400Z",
-        "updatedAt": "2024-08-05T18:23:10.400Z",
-        "user_id": "6681805ee857f2ed5dbf802e",
+        "user_id": "6691882c4d21c1bc0efdd683",
         "product_id": "663cea2c57109ba2e5d3b56f",
         "quantity": 3,
-        "state": "reserved"
+        "state": "reserved",
+        "createdAt": "2024-08-05T18:23:10.400Z",
+        "updatedAt": "2024-08-05T18:23:10.400Z"
     },
     {
         "_id": "ce4871515d214c2eddb5e94a",
-        "user_id": "6681805ee857f2ed5dbf802e",
+        "user_id": "6691882c4d21c1bc0efdd683",
         "product_id": "663cea2c57109ba2e5d3b573",
         "quantity": 1,
         "state": "reserved",
         "createdAt": "2024-08-05T20:05:32.703Z",
         "updatedAt": "2024-08-05T20:05:32.703Z"
-    },
-    {
-        "_id": "58c2408cfbe0f4dc75de4930",
-        "user_id": "6681805ee857f2ed5dbf802e",
-        "product_id": "663cea2c57109ba2e5d3b580",
-        "quantity": 1,
-        "state": "reserved",
-        "createdAt": "2024-08-05T20:05:42.486Z",
-        "updatedAt": "2024-08-05T20:05:42.486Z"
     }
 ]

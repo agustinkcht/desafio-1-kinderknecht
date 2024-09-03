@@ -3,14 +3,30 @@ import { printOfflineIcons, printOnlineIcons } from "./modules/printLayout.js";
 printOfflineIcons()
 printOnlineIcons()
 
-const template = (data) => `
+let role
+let uid
+let product
+let sid
+let button
+
+const template = (product) => `
 <div class="card m-2" style="width: 18rem;">
-    <img src="${data.photo}" class="card-img-top" alt="data-photo">
+    <img src="${product.photo}" class="card-img-top" alt="product-photo">
     <div class="card-body">
-    <h4 class="card-title">${data.title}</h4>
-    <h5 class="card-title">$${data.price}</h4>
-    <button type="button" class="btn btn-primary" onclick="addToCart('${data._id}')">Add to Cart</button>
-  </div>
+        <h4 class="card-title">${product.title}</h4>
+        <h5 class="card-title">$${product.price}</h4>
+            <div class="d-flex flex-row justify-content-evenly">
+                ${
+                    button === "cart" ? `<button type="button" class="btn btn-primary" onclick="addToCart('${product._id}')">Add toCart</button>` : ''
+                }
+                ${
+                    button === "manage" ? `<a href="/pages/manage.html?id=${product._id}" type="button" class="btn btn-primary" >Manage</a>` : ''
+                }
+                ${
+                    button === "none" ? '<a href="/pages/login.html">Log in to buy</a>' : ''
+                }
+            </div>  
+    </div>
 </div> 
 `;
 
@@ -18,18 +34,55 @@ const queries = new URL(location.href);
 const pid = queries.searchParams.get('id');
 // traigo pid desde el params
 
+async function getProduct() { // retrieve product data
+    try {
+        let res = await fetch(`/api/products/${pid}`)
+        res = await res.json()
+        if(res.statusCode !== 200) {
+            console.log("Product not found")
+        } 
+        product = res.response
+        sid = product.supplier_id._id
+    } catch (err) {
+        console.error("Error fetching data")     
+    }
+   //function here
+}
 
-fetch(`/api/products/${pid}`)
-    .then(res => res.json())
-    .then(res => {
-        console.log(res.response) //objeto
-        const product = res.response;
-        const productHtml = template(product);
-        document.querySelector('#product').innerHTML = productHtml;
-    })
-    .catch(error => {
-        console.log('error fetching data', error)
-})
+async function setButton() {
+    try {
+        let res = await fetch("/api/sessions/online")
+        res = await res.json()
+        if(res.statusCode !== 200) {
+            console.error("Error retrieving user data")
+            return button = "none"
+        }
+        role = res.role;
+        uid = res.user_id;
+        if (role === 0 || (role === 2) && (uid !== sid) ) {
+            return button = "cart"
+        }
+        // OJO! ES UID !== SUPPLIER ID NO sid
+        if (role === 1 ||(role === 2) && (uid === sid) ) {
+            return button = "manage"
+        }
+    } catch (err) {
+        console.error(err)   
+    }
+}
+
+async function setTemplate() {
+    try {
+        const productHtml = template(product)
+        document.querySelector("#product").innerHTML = productHtml; 
+    } catch (err) {
+        console.log("Unable to print product card due to lack of information")
+        
+    }
+    const productHtml = template(product)
+    document.querySelector("#product").innerHTML = productHtml; 
+
+}
 
 async function addToCart(pid) {
     try {
@@ -56,5 +109,19 @@ async function addToCart(pid) {
         console.log(error)
     };
 };
+
+document.addEventListener('DOMContentLoaded', () => { // execute getProduct ASAPL (page load)
+    if(!pid) {
+        document.querySelector("#productNotFound").innerHTML = "Product not found"
+    }
+    gets()
+    
+});
+
+async function gets() {
+    let getP = await getProduct()
+    let setB = await setButton()
+    let setT = await setTemplate()
+}
 
 window.addToCart = addToCart;

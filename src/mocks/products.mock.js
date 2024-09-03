@@ -7,14 +7,15 @@ import productsRepository from "../repositories/products.rep.js";
 async function createData() {
   try {
     dbConnect(); // because this file is executed outside the server.
-    for (let i = 1; i <= 50; i++) {
+    for (let i = 1; i <= 10; i++) {
       // creating properties
+      const supplier_id = "66918b794d21c1bc0efdd69e";
       const title = faker.commerce.productName();
       const category = faker.commerce.product();
       const price = faker.commerce.price({ min: 19, max: 2300, dec: 0 });
       const stock = faker.number.int({ min: 1, max: 500 });
       // creating product object
-      const product = { title, category, price, stock };
+      const product = { supplier_id, title, category, price, stock };
       // create with repository
       await productsRepository.createRepository(product);
     }

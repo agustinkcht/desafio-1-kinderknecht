@@ -19,7 +19,7 @@ const clearCartBtn = `
 `;
 
 const checkoutBtn = `
- <a href="/pages/ticket.html" class="btn btn-primary" onclick="checkOut()">Check Out</a>
+ <a href="/pages/ticket.html" class="btn btn-primary">Check Out</a>
 `;
 
 async function fetchData() {

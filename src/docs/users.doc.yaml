@@ -2,88 +2,162 @@ components:
   schemas:
     User:
       type: object
-      description: This schema defines the structure and data types for user objects. This format ensures proper interaction with user data and consistency across operations.
+      description: |
+        This schema defines the structure and data types for user objects. This format ensures proper interaction with the resource data and consistency across operations.
       properties:
         _id:
           type: string
-          description: Unique identifier for the user, represented as a 24-digit hexadecimal code. Generated automatically. 
+          pattern: "^[a-fA-F0-9]{24}$"
+          description: |
+            Unique identifier for the user, represented as a MongoDB ObjectId (24-digit hexadecimal code). Generated automatically.
+          example: "6681805ee857f2ed5dbf802e"
         email:
           type: string
+          format: email
           description: User's email.
+          maxLength: 254
+          example: "bobmoog@gmail.com"
         password:
           type: string
-          description: User's password.
+          pattern: "^(?=.*[a-zA-Z])(?=.*[0-9]).*$"
+          description: | 
+            User's password. It must be alphanumeric. It is stored in a hashed format for security reasons.
+          minLength: 8
+          maxLength: 64
+          example: "s3curep4ss"
         firstName:
           type: string
           description: User's first name.
+          minLength: 1
+          maxLength: 50
+          example: "Robert"
         lastName:
           type: string
           description: User's last name.
+          minLength: 1
+          maxLength: 50
+          example: "Moog"
         age:
           type: integer
           format: int64
           description: User's age.
+          minimum: 12
+          maximum: 120
+          example: 90
         role:
           type: integer
           format: int64
-          description: User's role appwise. Defines authorization. Default is 0.
+          description: User's role appwise. Defines authorization.
+          enum:
+            - value: 1
+              description: "Regular user with access to the standard features."
+            - value: 1
+              description: "Admin user with access to all administrative functions."
+            - value: 1
+              description: "Premium user with acces to all standard features, plus aditional premium features."
+          default: 0
+          example: 1
         photo:
           type: string
-          description: User's profile image. Must be URL format. A default image is set in case no URL is provided at the moment of creation.
+          format: uri
+          description: | 
+            User's profile image. A default image is set in case no URL is provided at the moment of creation.
+          default: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+          example: "https://www.iconpacks.net/free-icon/person-244.html"
         verified:
           type: boolean
-          description: Defines if the user's account has been verified using the verification code. Default is "false".
+          description: | 
+            Defines if the user's account has been verified using the verification code.
+          default: false
+          example: true
         verificationCode:
           type: string
-          description: User's unique code for account verification. Represented as a 24-digit hexadecimal code. Generated automatically. 
+          pattern: "^[a-fA-F0-9]{24}$"
+          description: | 
+            User's unique code for account verification. Represented as a 24-digit hexadecimal code. Generated automatically. 
+          example: "38a956cc75f9a344eb30641a"
         createdAt:
           type: string
           format: date-time
-          description: Timestamp when the user was created. Uses timestamp in ISO 8601 format. Generated automatically.
+          description: | 
+            Timestamp when the user was created. Uses timestamp in ISO 8601 format. Generated automatically.
+          example: 2024-06-22T15:07:25.193Z
         updatedAt:
           type: string
           format: date-time
-          description: Timestamp when the user was last updated. Uses timestamp in ISO 8601 format. Generated automatically.
+          description: | 
+            Timestamp when the user was last updated. Uses timestamp in ISO 8601 format. Generated automatically.
+          example: 2024-06-22T15:09:25.193Z
       example:
-        _id: 6681805ee857f2ed5dbf802e
-        email: bobmoog@gmail.com
-        password: s3curep4ss
-        firstName: Robert
-        lastName: Moog
+        _id: "6681805ee857f2ed5dbf802e"
+        email: "bobmoog@gmail.com"
+        password: "s3curep4ss"
+        firstName: "Robert"
+        lastName: "Moog"
         age: 90
         role: 1
-        photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+        photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
         verified: true
-        verificationCode: 38a956cc75f9a344eb30641a
+        verificationCode: "38a956cc75f9a344eb30641a"
         createdAt: 2024-06-22T15:07:25.193Z
-        updatedAt: 2024-06-22T15:07:25.193Z
+        updatedAt: 2024-06-22T15:09:25.193Z
     UserCreate:
       type: object
-      description: This schema defines the structure and data types for creating an user. It specifies the required and optional fields needed for the operation.
+      description: | 
+        This schema defines the structure and data types for creating an user. It specifies the required and optional fields needed for the operation.
       properties:
         email:
           type: string
+          format: email
           description: User's email.
+          maxLength: 254
+          example: "bobmoog@gmail.com"
         password:
           type: string
-          description: User's password.
+          pattern: "^(?=.*[a-zA-Z])(?=.*[0-9]).*$"
+          description: User's password. It must be alphanumeric. It is stored in a hashed format for security reasons.
+          minLength: 8
+          maxLength: 64
+          example: "s3curep4ss"
         firstName:
           type: string
           description: User's first name.
+          minLength: 1
+          maxLength: 50
+          example: "Robert"
         lastName:
           type: string
           description: User's last name.
+          minLength: 1
+          maxLength: 50
+          example: "Moog"
         age:
           type: integer
           format: int64
           description: User's age.
+          minimum: 12
+          maximum: 120
+          example: 90
         role:
           type: integer
           format: int64
-          description: User's role appwise. Defines authorization. Default is 0.
+          description: User's role appwise. Defines authorization.
+          enum:
+            - value: 1
+              description: "Regular user with access to the standard features."
+            - value: 1
+              description: "Admin user with access to all administrative functions."
+            - value: 1
+              description: "Premium user with acces to all standard features, plus aditional premium features."
+          default: 0
+          example: 1
         photo:
           type: string
-          description: User's profile image. Must be URL format. A default image is set in case no URL is provided at the moment of creation. 
+          format: uri
+          description: | 
+            User's profile image. A default image is set in case no URL is provided at the moment of creation.
+          default: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+          example: "https://www.iconpacks.net/free-icon/person-244.html"
       required:
         - email
         - password
@@ -91,39 +165,66 @@ components:
         - lastName
         - age
       example:
-        email: bobmoog@gmail.com
-        password: s3curep4ss
-        firstName: Robert
-        lastName: Moog
+        email: "bobmoog@gmail.com"
+        password: "s3curep4ss"
+        firstName: "Robert"
+        lastName: "Moog"
         age: 90
-        role: 1
     UserUpdate:
       type: object
-      description: This schema defines the structure and data types for updating an user. It specifies the fields needed for the operation. Please note that while every single property is an optional field in the request body, in order to perform an actual update, at least one of the mentioned optional fields must be provided. If not, the request will be processed successfully, but no modifications will be made to the user.  
+      description: |
+        This schema defines the structure and data types for updating an user. It specifies the fields needed for the operation. Please note that while every single property is an optional field in the request body, in order to perform an actual update, at least one of the mentioned optional fields must be provided. If not, the request will be processed successfully, but no modifications will be made to the user.  
       properties:
         email:
           type: string
+          format: email
           description: User's email.
+          maxLength: 254
+          example: "bobmoog@gmail.com"
         password:
           type: string
-          description: User's password.
+          pattern: "^(?=.*[a-zA-Z])(?=.*[0-9]).*$"
+          description: User's password. It must be alphanumeric. It is stored in a hashed format for security reasons.
+          minLength: 8
+          maxLength: 64
+          example: "s3curep4ss"
         firstName:
           type: string
           description: User's first name.
+          minLength: 1
+          maxLength: 50
+          example: "Rupert"
         lastName:
           type: string
           description: User's last name.
+          minLength: 1
+          maxLength: 50
+          example: "Moog"
         age:
           type: integer
           format: int64
           description: User's age.
+          minimum: 12
+          maximum: 120
+          example: 75
         role:
           type: integer
           format: int64
-          description: User's role appwise. Defines authorization. Default is 0.
+          description: User's role appwise. Defines authorization.
+          enum:
+            - value: 1
+              description: "Regular user with access to the standard features."
+            - value: 1
+              description: "Admin user with access to all administrative functions."
+            - value: 1
+              description: "Premium user with acces to all standard features, plus aditional premium features."
+          example: 1
         photo:
           type: string
-          description: User's profile image. Must be URL format. A default image is set in case no URL is provided at the moment of creation. 
+          format: uri
+          description: | 
+            User's profile image. A default image is set in case no URL is provided at the moment of creation.
+          example: "https://www.iconpacks.net/free-icon/person-244.html"
       example:
         firstName: Rupert
         age: 75
@@ -132,7 +233,8 @@ components:
       type: apiKey
       in: cookie
       name: token
-      description: Used for authentication and authorization in API requests. Consists of an API key passed in the cookie named "token". 
+      description: |
+        Used for authentication and authorization in API requests. Consists of an API key passed in the cookie named "token". 
   responses:
     suc201mesres:
       type: object
@@ -141,27 +243,28 @@ components:
           type: integer
           format: int64
           description: Status code indicating successful operation.
+          example: 201
         message:
           type: string
           description: Message providing details about the operation.
+          example: "User created successfully with id 663cea2c57109ba2e5d3b56f"
         response: 
           type: object
           description: The user returned as result of the operation.
-          $ref: '#/components/schemas/User'
+          $ref: "#/components/schemas/User"
       example:
         statusCode: 201
-        message: 'User created successfully with id 663cea2c57109ba2e5d3b56f'
+        message: "User created successfully with id 663cea2c57109ba2e5d3b56f"
         response:
-          _id: 6681805ee857f2ed5dbf802e
-          email: bobmoog@gmail.com
-          password: s3curep4ss
-          firstName: Robert
-          lastName: Moog
+          _id: "6681805ee857f2ed5dbf802e"
+          email: "bobmoog@gmail.com"
+          firstName: "Robert"
+          lastName: "Moog"
           age: 90
           role: 1
-          photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+          photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
           verified: true
-          verificationCode: 38a956cc75f9a344eb30641a
+          verificationCode: "38a956cc75f9a344eb30641a"
           createdAt: 2024-06-22T15:07:25.193Z
           updatedAt: 2024-06-22T15:07:25.193Z
     suc200res(one):
@@ -171,23 +274,23 @@ components:
           type: integer
           format: int64
           description: Status code indicating successful operation.
+          example: 200
         response: 
           type: object
           description: The user returned as result of the operation.
-          $ref: '#/components/schemas/User'
+          $ref: "#/components/schemas/User"
       example:
         statusCode: 200
         response:
-          _id: 6681805ee857f2ed5dbf802e
-          email: bobmoog@gmail.com
-          password: s3curep4ss
-          firstName: Robert
-          lastName: Moog
+          _id: "6681805ee857f2ed5dbf802e"
+          email: "bobmoog@gmail.com"
+          firstName: "Robert"
+          lastName: "Moog"
           age: 90
           role: 1
-          photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+          photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
           verified: true
-          verificationCode: 38a956cc75f9a344eb30641a
+          verificationCode: "38a956cc75f9a344eb30641a"
           createdAt: 2024-06-22T15:07:25.193Z
           updatedAt: 2024-06-22T15:07:25.193Z
     suc200res(many):
@@ -197,48 +300,46 @@ components:
           type: integer
           format: int64
           description: Status code indicating successful operation.
+          example: 200
         response: 
           type: array
           description: The users returned as result of the operation.
           items: 
-            $ref: '#/components/schemas/User'
+            $ref: "#/components/schemas/User"
       example:
         statusCode: 200
         response:
-          - _id: 6681805ee857f2ed5dbf802e
-            email: bobmoog@gmail.com
-            password: $2b$10$c0sIR.R36RWbmAboJpt6dOAjNqX4TE4fk1HPVEW5aglPoLtJRhKYC
-            firstName: Robert
-            lastName: Moog
+          - _id: "6681805ee857f2ed5dbf802e"
+            email: "bobmoog@gmail.com"
+            firstName: "Robert"
+            lastName: "Moog"
             age: 90
             role: 1
-            photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+            photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
             verified: true
-            verificationCode: 38a956cc75f9a344eb30641a
+            verificationCode: "38a956cc75f9a344eb30641a"
             createdAt: 2024-06-22T15:07:25.193Z
             updatedAt: 2024-06-22T15:07:25.193Z
-          - _id: 66818054e857f2ed5dbf802c
-            email: wendycarlos@gmail.com
-            password: $2b$10$hdkmZY8m7hjg7WsU4XnmTubFT0ApNG1LHQg4MV5kCGbLdLQ1mNvca
-            firstName: Wendy
-            lastName: Carlos
+          - _id: "66818054e857f2ed5dbf802c"
+            email: "wendycarlos@gmail.com"
+            firstName: "Wendy"
+            lastName: "Carlos"
             age: 84
-            role: 1
-            photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+            role: 2
+            photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
             verified: true
-            verificationCode: 3712cc5816166ef4293b2c8b
+            verificationCode: "3712cc5816166ef4293b2c8b"
             createdAt: 2024-06-22T15:07:25.193Z
             updatedAt: 2024-06-22T15:07:25.193Z
-          - _id: 66818074e857f2ed5dbf8030
-            email: pietropiccioni@gmail.com
-            password: $2b$10$/cyHhsNZqtQ7Nn7OximAD.D.Pr8GOKyATKWRHDaDP3A9yn6EXkAGG
-            firstName: Pietro
-            lastName: Piccioni
+          - _id: "66818074e857f2ed5dbf8030"
+            email: "pietropiccioni@gmail.com"
+            firstName: "Pietro"
+            lastName: "Piccioni"
             age: 29
             role: 0
-            photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+            photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
             verified: true
-            verificationCode: fe7d503dc385088795c74802
+            verificationCode: "fe7d503dc385088795c74802"
             createdAt: 2024-06-22T15:07:25.193Z
             updatedAt: 2024-06-22T15:07:25.193Z
     suc200respag:
@@ -248,11 +349,12 @@ components:
           type: integer
           format: int64
           description: Status code indicating successful operation.
+          example: 200
         response: 
           type: array
           description: The user(s) returned as result of the operation.
           items: 
-            $ref: '#/components/schemas/User'
+            $ref: "#/components/schemas/User"
         paginateInfo:
           type: object
           description: Information about pagination.
@@ -261,63 +363,66 @@ components:
               type: integer
               format: int64
               description: Current page number.
+              example: 2
             totalPages:
               type: integer
               format: int64
               description: Total number of pages available.
+              example: 4
             limit:
               type: integer
               format: int64
               description: Number of documents (users) per page.
+              example: 3
             prevPage:
               type: integer
               format: int64
               description: Previous page number.
+              example: 1
             nextPage:
               type: integer
               format: int64
               description: Next page number.
+              example: 3
             totalDocs:
               type: integer
               format: int64
               description: Total number of documents (users) available.  
+              example: 8
       example:
         statusCode: 200
         response:
-          - _id: 6681805ee857f2ed5dbf802e
-            email: bobmoog@gmail.com
-            password: $2b$10$c0sIR.R36RWbmAboJpt6dOAjNqX4TE4fk1HPVEW5aglPoLtJRhKYC
-            firstName: Robert
-            lastName: Moog
+          - _id: "6681805ee857f2ed5dbf802e"
+            email: "bobmoog@gmail.com"
+            firstName: "Robert"
+            lastName: "Moog"
             age: 90
             role: 1
-            photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+            photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
             verified: true
-            verificationCode: 38a956cc75f9a344eb30641a
+            verificationCode: "38a956cc75f9a344eb30641a"
             createdAt: 2024-06-22T15:07:25.193Z
             updatedAt: 2024-06-22T15:07:25.193Z
-          - _id: 66818054e857f2ed5dbf802c
-            email: wendycarlos@gmail.com
-            password: $2b$10$hdkmZY8m7hjg7WsU4XnmTubFT0ApNG1LHQg4MV5kCGbLdLQ1mNvca
-            firstName: Wendy
-            lastName: Carlos
+          - _id: "66818054e857f2ed5dbf802c"
+            email: "wendycarlos@gmail.com"
+            firstName: "Wendy"
+            lastName: "Carlos"
             age: 84
-            role: 1
-            photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+            role: 2
+            photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
             verified: true
-            verificationCode: 3712cc5816166ef4293b2c8b
+            verificationCode: "3712cc5816166ef4293b2c8b"
             createdAt: 2024-06-22T15:07:25.193Z
             updatedAt: 2024-06-22T15:07:25.193Z
-          - _id: 66818074e857f2ed5dbf8030
-            email: pietropiccioni@gmail.com
-            password: $2b$10$/cyHhsNZqtQ7Nn7OximAD.D.Pr8GOKyATKWRHDaDP3A9yn6EXkAGG
-            firstName: Pietro
-            lastName: Piccioni
+          - _id: "66818074e857f2ed5dbf8030"
+            email: "pietropiccioni@gmail.com"
+            firstName: "Pietro"
+            lastName: "Piccioni"
             age: 29
             role: 0
-            photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+            photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
             verified: true
-            verificationCode: fe7d503dc385088795c74802
+            verificationCode: "fe7d503dc385088795c74802"
             createdAt: 2024-06-22T15:07:25.193Z
             updatedAt: 2024-06-22T15:07:25.193Z
         paginateInfo:
@@ -334,29 +439,30 @@ components:
           type: integer
           format: int64
           description: Status code indicating successful operation.
+          example: 200
         message:
           type: string
           description: Message providing details about the operation.
+          example: "User updated successfully"
         response: 
           type: object
           description: The user returned as result of the operation.
-          $ref: '#/components/schemas/User'
+          $ref: "#/components/schemas/User"
       example:
         statusCode: 200
-        message: User updated successfully
+        message: "User updated successfully"
         response:
-          _id: 6681805ee857f2ed5dbf802e
-          email: bobmoog@gmail.com
-          password: $2b$10$c0sIR.R36RWbmAboJpt6dOAjNqX4TE4fk1HPVEW5aglPoLtJRhKYC
-          firstName: Robert
-          lastName: Moog
-          age: 90
+          _id: "6681805ee857f2ed5dbf802e"
+          email: "bobmoog@gmail.com"
+          firstName: "Rupert"
+          lastName: "Moog"
+          age: 75
           role: 1
-          photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+          photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
           verified: true
-          verificationCode: 38a956cc75f9a344eb30641a
+          verificationCode: "38a956cc75f9a344eb30641a"
           createdAt: 2024-06-22T15:07:25.193Z
-          updatedAt: 2024-06-22T15:07:25.193Z
+          updatedAt: 2024-06-22T15:09:25.193Z
     suc200mesres(delete):
       type: object
       properties:
@@ -364,27 +470,28 @@ components:
           type: integer
           format: int64
           description: Status code indicating successful operation.
+          example: 200
         message:
           type: string
           description: Message providing details about the operation.
+          example: "User deleted successfully"
         response: 
           type: object
           description: The user returned as result of the operation.
-          $ref: '#/components/schemas/User'
+          $ref: "#/components/schemas/User"
       example:
         statusCode: 200
-        message: User deleted successfully
+        message: "User deleted successfully"
         response:
-          _id: 6681805ee857f2ed5dbf802e
-          email: bobmoog@gmail.com
-          password: $2b$10$c0sIR.R36RWbmAboJpt6dOAjNqX4TE4fk1HPVEW5aglPoLtJRhKYC
-          firstName: Robert
-          lastName: Moog
+          _id: "6681805ee857f2ed5dbf802e"
+          email: "bobmoog@gmail.com"
+          firstName: "Robert"
+          lastName: "Moog"
           age: 90
           role: 1
-          photo: https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png
+          photo: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
           verified: true
-          verificationCode: 38a956cc75f9a344eb30641a
+          verificationCode: "38a956cc75f9a344eb30641a"
           createdAt: 2024-06-22T15:07:25.193Z
           updatedAt: 2024-06-22T15:07:25.193Z
     err400badRequest:
@@ -394,12 +501,14 @@ components:
           type: integer
           format: int64
           description: Status code indicating the failure of the operation.
+          example: 400
         message:
           type: string
           description: Message providing details about the error.
+          example: "Please, complete obligatory information to continue."
       example:
         statusCode: 400
-        message: Please, complete obligatory information to continue.
+        message: "Please, complete obligatory information to continue."
     err403forbidden:
       type: object
       properties: 
@@ -407,12 +516,14 @@ components:
           type: integer
           format: int64
           description: Status code indicating the failure of the operation.
+          example: 403
         message:
           type: string
           description: Message providing details about the error.
+          example: "Forbidden action."
       example:
         statusCode: 403
-        message: Forbidden action.
+        message: "Forbidden action."
     err404notFound:
       type: object
       properties:
@@ -420,12 +531,29 @@ components:
           type: integer
           format: int64
           description: Status code indicating failed operation.
+          example: 404
         message:
           type: string
           description: Message providing details about the error.
+          example: "User not found."
       example:
         statusCode: 404
-        message: User not found.
+        message: "User not found."
+    err409conflict:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating failed operation.
+          example: 409
+        message:
+          type: string
+          description: Message providing details about the operation
+          example: "Email already taken. Please choose a different one or log in."
+      example:
+        statusCode: 409
+        message: "Email already taken. Please choose a different one or log in."
     err500fatal:
       type: object
       properties:
@@ -433,16 +561,20 @@ components:
           type: integer
           format: int64
           description: Status code indicating fatal internal server error.
+          example: 500
         message:
           type: string
           description: Message providing details about the error.
+          example: "Internal server error. Fatal."
       example:
         statusCode: 500
-        message: Internal server error. Fatal.
+        message: "Internal server error. Fatal."
 paths:
   /api/users:
     post:
       summary: Create a new user.
+      description: |
+        Accessible to all users, including unauthenticated or offline users.
       tags:
         - User
       requestBody:
@@ -450,37 +582,57 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserCreate'
+              $ref: "#/components/schemas/UserCreate"
       responses:
         201:
           description: New user successfully created.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/suc201mesres'
+                $ref: "#/components/responses/suc201mesres"
         400:
-          description: The request failed due to missing required fields or unsupported inputs.
+          description: | 
+            The request failed due to missing required fields or unsupported inputs.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err400badRequest'
+                $ref: "#/components/responses/err400badRequest"
+        409:
+          description: The request failed due to a resource conflict.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err409conflict"
         500:
-          description: Internal server error.
+          description: The request failed due to an internal server error.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err500fatal'
+                $ref: "#/components/responses/err500fatal"
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"
     get:
-      summary: Retrieve all users, with optional query parameters.
+      summary: | 
+        Retrieve all users, with optional query parameters.
+      description: | 
+        Accessible by users with role 0 (Regular User), 1 (Admin), 2 (Premium User).
       tags:
         - User
+      security:
+        - cookieAuth: []
       parameters:
         - name: role
           in: query
           description: Filter users by role.
           required: false
           schema:
-            type: string
+            type: integer
+            format: int32
+          example: 1
         - name: limit
           in: query
           description: Number of users to return per page.
@@ -488,6 +640,7 @@ paths:
           schema:
             type: integer
             format: int32
+          example: 3
         - name: page
           in: query
           description: Page number for pagination.
@@ -495,32 +648,44 @@ paths:
           schema:
             type: integer
             format: int32
+          example: 2
       responses:
         200:
-          description: Successful operation returning all users, or user(s) based on query parameters.
+          description: | 
+            Successful operation returning all users, or user(s) based on query parameters.
           content:
             application/json:
               schema:
                 oneOf:
-                  - $ref: '#/components/responses/suc200res(many)'
-                  - $ref: '#/components/responses/suc200respag'
+                  - $ref: "#/components/responses/suc200res(many)"
+                  - $ref: "#/components/responses/suc200respag"
         404:
           description: Operation failed returning user(s).
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err404notFound'  
+                $ref: "#/components/responses/err404notFound"  
         500:
           description: Internal server error.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err500fatal'
+                $ref: "#/components/responses/err500fatal"
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"
   /api/users/{uid}:
     get:
       summary: Retrieve a user that matches the ID.
+      description: | 
+        Accessible by users with role 0 (Regular User), 1 (Admin), 2 (Premium User).
       tags:
         - User
+      security:
+        - cookieAuth: []
       parameters:
         - name: uid
           in: path
@@ -528,27 +693,37 @@ paths:
           description: _id of the user to be retrieved.
           schema:
             type: string
+          example: "6681805ee857f2ed5dbf802e"
       responses:
         200:
           description: Success retrieving a user.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/suc200res(one)'
+                $ref: "#/components/responses/suc200res(one)"
         404:
           description: Operation failed returning the user.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err404notFound'      
+                $ref: "#/components/responses/err404notFound"      
         500:
           description: Internal server error.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err500fatal'   
+                $ref: "#/components/responses/err500fatal"   
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"
     put:
-      summary: Update a user. Specify the props to be modified in the request's body.
+      summary: | 
+        Update a user. Specify the props to be modified in the request's body.
+      description: | 
+        Accessible by users with role 0 (Regular User), 1 (Admin), 2 (Premium User).      
       tags:
         - User
       security:
@@ -558,7 +733,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserUpdate'
+              $ref: "#/components/schemas/UserUpdate"
       parameters:
         - name: uid
           in: path
@@ -566,39 +741,48 @@ paths:
           description: _id of the user to be updated.
           schema:
             type: string
+          example: "6681805ee857f2ed5dbf802e"
       responses:
         200:
           description: Success updating a user.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/suc200mesres(update)'
+                $ref: "#/components/responses/suc200mesres(update)"
         400:
           description: The request failed due to unsupported inputs.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err400badRequest'
+                $ref: "#/components/responses/err400badRequest"
         403:
           description: The request failed due to authorization issues.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err403forbidden'
+                $ref: "#/components/responses/err403forbidden"
         404:
           description: Operation failed finding the user to update.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err404notFound' 
+                $ref: "#/components/responses/err404notFound" 
         500:
           description: Internal server error.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err500fatal'
+                $ref: "#/components/responses/err500fatal"
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"
     delete:
       summary: Delete a user that matches the ID.
+      description: | 
+        Accessible by users with role 0 (Regular User), 1 (Admin), 2 (Premium User).      
       tags:
         - User
       security:
@@ -610,28 +794,35 @@ paths:
           description: _id of the user to be deleted.
           schema:
             type: string
+          example: "6681805ee857f2ed5dbf802e"
       responses:
         200:
           description: Success deleting a user.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/suc200mesres(delete)'
+                $ref: "#/components/responses/suc200mesres(delete)"
         403:
           description: The request failed due to authorization issues.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err403forbidden'
+                $ref: "#/components/responses/err403forbidden"
         404:
           description: Operation failed finding the user to be deleted.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err404notFound' 
+                $ref: "#/components/responses/err404notFound" 
         500:
           description: Internal server error.
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/err500fatal'
+                $ref: "#/components/responses/err500fatal"
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"

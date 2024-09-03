@@ -58,6 +58,8 @@ class CartsController1 {
   async create(req, res, next) {
     try {
       const data = req.body;
+      const user_id = req.user._id;
+      data.user_id = user_id;
       const one = await createService(data);
       if (!one) {
         return res.err400addCartItem();
@@ -155,7 +157,6 @@ class CartsController2 {
       if (!selected) {
         return res.err404item();
       }
-      //console.log(selected)
       const user_id = req.user._id;
       const { product_id } = selected;
       const user = await readOneUser(user_id);
@@ -174,11 +175,12 @@ class CartsController2 {
   async create(req, res, next) {
     try {
       const data = req.body;
+      const user_id = req.user._id;
+      data.user_id = user_id;
       const one = await createService(data);
       if (!one) {
         return res.err400addCartItem();
       }
-      const user_id = req.user._id;
       const { product_id } = one;
       const user = await readOneUser(user_id);
       const product = await readOneProduct(product_id);

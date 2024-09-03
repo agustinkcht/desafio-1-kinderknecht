@@ -4,6 +4,7 @@ import usersRouter from "./users.api.js";
 import cartsRouter from "./carts.api.js";
 import sessionsRouter from "./sessions.api.js";
 import ticketsRouter from "./tickets.api.js";
+import paymentsRouter from "./payments.api.js";
 import loggersRouter from "./loggers.api.js";
 
 class ApiRouter extends CustomRouter {
@@ -13,11 +14,10 @@ class ApiRouter extends CustomRouter {
     this.use("/carts", cartsRouter);
     this.use("/sessions", sessionsRouter);
     this.use("/tickets", ticketsRouter);
-    this.use("/loggers", loggersRouter)
+    this.use("/payments", paymentsRouter);
+    this.use("/loggers", loggersRouter);
   }
 }
 
 const apiRouter = new ApiRouter();
-
 export default apiRouter.getRouter();
-

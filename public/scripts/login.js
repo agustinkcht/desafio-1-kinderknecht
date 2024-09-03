@@ -5,8 +5,8 @@ printOnlineIcons();
 
 document.querySelector("#login").addEventListener("click", async () => {
   const data = {
-    email: document.querySelector("#email").value,
-    password: document.querySelector("#password").value,
+    email: document.querySelector("#email").value.trim() || undefined,
+    password: document.querySelector("#password").value.trim() || undefined,
   };
   const opts = {
     method: "POST",

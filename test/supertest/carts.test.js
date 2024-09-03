@@ -5,56 +5,57 @@ import usersRepository from "../../src/repositories/users.rep.js";
 describe(
     "Testing resource: CARTS",
     function() {
-        const adminUser = {
+        const premiumUser = {
             email: "wendycarlos@gmail.com",
             password: "s3curep4ss"
         }
         const item1 = {
-            user_id: "66918b794d21c1bc0efdd69e", // wendy carlos
-            product_id: "663cea2c57109ba2e5d3b573" // iPhone 15 pro 
+            product_id: "663ceb1057109ba2e5d3b595" // Roku Wireless Charging Pad
         }
         const item2 = {
-            user_id: "66918b794d21c1bc0efdd69e", // wendy carlos
-            product_id: "663cea2c57109ba2e5d3b575" // apple watch 9
+            product_id: "663ceb1057109ba2e5d3b592" // Sennheiser Headphones
         }
         const item3 = {
-            user_id: "66918b794d21c1bc0efdd69e", // wendy carlos
-            product_id: "663cea2c57109ba2e5d3b583" // aw sport loop band
+            product_id: "663ceb1057109ba2e5d3b593" // Samsung Charging Stand
+        }
+        const item4 = {
+            product_id: "663cea2c57109ba2e5d3b57d" // Iphone 8 (user's own product)
         }
         const itemData = {
             quantity: 2
         }
         let token // value set at login. you must set a cookie w/ this token when making not-public requests.
         let uid // user id
-        let id_item1 // item id
+        let id_item1
         let id_item3
+
         it(
             "Log in with admin user to access the resource management",
             async() => {
-                const response = await requester.post("/sessions/login").send(adminUser)
+                const response = await requester.post("/sessions/login").send(premiumUser)
                 const { _body, headers } = response
                 token = headers["set-cookie"][0].split(";")[0] // set token
                 // retrieve logged user's id
-                const getUserData = await usersRepository.readByEmailRepository(adminUser.email)
+                const getUserData = await usersRepository.readByEmailRepository(premiumUser.email)
                 uid = getUserData._id
                 expect(_body.statusCode).to.be.equals(200);
             }
         )
         // CRUD TEST ending in deleting the cart
         it(
-            "Create a cart item: iPhone 15 pro",
+            "Add item to the cart: Roku Wireless Charging Pad",
             async() => {
                 const one = await requester
                 .post("/carts")
                 .send(item1)
                 .set("Cookie", token)
                 const { _body } = one
-                id_item1 = _body.response._id // set item ID for future requests
+                id_item1 = _body.response._id
                 expect(_body.statusCode).to.be.equals(201)
             }
         )
         it(
-            "Create a cart item: Apple Watch 9",
+            "Add item to the cart: Sennheiser Headphones",
             async() => {
                 const one = await requester
                 .post("/carts")
@@ -65,15 +66,26 @@ describe(
             }
         )
         it(
-            "Create a cart item: Sport Loop Band for Apple Watch",
+            "Add item to the cart: Samsung Charging Stand",
             async() => {
                 const one = await requester
                 .post("/carts")
                 .send(item3)
                 .set("Cookie", token)
                 const { _body } = one
-                id_item3 = _body.response._id // set item ID for future requests
+                id_item3 = _body.response._id
                 expect(_body.statusCode).to.be.equals(201)
+            }
+        )
+        it(
+            "Try to add a user's own product to the cart: Iphone 8 (should fail)",
+            async() => {
+                const one = await requester
+                .post("/carts")
+                .send(item4)
+                .set("Cookie", token)
+                const { _body } = one
+                expect(_body.statusCode).to.be.equals(403)
             }
         )
         it(
@@ -87,7 +99,7 @@ describe(
             }
         )
         it(
-            "Read a cart item: Sport Loop Band for Apple Watch",
+            "Read a cart item: Samsung Charging Stand",
             async() => {
                 const one = await requester
                 .get(`/carts/${id_item3}`)
@@ -97,7 +109,7 @@ describe(
             }
         )
         it(
-            "Update a cart item: Quantity",
+            "Update a cart item: Set quantity of Samsung Charging Stand to 2 units",
             async() => {
                 const one = await requester
                 .put(`/carts/${id_item3}`)
@@ -108,7 +120,7 @@ describe(
             }
         )
         it(
-            "Delete a cart item: iPhone 15 pro ",
+            "Delete a cart item: Roku Wireless Charging Pad",
             async() => {
                 const one = await requester
                 .delete(`/carts/${id_item1}`)

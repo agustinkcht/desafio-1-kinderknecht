@@ -10,3 +10,9 @@
 [33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:19:28 PM 
 [33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:19:28 PM 
 [31mFATAL[39m: undefined - GET /api/users/?role=1&page&limit - invalid signature - 1:18:06 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:38:33 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:38:33 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:38:35 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:38:35 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:39:14 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:39:15 PM 
