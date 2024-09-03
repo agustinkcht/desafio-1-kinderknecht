@@ -1,11 +1,12 @@
 # challenges-kinderknecht
 
-Sprint15 - Challenge4
+Challenge4
 
 - Stripe payment integration implemented.
 - Premium User role introduced for persistences
 - Schemas enhaced and updated
 - Documentation enhaced and updated
+- Deploy for app
 
 -----------------
 
