@@ -1,0 +1,18 @@
+[31mFATAL[39m: undefined - GET /api/users/?role=&page&limit - res.err401noSessionsss is not a function - 11:41:03 AM 
+[33mERROR[39m: 401 - GET /api/users/?role=&page&limit - No session opened. User offline. - 11:41:39 AM [33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 2:15:49 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 2:15:49 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 2:15:53 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 2:15:53 PM 
+[33mERROR[39m: 401 - POST /api/sessions/login - Invalid credentials. Check your information and try again. - 2:15:59 PM 
+[33mERROR[39m: 401 - POST /api/sessions/login - Invalid credentials. Check your information and try again. - 2:16:15 PM 
+[33mERROR[39m: 401 - POST /api/sessions/login - Invalid credentials. Check your information and try again. - 2:16:48 PM 
+[33mERROR[39m: 401 - POST /api/sessions/login - Invalid credentials. Check your information and try again. - 2:16:55 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:19:28 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:19:28 PM 
+[31mFATAL[39m: undefined - GET /api/users/?role=1&page&limit - invalid signature - 1:18:06 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:38:33 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:38:33 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:38:35 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:38:35 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:39:14 PM 
+[33mERROR[39m: 401 - GET /api/sessions/online - No session opened. User offline. - 7:39:15 PM 

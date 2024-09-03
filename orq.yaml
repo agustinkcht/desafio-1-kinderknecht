@@ -1,0 +1,38 @@
+# YAML for service:
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: technode-service
+spec:
+  selector: 
+    app: technode
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer
+
+---
+
+# YAML for deploy:
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: technode-deployment
+spec:
+  replicas: 10
+  selector:
+    matchLabels: 
+      app: technode
+  template:
+    metadata: 
+      labels: 
+        app: technode
+    spec:
+      containers:
+      - name: technode
+        image: agustinkcht/technode:1.0.0
+        ports:
+          - containerPort: 8080
+        imagePullPolicy: IfNotPresent

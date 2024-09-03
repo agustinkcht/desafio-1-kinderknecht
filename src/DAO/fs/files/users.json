@@ -1,0 +1,72 @@
+[
+    {
+        "_id": "66918b794d21c1bc0efdd69e",
+        "email": "wendycarlos@gmail.com",
+        "password": "$2b$10$2USlQxeFIE2u/HfH8Pxd4OcY5UgtBTjRKLLF9Oof8fJlTiZhXnHU.",
+        "firstName": "Wendy",
+        "lastName": "Carlos",
+        "age": 84,
+        "role": 2,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
+        "verified": true,
+        "verificationCode": "86552ea79a1317d7fc20fcb6",
+        "createdAt": "2024-07-12T20:00:57.931Z",
+        "updatedAt": "2024-07-12T20:00:57.931Z"
+    },
+    {
+        "_id": "6691882c4d21c1bc0efdd683",
+        "email": "bobmoog@gmail.com",
+        "password": "$2b$10$VDfBEHo06s3DU6zxMTErvugGvuMuFElg/IVcTyJpqRBujthhEYTzW",
+        "firstName": "Robert",
+        "lastName": "Moog",
+        "age": 90,
+        "role": 1,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
+        "verified": true,
+        "verificationCode": "594c149f858297b121d7432e",
+        "createdAt": "2024-07-12T19:46:52.778Z",
+        "updatedAt": "2024-07-12T19:46:52.778Z"
+    },
+    {
+        "_id": "66918c0f4d21c1bc0efdd6a4",
+        "email": "charlesgardes@gmail.com",
+        "password": "$2b$10$t8tlXEVRuBD/jkIFhxErkunpoPQpSp/5aoJVcTEmKg2S64SxYUzfe",
+        "firstName": "Charles",
+        "lastName": "Gardes",
+        "age": 42,
+        "role": 0,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
+        "verified": true,
+        "verificationCode": "ca7b99974cd87b4b1b63a0fc",
+        "createdAt": "2024-07-12T20:03:27.622Z",
+        "updatedAt": "2024-07-12T20:03:27.622Z"
+    },
+    {
+        "_id": "66918bd94d21c1bc0efdd6a1",
+        "email": "pietropiccioni@gmail.com",
+        "password": "$2b$10$Cy6oSNdj2ENcN/2naKILfenMS5Qkd8e0WRaYsj41VyMo8Vse0Yv/K",
+        "firstName": "Pietro",
+        "lastName": "Piccioni",
+        "age": 29,
+        "role": 0,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
+        "verified": true,
+        "verificationCode": "782969fe26ed9b73d0c72215",
+        "createdAt": "2024-07-12T20:02:33.253Z",
+        "updatedAt": "2024-07-12T20:02:33.253Z"
+    },
+    {
+        "_id": "6693e6d7e566aa55f4176b6c",
+        "email": "agustinkcht@gmail.com",
+        "password": "$2b$10$CGBsUyEckPCv1gcJsR09B.3cDR6Lw9q7Ac8/93sWaqZIefEIjzUfy",
+        "firstName": "Agustin",
+        "lastName": "Kinderknecht",
+        "age": 22,
+        "role": 1,
+        "photo": "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
+        "verified": true,
+        "verificationCode": "0da0ca7fa8580065b90927e0",
+        "createdAt": "2024-07-14T14:55:19.598Z",
+        "updatedAt": "2024-07-31T15:26:24.014Z"
+    }
+]

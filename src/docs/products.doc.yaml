@@ -1,0 +1,791 @@
+components:
+  schemas:
+    Product:
+      type: object
+      description: | 
+        This schema defines the structure and data types for product objects. This format ensures proper interaction with the resource data and consistency across operations.
+      properties:
+        _id:
+          type: string
+          pattern: '^[a-fA-F0-9]{24}$'
+          description: |
+            Unique identifier for the product, represented as a MongoDB ObjectId (24-digit hexadecimal code). Generated automatically.
+          example: "663cea2c57109ba2e5d3b575" # Apple Watch 9
+        supplier_id:
+          type: string
+          pattern: '^[a-fA-F0-9]{24}$'
+          description: |
+            A unique identifier for the supplier associated with the product. Represented as a MongoDB ObjectId (24-digit hexadecimal code), which is used to reference a specific user within the application.
+          example: "66918b794d21c1bc0efdd69e" # Wendy Carlos (Premium User)
+        title:
+          type: string
+          description: The name or title of the product.
+          minLength: 1
+          maxLength: 100
+          example: "Apple Watch 9"
+        photo:
+          type: string
+          format: uri
+          description: | 
+            Product's photo. A default image is set in case no URL is provided at the moment of creation.
+          default: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+          example: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+        category:
+          type: string
+          description: Category to which the product belongs.
+          minLength: 1
+          maxLength: 50
+          default: "TBD"
+          example: "watches"
+        price:
+          type: integer
+          format: int64
+          description: Product's price. 
+          min: 0
+          max: 9999999
+          default: 1
+          example: 399
+        stock:
+          type: integer
+          format: int64
+          description: Quantity of stock available.
+          min: 1
+          max: 999999
+          default: 1
+          example: 35
+        createdAt:
+          type: string
+          format: date-time
+          description: | 
+            Timestamp when the product was created. Uses timestamp in ISO 8601 format. Generated automatically.
+          example: 2024-06-26T18:10:45.461Z
+        updatedAt:
+          type: string
+          format: date-time
+          description: | 
+            Timestamp when the product was last updated. Uses timestamp in ISO 8601 format. Generated automatically.
+          example: 2024-06-26T18:11:45.461Z
+      example:
+        _id: "663cea2c57109ba2e5d3b575"
+        supplier_id: "66918b794d21c1bc0efdd69e"
+        title: "Apple Watch 9"
+        photo: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+        category: "watches"
+        price: 399
+        stock: 35
+        createdAt: 2024-06-26T18:10:45.461Z
+        updatedAt: 2024-06-26T18:10:45.461Z
+    ProductCreate:
+      type: object
+      description: |
+        This schema defines the structure and data types for creating a product. It specifies the required and optional fields needed for the operation. 
+      properties:
+        title:
+          type: string
+          description: The name or title of the product.
+          minLength: 1
+          maxLength: 100
+          example: "Apple Watch 9"
+        photo:
+          type: string
+          format: uri
+          description: | 
+            Product's photo. A default image is set in case no URL is provided at the moment of creation.
+          default: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+          example: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+        category:
+          type: string
+          description: Category to which the product belongs.
+          minLength: 1
+          maxLength: 50
+          default: "TBD"
+          example: "watches"
+        price:
+          type: integer
+          format: int64
+          description: Product's price. 
+          min: 0
+          max: 9999999
+          default: 1
+          example: 399
+        stock:
+          type: integer
+          format: int64
+          description: Quantity of stock available.
+          min: 1
+          max: 999999
+          default: 1
+          example: 35
+      required:
+        - title
+      example:
+        title: "Apple Watch 9"
+        category: "watches"
+        price: 399
+        stock: 35
+    ProductUpdate:
+      type: object
+      description: |
+        This schema defines the structure and data types for updating a product. It specifies the fields needed for the operation. Please note that while every single property is an optional field in the request body, in order to perform an actual update, at least one of the mentioned optional fields must be provided. If not, the request will be processed successfully, but no modifications will be made to the product.  
+      properties:
+        title:
+          type: string
+          description: The name or title of the product.
+          minLength: 1
+          maxLength: 100
+          example: "Apple Watch 9"
+        photo:
+          type: string
+          format: uri
+          description: | 
+            Product's photo. A default image is set in case no URL is provided at the moment of creation.
+          example: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+        category:
+          type: string
+          description: Category to which the product belongs.
+          minLength: 1
+          maxLength: 50
+          example: "watches"
+        price:
+          type: integer
+          format: int64
+          description: Product's price. 
+          min: 0
+          max: 9999999
+          example: 399
+        stock:
+          type: integer
+          format: int64
+          description: Quantity of stock available.
+          min: 1
+          max: 999999
+          example: 35
+      example:
+        price: 299
+        stock: 60
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+      description: | 
+        Used for authentication and authorization in API requests. Consists of an API key passed in the cookie named "token". 
+  responses:
+    suc201mesres:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+          example: 201
+        message:
+          type: string
+          description: Message providing details about the operation.
+          example: "Product created successfully with id 663cea2c57109ba2e5d3b56f"
+        response: 
+          type: object
+          description: The product returned as result of the operation.
+          $ref: "#/components/schemas/Product"
+      example:
+        statusCode: 201
+        message: "Product created successfully with id 663cea2c57109ba2e5d3b56f"
+        response:
+          _id: "663cea2c57109ba2e5d3b575"
+          supplier_id: "66918b794d21c1bc0efdd69e"
+          title: "Apple Watch 9"
+          photo: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+          category: "watches"
+          price: 399
+          stock: 35
+          createdAt: 2024-06-26T18:10:45.461Z
+          updatedAt: 2024-06-26T18:10:45.461Z
+    suc200res(one):
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+          example: 200
+        response: 
+          type: object
+          description: The product returned as result of the operation.
+          $ref: "#/components/schemas/Product"
+      example:
+        statusCode: 200
+        response:
+          _id: "663cea2c57109ba2e5d3b575"
+          supplier_id: "66918b794d21c1bc0efdd69e"
+          title: "Apple Watch 9"
+          photo: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+          category: "watches"
+          price: 399
+          stock: 35
+          createdAt: 2024-06-26T18:10:45.461Z
+          updatedAt: 2024-06-26T18:10:45.461Z
+    suc200res(many):
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+          example: 200
+        response: 
+          type: array
+          description: The products returned as result of the operation.
+          items: 
+            $ref: "#/components/schemas/Product"
+      example:
+        statusCode: 200
+        response:
+          - _id: 663cea2c57109ba2e5d3b56f
+            supplier_id: "66918b794d21c1bc0efdd69e"
+            title: "Airpods Pro 2"
+            photo: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+            category: "accessories"
+            price: 249
+            stock: 40
+            createdAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z
+          - _id: 663cea2c57109ba2e5d3b571
+            title: "Airpods Max"
+            photo: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+            category: "accessories"
+            price: 549
+            stock: 40
+            createdAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z            
+          - _id: 663cea2c57109ba2e5d3b573
+            title: "iPhone 15 pro"
+            photo: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+            category: "phones"
+            price: 999
+            stock: 30
+            createdAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z
+    suc200respag:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+          example: 200
+        response: 
+          type: array
+          description: The product(s) returned as result of the operation.
+          items: 
+            $ref: "#/components/schemas/Product"
+        paginateInfo:
+          type: object
+          description: Information about pagination.
+          properties:
+            page:
+              type: integer
+              format: int64
+              description: Current page number.
+            totalPages:
+              type: integer
+              format: int64
+              description: Total number of pages available.
+            limit:
+              type: integer
+              format: int64
+              description: Number of documents (products) per page.
+            prevPage:
+              type: integer
+              format: int64
+              description: Previous page number.
+            nextPage:
+              type: integer
+              format: int64
+              description: Next page number.
+            totalDocs:
+              type: integer
+              format: int64
+              description: Total number of documents (products) available.  
+      example:
+        statusCode: 200
+        response:
+          - _id: 663cea2c57109ba2e5d3b56f
+            supplier_id: "66918b794d21c1bc0efdd69e"
+            title: "Airpods Pro 2"
+            photo: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+            category: "accessories"
+            price: 249
+            stock: 40
+            createdAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z
+          - _id: 663cea2c57109ba2e5d3b571
+            supplier_id: "66918b794d21c1bc0efdd69e"
+            title: "Airpods Max"
+            photo: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+            category: "accessories"
+            price: 549
+            stock: 40
+            createdAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z            
+          - _id: 663cea2c57109ba2e5d3b573
+            supplier_id: "66918b794d21c1bc0efdd69e"
+            title: "iPhone 15 pro"
+            photo: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+            category: "phones"
+            price: 999
+            stock: 30
+            createdAt: 2024-06-26T18:10:45.461Z
+            updatedAt: 2024-06-26T18:10:45.461Z
+        paginateInfo:
+             page: 1
+             totalPages: 501
+             limit: 3
+             prevPage: null
+             nextPage: 2
+             totalDocs: 1502 
+    suc200mesres(update):
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+          example: 200
+        message:
+          type: string
+          description: Message providing details about the operation.
+          example: "Product updated successfully"
+        response: 
+          type: object
+          description: The product returned as result of the operation.
+          $ref: "#/components/schemas/Product"
+      example:
+        statusCode: 200
+        message: Product updated successfully
+        response:
+          _id: "663cea2c57109ba2e5d3b575"
+          supplier_id: "66918b794d21c1bc0efdd69e"
+          title: "Apple Watch 9"
+          photo: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+          category: "watches"
+          price: 299
+          stock: 60
+          createdAt: 2024-06-26T18:10:45.461Z
+          updatedAt: 2024-06-26T18:10:45.461Z
+    suc200mesres(delete):
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating successful operation.
+          example: 200
+        message:
+          type: string
+          description: Message providing details about the operation.
+          example: "Product deleted successfully"
+        response: 
+          type: object
+          description: The product returned as result of the operation.
+          $ref: "#/components/schemas/Product"
+      example:
+        statusCode: 200
+        message: "Product deleted successfully"
+        response:
+          _id: "663cea2c57109ba2e5d3b575"
+          supplier_id: "66918b794d21c1bc0efdd69e"
+          title: "Apple Watch 9"
+          photo: "https://i.pinimg.com/originals/1c/18/78/1c1878a8b006593b5a6a84e3f85df24a.png"
+          category: "watches"
+          price: 399
+          stock: 35
+          createdAt: 2024-06-26T18:10:45.461Z
+          updatedAt: 2024-06-26T18:10:45.461Z
+    err400badRequest:
+      type: object
+      properties: 
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating the failure of the operation.
+          example: 400
+        message:
+          type: string
+          description: Message providing details about the operation.
+          example: "Please, complete obligatory information to continue."
+      example:
+        statusCode: 400
+        message: "Please, complete obligatory information to continue."
+    err403forbidden:
+      type: object
+      properties: 
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating the failure of the operation.
+          example: 403
+        message:
+          type: string
+          description: Message providing details about the operation.
+          example: "Forbidden action."
+      example:
+        statusCode: 403
+        message: "Forbidden action."
+    err404notFound:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating failed operation.
+          example: 404
+        message:
+          type: string
+          description: Message providing details about the operation
+          example: "Product not found."
+      example:
+        statusCode: 404
+        message: "Product not found."
+    err500fatal:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: Status code indicating fatal internal server error.
+          example: 500
+        message:
+          type: string
+          description: Message providing details about the error.
+          example: "Internal server error. Fatal."
+      example:
+        statusCode: 500
+        message: "Internal server error. Fatal."
+paths:
+  /api/products:
+    post:
+      summary: Create a new product.
+      description: |
+        Accessible by users with role 1 (Admin) and 2 (Premium User).
+      tags:
+        - Product
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductCreate"
+      responses:
+        201:
+          description: New product successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/suc201mesres"
+        400:
+          description: | 
+            The request failed due to missing required fields or unsupported inputs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err400badRequest"
+        403:
+          description: The request failed due to authorization issues.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err403forbidden"
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"
+    get:
+      summary: | 
+        Retrieve all products, with optional query parameters.
+      description: |
+        Accessible to all users, including unauthenticated or offline users. If the user is role 2 (Admin), the retrieved products will exclusively be those published by other users.
+      tags:
+        - Product
+      parameters:
+        - name: category
+          in: query
+          description: Filter products by category.
+          required: false
+          schema:
+            type: string
+          example: "watches"
+        - name: title
+          in: query
+          description: Filter products by title.
+          required: false
+          schema:
+            type: string
+          example: "Apple Watch"
+        - name: limit
+          in: query
+          description: Number of products to return per page.
+          required: false
+          schema:
+            type: integer
+            format: int32
+          example: 3
+        - name: page
+          in: query
+          description: Page number for pagination.
+          required: false
+          schema:
+            type: integer
+            format: int32
+          example: 1
+      responses:
+        200:
+          description: | 
+            Successful operation returning all products, or product(s) based on query parameters.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/responses/suc200res(many)"
+                  - $ref: "#/components/responses/suc200respag"
+        404:
+          description: Operation failed returning product(s).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err404notFound"  
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"
+  /api/products/{pid}:
+    get:
+      summary: Retrieve a product that matches the ID.
+      description: |
+        Accessible to all users, including unauthenticated or offline users.
+      tags:
+        - Product
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: _id of the product to be retrieved.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success retrieving a product.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/suc200res(one)"
+        404:
+          description: Operation failed returning the product.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err404notFound"      
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"   
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"
+    put:
+      summary: | 
+        Update a product. Specify the props to be modified in the request's body.
+      description: |
+        Accessible by users with role 1 (Admin) and 2 (Premium User, if the product is of their own).
+      tags:
+        - Product
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductUpdate"
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: _id of the product to be updated.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success updating a product.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/suc200mesres(update)"
+        400:
+          description: The request failed due to unsupported inputs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err400badRequest"
+        403:
+          description: The request failed due to authorization issues.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err403forbidden"
+        404:
+          description: Operation failed finding the product to update.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err404notFound" 
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"
+    delete:
+      summary: Delete a product that matches the ID.
+      description: |
+        Accessible by users with role 1 (Admin) and 2 (Premium User, if the product is of their own).
+      tags:
+        - Product
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: _id of the product to be deleted.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success deleting a product.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/suc200mesres(delete)"
+        403:
+          description: The request failed due to authorization issues.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err403forbidden"
+        404:
+          description: Operation failed finding the product to be deleted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err404notFound" 
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"
+  /api/products/me:
+    get:
+      summary: | 
+        Retrieve the list of products associated with a premium user account.
+      description: |
+        Accessible by users with role 2 (Premium, retrieving their own products)
+      tags:
+        - Product
+      parameters:
+        - name: category
+          in: query
+          description: Filter products by category.
+          required: false
+          schema:
+            type: string
+          example: "watches"
+        - name: title
+          in: query
+          description: Filter products by title.
+          required: false
+          schema:
+            type: string
+          example: "Apple Watch"
+        - name: limit
+          in: query
+          description: Number of products to return per page.
+          required: false
+          schema:
+            type: integer
+            format: int32
+          example: 3
+        - name: page
+          in: query
+          description: Page number for pagination.
+          required: false
+          schema:
+            type: integer
+            format: int32
+          example: 1
+      responses:
+        200:
+          description: Success retrieving a product.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/suc200res(one)"
+        403:
+          description: The request failed due to authorization issues.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err403forbidden"
+        404:
+          description: Operation failed returning the product.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err404notFound"      
+        500:
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"   
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/err500fatal"

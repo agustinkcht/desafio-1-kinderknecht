@@ -1,0 +1,27 @@
+config:
+  plugins:
+    metrics-by-endpoint: {}
+  target: http://localhost:8080
+  phases:
+    - duration: 10
+      arrivalRate: 50
+scenarios:
+  - name: login, read, create.
+    flow:
+      - log: login
+      - post:
+          url: /api/sessions/login
+          json:
+            email: bobmoog@gmail.com
+            password: s3curep4ss
+      - log: read all products
+      - get:
+          url: /api/products
+      - log: create product
+      - post:
+          url: /api/products
+          json:
+            title: productFlow
+            price: 999
+            category: test
+            stock: 999

@@ -1,0 +1,177 @@
+{
+  "aggregate": {
+    "counters": {
+      "vusers.created_by_name.0": 20,
+      "vusers.created": 20,
+      "http.requests": 21,
+      "http.codes.200": 1,
+      "http.responses": 1,
+      "http.downloaded_bytes": 30,
+      "plugins.metrics-by-endpoint./artillery/complex.codes.200": 1,
+      "plugins.metrics-by-endpoint./artillery/complex.errors.ETIMEDOUT": 20,
+      "errors.ETIMEDOUT": 20,
+      "vusers.failed": 20
+    },
+    "rates": {
+      "http.request_rate": 2
+    },
+    "firstCounterAt": 1721057880161,
+    "firstHistogramAt": 1721057886067,
+    "lastCounterAt": 1721057896071,
+    "lastHistogramAt": 1721057886068,
+    "firstMetricAt": 1721057880161,
+    "lastMetricAt": 1721057896071,
+    "period": 1721057890000,
+    "summaries": {
+      "http.response_time": {
+        "min": 5893,
+        "max": 5893,
+        "count": 1,
+        "mean": 5893,
+        "p50": 5944.6,
+        "median": 5944.6,
+        "p75": 5944.6,
+        "p90": 5944.6,
+        "p95": 5944.6,
+        "p99": 5944.6,
+        "p999": 5944.6
+      },
+      "plugins.metrics-by-endpoint.response_time./artillery/complex": {
+        "min": 5893,
+        "max": 5893,
+        "count": 1,
+        "mean": 5893,
+        "p50": 5944.6,
+        "median": 5944.6,
+        "p75": 5944.6,
+        "p90": 5944.6,
+        "p95": 5944.6,
+        "p99": 5944.6,
+        "p999": 5944.6
+      }
+    },
+    "histograms": {
+      "http.response_time": {
+        "min": 5893,
+        "max": 5893,
+        "count": 1,
+        "mean": 5893,
+        "p50": 5944.6,
+        "median": 5944.6,
+        "p75": 5944.6,
+        "p90": 5944.6,
+        "p95": 5944.6,
+        "p99": 5944.6,
+        "p999": 5944.6
+      },
+      "plugins.metrics-by-endpoint.response_time./artillery/complex": {
+        "min": 5893,
+        "max": 5893,
+        "count": 1,
+        "mean": 5893,
+        "p50": 5944.6,
+        "median": 5944.6,
+        "p75": 5944.6,
+        "p90": 5944.6,
+        "p95": 5944.6,
+        "p99": 5944.6,
+        "p999": 5944.6
+      }
+    }
+  },
+  "intermediate": [
+    {
+      "counters": {
+        "vusers.created_by_name.0": 20,
+        "vusers.created": 20,
+        "http.requests": 21,
+        "http.codes.200": 1,
+        "http.responses": 1,
+        "http.downloaded_bytes": 30,
+        "plugins.metrics-by-endpoint./artillery/complex.codes.200": 1
+      },
+      "rates": {
+        "http.request_rate": 4
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1721057880161,
+      "firstHistogramAt": 1721057886067,
+      "lastCounterAt": 1721057886069,
+      "lastHistogramAt": 1721057886068,
+      "firstMetricAt": 1721057880161,
+      "lastMetricAt": 1721057886069,
+      "period": "1721057880000",
+      "summaries": {
+        "http.response_time": {
+          "min": 5893,
+          "max": 5893,
+          "count": 1,
+          "mean": 5893,
+          "p50": 5944.6,
+          "median": 5944.6,
+          "p75": 5944.6,
+          "p90": 5944.6,
+          "p95": 5944.6,
+          "p99": 5944.6,
+          "p999": 5944.6
+        },
+        "plugins.metrics-by-endpoint.response_time./artillery/complex": {
+          "min": 5893,
+          "max": 5893,
+          "count": 1,
+          "mean": 5893,
+          "p50": 5944.6,
+          "median": 5944.6,
+          "p75": 5944.6,
+          "p90": 5944.6,
+          "p95": 5944.6,
+          "p99": 5944.6,
+          "p999": 5944.6
+        }
+      },
+      "histograms": {
+        "http.response_time": {
+          "min": 5893,
+          "max": 5893,
+          "count": 1,
+          "mean": 5893,
+          "p50": 5944.6,
+          "median": 5944.6,
+          "p75": 5944.6,
+          "p90": 5944.6,
+          "p95": 5944.6,
+          "p99": 5944.6,
+          "p999": 5944.6
+        },
+        "plugins.metrics-by-endpoint.response_time./artillery/complex": {
+          "min": 5893,
+          "max": 5893,
+          "count": 1,
+          "mean": 5893,
+          "p50": 5944.6,
+          "median": 5944.6,
+          "p75": 5944.6,
+          "p90": 5944.6,
+          "p95": 5944.6,
+          "p99": 5944.6,
+          "p999": 5944.6
+        }
+      }
+    },
+    {
+      "counters": {
+        "plugins.metrics-by-endpoint./artillery/complex.errors.ETIMEDOUT": 20,
+        "errors.ETIMEDOUT": 20,
+        "vusers.failed": 20
+      },
+      "rates": {},
+      "firstCounterAt": 1721057890214,
+      "lastCounterAt": 1721057896071,
+      "firstMetricAt": 1721057890214,
+      "lastMetricAt": 1721057896071,
+      "period": "1721057890000",
+      "summaries": {},
+      "histograms": {}
+    }
+  ]
+}

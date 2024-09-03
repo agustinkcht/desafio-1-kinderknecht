@@ -1,0 +1,20 @@
+[
+    {
+        "_id": "139c455ec8b76c3a0f3e6b5f",
+        "user_id": "6691882c4d21c1bc0efdd683",
+        "product_id": "663cea2c57109ba2e5d3b56f",
+        "quantity": 3,
+        "state": "reserved",
+        "createdAt": "2024-08-05T18:23:10.400Z",
+        "updatedAt": "2024-08-05T18:23:10.400Z"
+    },
+    {
+        "_id": "ce4871515d214c2eddb5e94a",
+        "user_id": "6691882c4d21c1bc0efdd683",
+        "product_id": "663cea2c57109ba2e5d3b573",
+        "quantity": 1,
+        "state": "reserved",
+        "createdAt": "2024-08-05T20:05:32.703Z",
+        "updatedAt": "2024-08-05T20:05:32.703Z"
+    }
+]
