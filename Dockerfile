@@ -3,7 +3,7 @@
 FROM node
 # app type (node)
 
-WORKDIR /technode
+WORKDIR /desafios-kinderknecht
 # path to save, name of the proj/img
 
 COPY package*.json ./
@@ -20,6 +20,5 @@ EXPOSE 8080
 # Port to run (not necesarilly dev/prod/test... is the port where the container is gonna run)
 # It's recommended to be the same as server tho
 
-# CMD ["npm", "run", "dev"]
 CMD ["npm", "start"]
 # init commands (array with the words separated with comma)
