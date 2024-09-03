@@ -10,6 +10,7 @@ const productSchema = joi.object({
     "string.uri": "Photo must be a valid URL",
   }),
   category: joi.string().max(50).messages({
+    "string.min": "Category must contain between 1 and 50 characters",
     "string.max": "Category must contain less than 50 characters",
   }),
   price: joi.number().min(0).max(9999999).messages({
@@ -20,7 +21,7 @@ const productSchema = joi.object({
   stock: joi.number().min(1).max(9999999).messages({
     "number.base": "Stock must be a number",
     "number.min": "The minimum stock is 1",
-    "number.max": "The maximum stock is 9999999",
+    "number.max": "The maximum stock is 999999",
   }),
 });
 

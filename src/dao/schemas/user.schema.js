@@ -5,24 +5,24 @@ const userSchema = joi.object({
     .string()
     .required()
     .email({ minDomainSegments: 2 })
-    .max(40)
+    .max(254)
     .messages({
       "any.required": "Please provide an email",
       "string.email": "Please enter a valid email adress",
-      "string.max": "Your email must have under 40 characters",
+      "string.max": "Your email must have under 254 characters",
     }),
   password: joi
     .string()
     .required()
     .pattern(new RegExp("^(?=.*[a-zA-Z])(?=.*[0-9]).*$"))
     .min(8)
-    .max(25)
+    .max(64)
     .messages({
       "any.required": "Please provide a password",
       "string.pattern.base":
         "Password must be alphanumerical. It cannot contain special characters.",
       "string.min": "Password must be at least 8 characters long",
-      "string.max": "Password must be less than 25 characters long",
+      "string.max": "Password must be less than 64 characters long",
     }),
   firstName: joi
     .string()
@@ -40,7 +40,7 @@ const userSchema = joi.object({
     .string()
     .required()
     .pattern(new RegExp("^[a-zA-Zà-ÿÀ-Ÿ]+([ '-][a-zA-Zà-ÿÀ-Ÿ]+)*$"))
-    .min(2)
+    .min(1)
     .max(50)
     .messages({
       "any.required": "Last name is required",
