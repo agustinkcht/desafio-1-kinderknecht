@@ -1,5 +1,3 @@
-# comments van con hashtag
-
 FROM node
 # app type (node)
 
