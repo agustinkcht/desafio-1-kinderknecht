@@ -6,7 +6,6 @@ const persistence = argsUtil.persistence
 
 async function getDao() {
     let setDao = {}
-
     switch (persistence) {
         case "memory":
             logger.INFO("Connected to memory")
@@ -34,6 +33,10 @@ async function getDao() {
     return setDao;
 }
 
-const dao = await getDao()
+let dao;
+getDao().then((d) => dao = d)
 
 export default dao;
+
+
+
