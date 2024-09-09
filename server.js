@@ -27,7 +27,7 @@ const handleServerStart = async () => {
 };
 const nodeServer = createServer(server);
 // cluster config
-const cores = cpus().length; // cores of the computer (8)
+const cores = cpus().length || 2; // cores of the computer (8)
 if (cluster.isPrimary) {
   console.log("primary process");
   for (let i = 1; i <= cores; i++) {

@@ -1,0 +1,5 @@
+services:
+  technode:
+    image: ghcr.io/agustinkcht/technode:latest
+    volumes:
+      - ./.env.prod:/desafios-kinderknecht/.env.prod
