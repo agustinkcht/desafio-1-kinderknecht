@@ -37,6 +37,3 @@ let dao;
 getDao().then((d) => dao = d)
 
 export default dao;
-
-
-
