@@ -1,4 +1,4 @@
-FROM node
+FROM node:22-alpine
 # app type (node)
 
 WORKDIR /desafios-kinderknecht

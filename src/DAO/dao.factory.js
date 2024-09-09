@@ -33,7 +33,6 @@ async function getDao() {
     return setDao;
 }
 
-let dao;
-getDao().then((d) => dao = d)
+const dao = await getDao();
 
 export default dao;
